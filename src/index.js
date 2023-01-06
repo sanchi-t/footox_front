@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import ProductListing from './pages/ProductListing';
-import Header from './components/Header';
-import Footer from './components/Footer';
+
+import App from './App';
 import { BrowserRouter } from "react-router-dom";
 
 import reportWebVitals from './reportWebVitals';
@@ -16,9 +15,7 @@ root.render(
   <React.StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <Header />
-          <ProductListing/>
-          <Footer/>
+          <App/>
         </Provider>
       </BrowserRouter>
   </React.StrictMode>

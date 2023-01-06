@@ -153,7 +153,19 @@ const addCoupon = (details) => (dispatch) => {
     });
 };
 
+const getBannerData = (params) => (dispatch) => {
+  dispatch({ type: types.GET_DATA_R });
+  return axios
+    .get("http://localhost:4000/banner", params)
+    .then((res) => {
+      dispatch({ type: types.GET_DATA_S, payload: res.data });
+    })
+    .then((err) => {
+      dispatch({ type: types.GET_DATA_F });
+    });
+};
 
 
-export { getData, updateData, deleteData,addData,getCoupon,updateCoupon,deleteCoupon,addCoupon,getOneCoupon };
+
+export { getData, updateData, deleteData,addData,getCoupon,updateCoupon,deleteCoupon,addCoupon,getOneCoupon,getBannerData };
 

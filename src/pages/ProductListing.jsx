@@ -2,15 +2,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { getData } from "../redux/DataReducer/action";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 
 
 
 const ProductListing=()=>{
+  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
   const products = useSelector((store) => store.dataReducer.products);
   const location = useLocation();
   const [searchParams] = useSearchParams();
+
+  const handleDes = (id) => {
+    console.log('click');
+    console.log(id);
+    navigate(`/description/${id}`);
+  };
 
   useEffect(() => {
     if (location.search || products?.length === 0) {
@@ -32,14 +43,8 @@ const ProductListing=()=>{
 
     return(
         <>
+        <Header></Header>
         <div>
-        <div className="header-services">
-          <div className="ps-services owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed={7000} data-owl-gap={0} data-owl-nav="true" data-owl-dots="false" data-owl-item={1} data-owl-item-xs={1} data-owl-item-sm={1} data-owl-item-md={1} data-owl-item-lg={1} data-owl-duration={1000} data-owl-mousedrag="on">
-            <p className="ps-service"><i className="ps-icon-delivery" /><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-            <p className="ps-service"><i className="ps-icon-delivery" /><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-            <p className="ps-service"><i className="ps-icon-delivery" /><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-          </div>
-        </div>
         <main className="ps-main">
           <div className="ps-products-wrap pt-80 pb-80">
             <div className="ps-products" data-mh="product-listing">
@@ -65,12 +70,12 @@ const ProductListing=()=>{
               </div>
               <div className="ps-product__columns">
               {products.map((item) => (
-                <div className="ps-product__column">
+                <div className="ps-product__column" key={item._id}>
                   <div className="ps-shoe mb-30">
                     <div className="ps-shoe__thumbnail">
                       {/* <div className="ps-badge"><span>New</span></div> */}
                       {/* <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div> */}
-                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" href="product-detail.html" />
+                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.id)} />
                     </div>
                     <div className="ps-shoe__content">
                       <div className="ps-shoe__variants">
@@ -248,7 +253,7 @@ const ProductListing=()=>{
                 </div>
                 <div className="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
                   <form className="ps-subscribe__form" action="do_action" method="post">
-                    <input className="form-control" type="text" placeholder />
+                    <input className="form-control" type="text" />
                     <button>Sign up now</button>
                   </form>
                 </div>
@@ -262,7 +267,7 @@ const ProductListing=()=>{
         </main>
       </div>
 
-
+          <Footer></Footer>
         </>
     )
 }
