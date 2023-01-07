@@ -8,7 +8,7 @@ const getData = (params) => (dispatch) => {
     .then((res) => {
       dispatch({ type: types.GET_DATA_S, payload: res.data });
     })
-    .then((err) => {
+    .catch((err) => {
       dispatch({ type: types.GET_DATA_F });
     });
 };
@@ -153,16 +153,14 @@ const addCoupon = (details) => (dispatch) => {
     });
 };
 
-const getBannerData = (params) => (dispatch) => {
+const getBannerData = () => async (dispatch) => {
   dispatch({ type: types.GET_DATA_R });
-  return axios
-    .get("http://localhost:4000/banner", params)
-    .then((res) => {
-      dispatch({ type: types.GET_DATA_S, payload: res.data });
-    })
-    .then((err) => {
-      dispatch({ type: types.GET_DATA_F });
-    });
+  const res = await axios
+    .get("http://localhost:4000/banner");
+  dispatch({ type: types.GET_DATA_S, payload: res.data });
+  const err = res;
+  dispatch({ type: types.GET_DATA_F });
+  return res;
 };
 
 

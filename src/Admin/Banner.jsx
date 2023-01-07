@@ -41,7 +41,8 @@ const AdminPage = () => {
             justifyContent={"space-between"}
             my={"5"}
             fontSize={["7px", "10px", "12px", "15px"]}
-          >
+          > 
+            <Box w="15%">{item.name}</Box>
             <Box width={"300px"} mx={"2"}>
               <Image width={"100%"} src={item.images[0]} alt={'item.name'} />
             </Box>
