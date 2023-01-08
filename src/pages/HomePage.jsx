@@ -26,7 +26,7 @@ const Homepage = () => {
   const handleDes = (id) => {
     console.log('click');
     console.log(id);
-    navigate(`/description/${id}`);
+    navigate(`/${id}`);
   };
   const sortBy = searchParams.get("sortBy");
 
@@ -316,7 +316,7 @@ const Homepage = () => {
                               {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
                                 <span>-35%</span>
                                 </div> */}
-                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.id)}></a>
                             </div>
                             <div className="ps-shoe__content">
                               <div className="ps-shoe__variants">
@@ -351,7 +351,7 @@ const Homepage = () => {
                       <div className="grid-item shoes">
                         <div className="grid-item__content-wrapper">
                           <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
                             </div>
                             <div className="ps-shoe__content">
                               <div className="ps-shoe__variants">
@@ -376,7 +376,7 @@ const Homepage = () => {
                       <div className="grid-item men">
                         <div className="grid-item__content-wrapper">
                           <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
                             </div>
                             <div className="ps-shoe__content">
                               <div className="ps-shoe__variants">
@@ -402,7 +402,7 @@ const Homepage = () => {
                       <div className="grid-item women">
                         <div className="grid-item__content-wrapper">
                           <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.id)}></a>
                             </div>
                             <div className="ps-shoe__content">
                               <div className="ps-shoe__variants">
