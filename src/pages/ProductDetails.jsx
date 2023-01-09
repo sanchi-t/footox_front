@@ -13,8 +13,16 @@ import OwlCarousel from 'react-owl-carousel';
 const ProductDetails=()=>{
     const { id } = useParams();
     let navigate = useNavigate();
+    const [prod, setProd] = useState();
     const products = useSelector((store) => store.dataReducer.products);
     const dispatch = useDispatch();
+
+    const handleDes = (id) => {
+      console.log('click');
+      console.log(id);
+      navigate(`/${id}`);
+      window.location.reload();
+    };
 
     
 
@@ -32,13 +40,15 @@ const ProductDetails=()=>{
         if (id) {
           const cur = products.find((item) => item.id === Number(id));
           const cur2 = products.find((item) => item.gender === "MEN");
-          console.log(cur2,'cur2',cur);
+          
           cur && setCurrentProducts(cur);
           cur2 && setCurrentProducts1(cur2);
+          setProd(products)
         }
       }, [id, products,dispatch,num]);
 
       const imgg=currentProducts.images;
+      console.log(products,'cur2');
 
 
     return (
@@ -77,7 +87,7 @@ const ProductDetails=()=>{
       <nav className="navigation">
         <div className="container-fluid">
           <div className="navigation__column left">
-            <div className="header__logo"><a className="ps-logo" onClick={()=>navigate("/")} style={{cursor: "pointer"}}><img src="images/logo.png" alt=""/></a></div>
+            <div className="header__logo"><a className="ps-logo" onClick={()=>navigate("/")} style={{cursor: "pointer"}}><img src="images/footox_logo.jpeg" alt=""/></a></div>
           </div>
           <div className="navigation__column center">
                 <ul className="main-menu menu">
@@ -262,7 +272,7 @@ const ProductDetails=()=>{
               <div className="ps-product__info">
                 <div className="ps-product__rating">
                   <select className="ps-rating">
-                    <option value="1">1</option>
+                    <option value="1"><span class="fa fa-star checked"></span>1</option>
                     <option value="1">2</option>
                     <option value="1">3</option>
                     <option value="1">4</option>
@@ -414,14 +424,17 @@ const ProductDetails=()=>{
           <div className="ps-section__content">
             <div className="ps-owl--colection owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="4" data-owl-item-xs="1" data-owl-item-sm="2" data-owl-item-md="3" data-owl-item-lg="4" data-owl-duration="1000" data-owl-mousedrag="on">
             <OwlCarousel items={4} margin={30} autoplay={true} loop={true} dots={false} nav={false}>
+            {products.map((item) => {
+              if(item.gender===currentProducts.gender && item.id!==currentProducts.id)
+                  return(
               <div className="ps-shoes--carousel">
                 <div className="ps-shoe">
-                  <div className="ps-shoe__thumbnail">
-                    <div className="ps-badge"><span>New</span></div><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src="images/shoe/1.jpg" alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                  <div className="ps-shoe__thumbnail" onClick={() => handleDes(item.id)}>
+                    <div className="ps-badge"><span>New</span></div><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images?.[0]} alt=""/><a className="ps-shoe__overlay" ></a>
                   </div>
                   <div className="ps-shoe__content">
                     <div className="ps-shoe__variants">
-                      <div className="ps-shoe__variant normal"><img src="images/shoe/2.jpg" alt=""/><img src="images/shoe/3.jpg" alt=""/><img src="images/shoe/4.jpg" alt=""/><img src="images/shoe/5.jpg" alt=""/></div>
+                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={item.images?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={item.images?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={item.images?.[2]} alt=""/><img style={{width:'64px'}} src={item.images?.[3]} alt=""/></div>
                       <select className="ps-rating ps-shoe__rating">
                         <option value="1">1</option>
                         <option value="1">2</option>
@@ -430,18 +443,23 @@ const ProductDetails=()=>{
                         <option value="2">5</option>
                       </select>
                     </div>
-                    <div className="ps-shoe__detail"><a className="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p className="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price"> £ 120</span>
-                    </div>
+                    <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                        <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
+                        <p className="ps-shoe__categories"><a href="#">
+                          {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                          <del>₹{item.original_price}</del> ₹{item.final_price}</span>
+                      </div>
                   </div>
                 </div>
               </div>
+              )})}
               
               <div className="ps-shoes--carousel">
                 <div className="ps-shoe">
                   <div className="ps-shoe__thumbnail">
                     <div className="ps-badge"><span>New</span></div>
-                    <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src="images/shoe/2.jpg" alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                    <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src=
+                    {currentProducts.images?.[0]} alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
                   </div>
                   <div className="ps-shoe__content">
                     <div className="ps-shoe__variants">
@@ -454,14 +472,16 @@ const ProductDetails=()=>{
                         <option value="2">5</option>
                       </select>
                     </div>
-                    <div className="ps-shoe__detail"><a className="ps-shoe__name" href="product-detai.html">Air Jordan 7 Retro</a>
-                      <p className="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                        <del>£220</del> £ 120</span>
+                    <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                      <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{currentProducts.name}</a></div>
+                      <p className="ps-shoe__categories"><a href="#">
+                        {currentProducts.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                        <del>₹{currentProducts.original_price}</del> ₹{currentProducts.final_price}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="ps-shoes--carousel">
+              {/* <div className="ps-shoes--carousel">
                 <div className="ps-shoe">
                   <div className="ps-shoe__thumbnail">
                     <div className="ps-badge"><span>New</span></div><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src="images/shoe/3.jpg" alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
@@ -546,7 +566,7 @@ const ProductDetails=()=>{
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               </OwlCarousel>
             </div>
             

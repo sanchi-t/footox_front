@@ -93,7 +93,7 @@ const Homepage = () => {
           <nav className="navigation">
             <div className="container-fluid">
               <div className="navigation__column left">
-                <div className="header__logo"><a className="ps-logo" href="index.html"><img src='images/logo.png' alt="" /></a></div>
+                <div className="header__logo"><a className="ps-logo" href="index.html"><img src='images/footox_logo.jpeg' alt="" /></a></div>
               </div>
               <div className="navigation__column center">
                 <ul className="main-menu menu">
@@ -337,7 +337,8 @@ const Homepage = () => {
 
 
                               </div>
-                              <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
+                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
                                 <p className="ps-shoe__categories"><a href="#">
                                   {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
                                   <del>₹{item.original_price}</del> ₹{item.final_price}</span>
@@ -363,8 +364,11 @@ const Homepage = () => {
                                     <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
                                   </OwlCarousel></div></div>
                               </div>
-                              <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
-                                <p className="ps-shoe__categories"><a href="#">{item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">₹{item.current_price}</span>
+                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
+                                <p className="ps-shoe__categories"><a href="#">
+                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
                               </div>
                             </div>
                           </div>
@@ -388,8 +392,11 @@ const Homepage = () => {
                                     <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
                                   </OwlCarousel></div></div>
                               </div>
-                              <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
-                                <p className="ps-shoe__categories"><a href="#">{item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">₹{item.current_price}</span>
+                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
+                                <p className="ps-shoe__categories"><a href="#">
+                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
                               </div>
                             </div>
                           </div>
@@ -414,8 +421,11 @@ const Homepage = () => {
                                     <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
                                   </OwlCarousel></div></div>
                               </div>
-                              <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
-                                <p className="ps-shoe__categories"><a href="#">{item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">₹{item.current_price}</span>
+                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
+                                <p className="ps-shoe__categories"><a href="#">
+                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
                               </div>
                             </div>
                           </div>
