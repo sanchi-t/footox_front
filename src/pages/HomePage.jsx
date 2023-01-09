@@ -27,7 +27,9 @@ const Homepage = () => {
     console.log('click');
     console.log(id);
     navigate(`/${id}`);
+    window.location.reload();
   };
+  
   const sortBy = searchParams.get("sortBy");
 
   const queryParams = {

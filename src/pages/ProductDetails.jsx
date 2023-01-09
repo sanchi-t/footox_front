@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,9 +12,9 @@ import OwlCarousel from 'react-owl-carousel';
 
 const ProductDetails=()=>{
     const { id } = useParams();
+    let navigate = useNavigate();
     const products = useSelector((store) => store.dataReducer.products);
     const dispatch = useDispatch();
-
 
     
 
@@ -36,6 +37,9 @@ const ProductDetails=()=>{
           cur2 && setCurrentProducts1(cur2);
         }
       }, [id, products,dispatch,num]);
+
+      const imgg=currentProducts.images;
+
 
     return (
 
@@ -73,7 +77,7 @@ const ProductDetails=()=>{
       <nav className="navigation">
         <div className="container-fluid">
           <div className="navigation__column left">
-            <div className="header__logo"><a className="ps-logo" href="index.html"><img src="images/logo.png" alt=""/></a></div>
+            <div className="header__logo"><a className="ps-logo" onClick={()=>navigate("/")} style={{cursor: "pointer"}}><img src="images/logo.png" alt=""/></a></div>
           </div>
           <div className="navigation__column center">
                 <ul className="main-menu menu">
@@ -232,21 +236,23 @@ const ProductDetails=()=>{
               <div className="ps-product__thumbnail">
                 <div className="ps-product__preview">
                   <div className="ps-product__variants">
-                    <div className="item"><img src="images/shoe-detail/1.jpg" alt=""/></div>
-                    <div className="item"><img src="images/shoe-detail/2.jpg" alt=""/></div>
-                    <div className="item"><img src="images/shoe-detail/3.jpg" alt=""/></div>
-                    <div className="item"><img src="images/shoe-detail/3.jpg" alt=""/></div>
-                    <div className="item"><img src="images/shoe-detail/3.jpg" alt=""/></div>
-                  </div><a className="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src="images/shoe-detail/1.jpg" alt=""/><i className="fa fa-play"></i></a>
+                    <div className="item"><img src={imgg?.[0]? imgg[0]:"images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={imgg?.[1]? imgg[1]:"images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={imgg?.[2]? imgg[2]:"images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={imgg?.[3]? imgg[3]:"images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={imgg?.[4]? imgg[4]:"images/shoe-detail/2.jpg"} alt=""/></div>
+                  </div><a className="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src={currentProducts?.images?.[0]} alt=""/><i className="fa fa-play"></i></a>
                 </div>
                 <div className="ps-product__image">
                   <div className="item"><img className="zoom" src={currentProducts?.images?.[0]} alt="" data-zoom-image={currentProducts?.images?.[0]}/></div>
                   <div className="item"><img className="zoom" src={currentProducts?.images?.[1]} alt="" data-zoom-image={currentProducts?.images?.[1]}/></div>
                   <div className="item"><img className="zoom" src={currentProducts?.images?.[2]} alt="" data-zoom-image={currentProducts?.images?.[2]}/></div>
+                  <div className="item"><img className="zoom" src={currentProducts?.images?.[3]} alt="" data-zoom-image={currentProducts?.images?.[3]}/></div>
+                  <div className="item"><img className="zoom" src={currentProducts?.images?.[4]} alt="" data-zoom-image={currentProducts?.images?.[4]}/></div>
                 </div>
               </div>
               <div className="ps-product__thumbnail--mobile">
-                <div className="ps-product__main-img"><img src="images/shoe-detail/1.jpg" alt=""/></div>
+                <div className="ps-product__main-img"><img src={currentProducts.images?.[0]} alt=""/></div>
                 <div className="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
                 <OwlCarousel items={3} margin={20} autoplay={true} loop={true} dots={false} nav={false}>
                   <img src={currentProducts?.images?.[0]} alt=""/><img src={currentProducts?.images?.[1]} alt=""/><img src={currentProducts?.images?.[2]} alt=""/>

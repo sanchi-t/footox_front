@@ -23,8 +23,8 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/:id" element={<ProductDetails />} />
+        <Route path="/" element={<HomePage />} forceRefresh={true} />
+        <Route path="/:id" element={<ProductDetails />}/>
         <Route path="/login" element={<Login />} />   
         <Route
           path="/admin"
