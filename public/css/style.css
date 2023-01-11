@@ -101,7 +101,7 @@
 [data-col-xs="2"].masonry-wrapper .grid-item.wide, [data-col-xs="2"].masonry-wrapper .grid-item.large {
   width: 100%; }
 
-[data-col-xs="2"].masonry-wrapper .grid-item.extra-large {
+[data-col-xs="2"]. .grid-item.extra-large {
   width: 100%; }
 
 [data-col-xs="3"].masonry-wrapper .grid-item, [data-col-xs="3"].masonry-wrapper .grid-sizer {

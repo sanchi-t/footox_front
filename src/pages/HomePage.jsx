@@ -7,7 +7,6 @@ import { getData, getBannerData } from "../redux/DataReducer/action";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
-
 import axios from "axios";
 
 
@@ -28,6 +27,7 @@ const Homepage = () => {
     console.log(id);
     navigate(`/${id}`);
     window.location.reload();
+    window.scrollTo(0,0); 
   };
   
   const sortBy = searchParams.get("sortBy");
@@ -50,197 +50,26 @@ const Homepage = () => {
       setProd(response.data)
     }
     const l = axiosTest()
-  }, [])
-  console.log('kuhoo', prod)
+  }, [products])
+  console.log('sanchit', prod,products.length)
   useEffect(() => {
     dispatch(getData(queryParams));
   }, [])
   console.log('helloo', products, products1)
+  products.sort(function(a,b){
+    return new Date(b.modifiedDate) - new Date(a.modifiedDate);
+  });
+  console.log(products,'sort');
 
   return (
     <React.Fragment>
       <body className="ps-loading">
-
-        <div className="header--sidebar" />
-        <header className="header">
-          <div className="header__top">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-6 col-md-8 col-sm-6 col-xs-12 ">
-                  <p>460 West 34th Street, 15th floor, New York  -  Hotline: 804-377-3580 - 804-399-3580</p>
-                </div>
-                <div className="col-lg-6 col-md-4 col-sm-6 col-xs-12">
-                  <div className="header__actions"><a href="#">Login &amp; Regiser</a>
-                    <div className="btn-group ps-dropdown"><a className="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USD<i className="fa fa-angle-down" /></a>
-                      <ul className="dropdown-menu">
-                        <li><a href="#"><img src='images/flag/usa.svg' alt="" /> USD</a></li>
-                        <li><a href="#"><img src='images/flag/singapore.svg' alt="" /> SGD</a></li>
-                        <li><a href="#"><img src='images/flag/japan.svg' alt="" /> JPN</a></li>
-                      </ul>
-                    </div>
-                    <div className="btn-group ps-dropdown"><a className="dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language<i className="fa fa-angle-down" /></a>
-                      <ul className="dropdown-menu">
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">Japanese</a></li>
-                        <li><a href="#">Chinese</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav className="navigation">
-            <div className="container-fluid">
-              <div className="navigation__column left">
-                <div className="header__logo"><a className="ps-logo" href="index.html"><img src='images/footox_logo.jpeg' alt="" /></a></div>
-              </div>
-              <div className="navigation__column center">
-                <ul className="main-menu menu">
-                  <li className="menu-item menu-item-has-children dropdown"><a href="index.html">Home</a>
-                    <ul className="sub-menu">
-                      <li className="menu-item"><a href="index.html">Homepage #1</a></li>
-                      <li className="menu-item"><a href="#">Homepage #2</a></li>
-                      <li className="menu-item"><a href="#">Homepage #3</a></li>
-                    </ul>
-                  </li>
-                  <li className="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
-                    <div className="mega-menu">
-                      <div className="mega-wrap">
-                        <div className="mega-column">
-                          <ul className="mega-item mega-features">
-                            <li><a href="product-listing.html">NEW RELEASES</a></li>
-                            <li><a href="product-listing.html">FEATURES SHOES</a></li>
-                            <li><a href="product-listing.html">BEST SELLERS</a></li>
-                            <li><a href="product-listing.html">NOW TRENDING</a></li>
-                            <li><a href="product-listing.html">SUMMER ESSENTIALS</a></li>
-                            <li><a href="product-listing.html">MOTHER'S DAY COLLECTION</a></li>
-                            <li><a href="product-listing.html">FAN GEAR</a></li>
-                          </ul>
-                        </div>
-                        <div className="mega-column">
-                          <h4 className="mega-heading">Shoes</h4>
-                          <ul className="mega-item">
-                            <li><a href="product-listing.html">All Shoes</a></li>
-                            <li><a href="product-listing.html">Running</a></li>
-                            <li><a href="product-listing.html">Training &amp; Gym</a></li>
-                            <li><a href="product-listing.html">Basketball</a></li>
-                            <li><a href="product-listing.html">Football</a></li>
-                            <li><a href="product-listing.html">Soccer</a></li>
-                            <li><a href="product-listing.html">Baseball</a></li>
-                          </ul>
-                        </div>
-                        <div className="mega-column">
-                          <h4 className="mega-heading">CLOTHING</h4>
-                          <ul className="mega-item">
-                            <li><a href="product-listing.html">Compression &amp; Nike Pro</a></li>
-                            <li><a href="product-listing.html">Tops &amp; T-Shirts</a></li>
-                            <li><a href="product-listing.html">Polos</a></li>
-                            <li><a href="product-listing.html">Hoodies &amp; Sweatshirts</a></li>
-                            <li><a href="product-listing.html">Jackets &amp; Vests</a></li>
-                            <li><a href="product-listing.html">Pants &amp; Tights</a></li>
-                            <li><a href="product-listing.html">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div className="mega-column">
-                          <h4 className="mega-heading">Accessories</h4>
-                          <ul className="mega-item">
-                            <li><a href="product-listing.html">Compression &amp; Nike Pro</a></li>
-                            <li><a href="product-listing.html">Tops &amp; T-Shirts</a></li>
-                            <li><a href="product-listing.html">Polos</a></li>
-                            <li><a href="product-listing.html">Hoodies &amp; Sweatshirts</a></li>
-                            <li><a href="product-listing.html">Jackets &amp; Vests</a></li>
-                            <li><a href="product-listing.html">Pants &amp; Tights</a></li>
-                            <li><a href="product-listing.html">Shorts</a></li>
-                          </ul>
-                        </div>
-                        <div className="mega-column">
-                          <h4 className="mega-heading">BRAND</h4>
-                          <ul className="mega-item">
-                            <li><a href="product-listing.html">NIKE</a></li>
-                            <li><a href="product-listing.html">Adidas</a></li>
-                            <li><a href="product-listing.html">Dior</a></li>
-                            <li><a href="product-listing.html">B&amp;G</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="menu-item"><a href="#">Women</a></li>
-                  <li className="menu-item"><a href="#">Kids</a></li>
-                  <li className="menu-item menu-item-has-children dropdown"><a href="#">News</a>
-                    <ul className="sub-menu">
-                      <li className="menu-item menu-item-has-children dropdown"><a href="blog-grid.html">Blog-grid</a>
-                        <ul className="sub-menu">
-                          <li className="menu-item"><a href="blog-grid.html">Blog Grid 1</a></li>
-                          <li className="menu-item"><a href="blog-grid-2.html">Blog Grid 2</a></li>
-                        </ul>
-                      </li>
-                      <li className="menu-item"><a href="blog-list.html">Blog List</a></li>
-                    </ul>
-                  </li>
-                  <li className="menu-item menu-item-has-children dropdown"><a href="#">Contact</a>
-                    <ul className="sub-menu">
-                      <li className="menu-item"><a href="contact-us.html">Contact Us #1</a></li>
-                      <li className="menu-item"><a href="contact-us.html">Contact Us #2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div className="navigation__column right">
-                <form className="ps-search--header" action="do_action" method="post">
-                  <input className="form-control" type="text" placeholder="Search Product…" />
-                  <button><i className="ps-icon-search" /></button>
-                </form>
-                <div className="ps-cart"><a className="ps-cart__toggle" href="#"><span><i>20</i></span><i className="ps-icon-shopping-cart" /></a>
-                  <div className="ps-cart__listing">
-                    <div className="ps-cart__content">
-                      <div className="ps-cart-item"><a className="ps-cart-item__close" href="#" />
-                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src='images/cart-preview/1.jpg' alt="" /></div>
-                        <div className="ps-cart-item__content"><a className="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-                          <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                        </div>
-                      </div>
-                      <div className="ps-cart-item"><a className="ps-cart-item__close" href="#" />
-                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src='images/cart-preview/2.jpg' alt="" /></div>
-                        <div className="ps-cart-item__content"><a className="ps-cart-item__title" href="product-detail.html">The Crusty Croissant</a>
-                          <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                        </div>
-                      </div>
-                      <div className="ps-cart-item"><a className="ps-cart-item__close" href="#" />
-                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src='images/cart-preview/3.jpg' alt="" /></div>
-                        <div className="ps-cart-item__content"><a className="ps-cart-item__title" href="product-detail.html">The Rolling Pin</a>
-                          <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ps-cart__total">
-                      <p>Number of items:<span>36</span></p>
-                      <p>Item Total:<span>£528.00</span></p>
-                    </div>
-                    <div className="ps-cart__footer"><a className="ps-btn" href="cart.html">Check out<i className="ps-icon-arrow-left" /></a></div>
-                  </div>
-                </div>
-                <div className="menu-toggle"><span /></div>
-              </div>
-            </div>
-          </nav>
-        </header>
-        <div class="header-services">
-          <div class="ps-services owl-slider">
-            <OwlCarousel items={1} margin={0} autoplay={true} loop={true} dots={false} nav={false}>
-
-              <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-              <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-              <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-            </OwlCarousel>
-          </div>
-        </div>
+        <Header/>
         <main className="ps-main">
           <div className="ps-banner">
             <div className="rev_slider fullscreenbanner" id="home-banner">
               <ul className="ps-banner">
-                <li data-index="rs-29723" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off"><img className="rev-slidebg" src={prod?.[0]?.images[0]} alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina />
+                <li data-index="rs-29723" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off"><img className="rev-slidebg" src={prod?.[0]?.images?.[0]} alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina />
                   <div className="tp-caption ps-banner__header" id="layer4" data-x="left" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['-150','-60','-70','-70']" data-width="['none','none','none','400']" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:1000,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
                     <p>March 2017 <br /> BASKETBALL FASHION</p>
                   </div>
@@ -251,7 +80,7 @@ const Homepage = () => {
                     <p>Supa wanted something that was going to rep his East Coast <br /> roots and, more specifically, his hometown of  New York City in a big way.</p>
                   </div><a className="tp-caption ps-btn" id="layer34" href="#" data-x="['left','left','left','left']" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['120','60','70','70']" data-type="text" data-responsive_offset="on" data-textAlign="['center','center','center','center']" data-frames="[{&quot;delay&quot;:1500,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">Purchase Now<i className="ps-icon-next"></i></a>
                 </li>
-                <li class="ps-banner ps-banner--white" data-index="rs-100" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0"><img class="rev-slidebg" src={prod?.[0]?.images[1]} alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina />
+                <li class="ps-banner ps-banner--white" data-index="rs-100" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-rotate="0"><img class="rev-slidebg" src={prod?.[0]?.images?.[1]} alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina />
                   <div class="tp-caption ps-banner__header" id="layer20" data-x="left" data-hoffset="['-60','15','15','15']" data-y="['middle','middle','middle','middle']" data-voffset="['-150','-120','-150','-170']" data-width="['none','none','none','400']" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:1000,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;x:50px;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:300,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;x:50px;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;}]">
                     <p>BEST ITEM <br /> THIS SUMMER</p>
                   </div>
@@ -272,60 +101,93 @@ const Homepage = () => {
               </div>
               <div className="ps-section__content pb-50">
                 <div className="masonry-wrapper" data-col-md="3" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
-                  <div className="ps-masonry">
+                  <div className="ps-masonry1">
                     <div className="grid-sizer"></div>
-                    <div className="grid-item">
-                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images[0]} alt="" /></a></div>
+                    <div className="grid-item" style={{float:'left'}}>
+                      <div className="grid-item__content-wrapper" ><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images?.[0]} alt="" /></a></div>
                     </div>
-                    <div className="grid-item">
-                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images[1]} alt="" /></a></div>
+                    <div className="grid-item" style={{float:'left'}}>
+                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images?.[1]} alt="" /></a></div>
                     </div>
-                    <div className="grid-item high">
-                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images[4]} alt="" /></a></div>
+                    <div className="grid-item high" style={{float:'right'}}>
+                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images?.[4]} alt="" /></a></div>
                     </div>
-                    <div className="grid-item">
-                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images[2]} alt="" /></a></div>
+                    <div className="grid-item" style={{float:'left'}}>
+                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images?.[2]} alt="" /></a></div>
                     </div>
-                    <div className="grid-item">
-                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images[3]} alt="" /></a></div>
+                    <div className="grid-item" style={{float:'left'}}>
+                      <div className="grid-item__content-wrapper"><a className="ps-offer" href="product-detail.html"><img src={prod?.[2].images?.[3]} alt="" /></a></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="ps-section--features-product ps-section masonry-root pt-40 pb-80">
-            <div className="ps-container">
+          
+          <div className="ps-section--features-product ps-section masonry-root pt-40 pb-80"  style={{paddingTop:'20%'}}>
+            <div className="ps-container" >
               <div className="ps-section__header mb-50">
                 <h3 className="ps-section__title" data-mask="features">- New Product</h3>
-                <ul className="ps-masonry__filter">
-                  <li className="current"><a href="#" data-filter="*">All <sup>{products.length}</sup></a></li>
-                  <li><a href="#" data-filter=".men">Men <sup>1</sup></a></li>
-                  <li><a href="#" data-filter=".women">Women <sup>1</sup></a></li>
-                  <li><a href="#" data-filter=".shoes">Shoes <sup>4</sup></a></li>
+                <ul className="ps-masonry__filter" style={{paddingTop:'05%'}}>
+                  <li className="current"><a  id='allp123'  href="#" data-filter=".allp">All <sup>{products.length}</sup></a></li>
+                  <li><a style={{cursor: 'pointer'}} data-filter=".men">Men <sup>{(products.filter(x => x.productGender === 'Men')).length}</sup></a></li>
+                  <li><a href='#' data-filter=".women">Women <sup>{(products.filter(x => x.productGender === 'Women')).length}</sup></a></li>
+                  <li><a href='#' data-filter=".shoes">Shoes <sup>4</sup></a></li>
                 </ul>
               </div>
               <div className="ps-section__content pb-50">
                 <div className="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
                   <div className="ps-masonry">
-                    <div className="grid-sizer"></div>
                     {products.map((item) => (
-                      <div className="grid-item kids" style={{ float: 'left' }}>
-                        <div className="grid-item__content-wrapper">
+                      <div className="grid-item allp" style={{ float: 'left' }}>
+                        <div className="grid-item__content-wrapper" style={{minHeight: "300px",position: 'relative'}}>
                           <div className="ps-shoe mb-30">
                             <div className="ps-shoe__thumbnail">
-                              {/* <div className="ps-badge"><span>New</span></div> */}
-                              {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
-                                <span>-35%</span>
-                                </div> */}
-                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.id)}></a>
+                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
                             </div>
                             <div className="ps-shoe__content">
                               <div className="ps-shoe__variants">
                                 <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
                                   <div className='owl-stage-outer'>
                                     <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                      <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
+                                      <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
+                                    </OwlCarousel></div></div>
+              
+
+
+                              </div>
+                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
+                                <p className="ps-shoe__categories"><a href="#">
+                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                                  <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    
+
+                    {products.map((item) => {
+                      if(item.productGender==="mMen")
+                      return(
+                        <div className="grid-item men" style={{float: 'left' }}>
+                        <div className="grid-item__content-wrapper" style={{minHeight: "300px",position: 'relative'}}>
+                          <div className="ps-shoe mb-30">
+                            <div className="ps-shoe__thumbnail">
+                              {/* <div className="ps-badge"><span>New</span></div> */}
+                              {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
+                                <span>-35%</span>
+                                </div> */}
+                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
+                            </div>
+                            <div className="ps-shoe__content">
+                              <div className="ps-shoe__variants">
+                                <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
+                                  <div className='owl-stage-outer'>
+                                    <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
+                                      <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
                                     </OwlCarousel></div></div>
                                 {/* <select className="ps-rating ps-shoe__rating">
                                       <option value="1">1</option>
@@ -338,65 +200,10 @@ const Homepage = () => {
 
                               </div>
                               <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
                                 <p className="ps-shoe__categories"><a href="#">
                                   {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    {products.map((item) => {
-                      if(item.category==="shoes")
-                      return(
-                      <div className="grid-item shoes">
-                        <div className="grid-item__content-wrapper">
-                          <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
-                            </div>
-                            <div className="ps-shoe__content">
-                              <div className="ps-shoe__variants">
-                              <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
-                                <div className='owl-stage-outer'>
-                                  <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                    <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
-                                  </OwlCarousel></div></div>
-                              </div>
-                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
-                                <p className="ps-shoe__categories"><a href="#">
-                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      )})}
-
-                    {products.map((item) => {
-                      if(item.gender==="MEN")
-                      return(
-                      <div className="grid-item men">
-                        <div className="grid-item__content-wrapper">
-                          <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
-                            </div>
-                            <div className="ps-shoe__content">
-                              <div className="ps-shoe__variants">
-                              <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
-                                <div className='owl-stage-outer'>
-                                  <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                    <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
-                                  </OwlCarousel></div></div>
-                              </div>
-                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
-                                <p className="ps-shoe__categories"><a href="#">
-                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
+                                  <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
                               </div>
                             </div>
                           </div>
@@ -406,19 +213,61 @@ const Homepage = () => {
 
                     
                     {products.map((item) => {
-                      if(item.gender==="WOMEN")
+                      if(item.productGender==="wWomen")
                       return(
-                      <div className="grid-item women">
+                        <div className="grid-item women" style={{float: 'left' }}>
+                        <div className="grid-item__content-wrapper" style={{minHeight: "300px",position: 'relative'}}>
+                          <div className="ps-shoe mb-30">
+                            <div className="ps-shoe__thumbnail">
+                              {/* <div className="ps-badge"><span>New</span></div> */}
+                              {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
+                                <span>-35%</span>
+                                </div> */}
+                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
+                            </div>
+                            <div className="ps-shoe__content">
+                              <div className="ps-shoe__variants">
+                                <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
+                                  <div className='owl-stage-outer'>
+                                    <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
+                                      <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
+                                    </OwlCarousel></div></div>
+                                {/* <select className="ps-rating ps-shoe__rating">
+                                      <option value="1">1</option>
+                                      <option value="1">2</option>
+                                      <option value="1">3</option>
+                                      <option value="1">4</option>
+                                      <option value="2">5</option>
+                                    </select> */}
+
+
+                              </div>
+                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
+                                <p className="ps-shoe__categories"><a href="#">
+                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                                  <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      )})}  
+
+                    {products.map((item) => {
+                      if(item.category==="shoes")
+                      return(
+                      <div className="grid-item shoes">
                         <div className="grid-item__content-wrapper">
                           <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.id)}></a>
+                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
                             </div>
                             <div className="ps-shoe__content">
                               <div className="ps-shoe__variants">
                               <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
                                 <div className='owl-stage-outer'>
                                   <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                    <img src={item.images[0]} alt="" /><img src={item.images[1]} alt="" /><img src={item.images[2]} alt="" /><img src={item.images[3]} alt="" />
+                                    <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
                                   </OwlCarousel></div></div>
                               </div>
                               <div className="ps-shoe__detail" style={{textAlign:'left'}}>
@@ -437,8 +286,9 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-
-          <div className="ps-home-testimonial bg--parallax pb-80" data-background={prod?.[1].images[0]} style={{ background: `url(${prod?.[1].images[0]})` }}>
+          <div style={{padding:'130px'}}></div>
+          <div style={{padding:`${((Math.ceil(products.length/4))-1)*250}px`}}></div>
+          <div className="ps-home-testimonial bg--parallax pb-80" data-background={prod?.[1].images?.[0]} style={{display:'block',minHeight:'100px',maxHeight:'550px', background: `url(${prod?.[1].images?.[0]})` }}>
 
             <div className="container">
 

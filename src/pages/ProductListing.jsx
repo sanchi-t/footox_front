@@ -30,9 +30,9 @@ const ProductListing=()=>{
       const queryParams = {
         params: {
           category: searchParams.getAll("category"),
-          gender: searchParams.getAll("gender"),
-          colortype: searchParams.getAll("colortype"),
-          sizes: searchParams.getAll("sizes"),
+          gender: searchParams.getAll("productGender"),
+          // colortype: searchParams.getAll("colortype"),
+          sizes: searchParams.getAll("Sizes"),
           _sort: sortBy && "rating",
           _order: sortBy,
         },
@@ -75,11 +75,11 @@ const ProductListing=()=>{
                     <div className="ps-shoe__thumbnail">
                       {/* <div className="ps-badge"><span>New</span></div> */}
                       {/* <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div> */}
-                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img src={item.images[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.id)} />
+                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
                     </div>
                     <div className="ps-shoe__content">
                       <div className="ps-shoe__variants">
-                        <div className="ps-shoe__variant normal"><img width="55" src={item.images[1]} alt="" /><img width="55" src={item.images[2]}alt="" /><img width="55" src={item.images[3]} alt="" /><img width="55" src={item.images[4]} alt="" /></div>
+                        <div className="ps-shoe__variant normal"><img width="55" src={item.image?.[1]} alt="" /><img width="55" src={item.image?.[2]}alt="" /><img width="55" src={item.image?.[3]} alt="" /><img width="55" src={item.image?.[4]} alt="" /></div>
                         <select className="ps-rating ps-shoe__rating">
                           <option value={1}>1</option>
                           <option value={1}>2</option>
@@ -90,7 +90,7 @@ const ProductListing=()=>{
                       </div>
                       <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
                         <p className="ps-shoe__categories"><a href="#">{item.gender}</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                          <del>₹{item.original_price}</del> ₹{item.final_price}</span>
+                          <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
                       </div>
                     </div>
                   </div>

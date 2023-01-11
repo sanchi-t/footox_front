@@ -9,7 +9,7 @@ const Footer=()=>{
                 <div className="row">
                   <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
                     <aside className="ps-widget--footer ps-widget--info">
-                      <header><a className="ps-logo" href="index.html"><img src="images/logo-white.png" alt="" /></a>
+                      <header><a className="ps-logo" href="index.html"><img src="images/footox_white_logo.png" alt="" /></a>
                         <h3 className="ps-widget__title">Address Office 1</h3>
                       </header>
                       <footer>

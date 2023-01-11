@@ -252,7 +252,13 @@
                 });
             });
             var filters = masonryTrigger.closest('.masonry-root').find('.ps-masonry__filter > li > a');
+            // console.log(filters,'asnch');
+            // $(`[data-filter=".allp"]`).trigger('click');
+            // window.on('load',function(){
+                
+            // })
             filters.on('click', function() {
+                console.log(filters,'asnch');
                 var selector = $(this).attr('data-filter');
                 filters.find('a').removeClass('current');
                 $(this).parent('li').addClass('current');
@@ -696,6 +702,7 @@
     });
 
     $(window).on('load', function() {
+        $( "#allp123" ). trigger("click");
         $('.ps-loading').addClass('loaded');
     });
 
