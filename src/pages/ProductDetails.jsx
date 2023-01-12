@@ -258,7 +258,7 @@ const ProductDetails=()=>{
                     <h3 className="ps-section__title" data-mask="Related item">- YOU MIGHT ALSO LIKE</h3>
                   </div>
                     <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-                    <div className="ps-owl-actions"><a className="ps-prev" href="#"><i className="ps-icon-arrow-right"></i>Prev</a><a className="ps-next" href="#">Next<i className="ps-icon-arrow-left"></i></a></div>
+                    {/* <div className="ps-owl-actions"><a className="ps-prev" href="#"><i className="ps-icon-arrow-right"></i>Prev</a><a className="ps-next" href="#">Next<i className="ps-icon-arrow-left"></i></a></div> */}
                   </div>
                   
 
