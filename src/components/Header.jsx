@@ -168,13 +168,13 @@ const Header = () => {
             </div>
           </nav>
         </header>
-        <div class="header-services">
-          <div class="ps-services owl-slider">
+        <div className="header-services">
+          <div className="ps-services owl-slider">
             <OwlCarousel items={1} margin={0} autoplay={true} loop={true} dots={false} nav={false}>
 
-              <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-              <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-              <p class="ps-service"><i class="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
+              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
+              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
+              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
             </OwlCarousel>
           </div>
         </div> 

@@ -702,7 +702,6 @@
     });
 
     $(window).on('load', function() {
-        $( "#allp123" ). trigger("click");
         $('.ps-loading').addClass('loaded');
     });
 

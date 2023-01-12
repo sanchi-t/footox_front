@@ -136,7 +136,10 @@ const ProductDetails=()=>{
                 </div>
                 <div className="ps-product__block ps-product__size">
                   <h4 style={{textAlign:'left'}}>CHOOSE SIZE<a href="#">Size chart</a></h4>
-                  <select style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px'}}>
+                  <select style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px',appearance: 'none',paddingRight:'20px',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 1.9rem center',
+    backgroundSize: '1em'}}>
                     <option value="1" >SELECT SIZE</option>
                     <option value="2">4</option>
                     <option value="3">4.5</option>
@@ -155,7 +158,7 @@ const ProductDetails=()=>{
                     <input className="form-control" type="number" defaultValue="1"/>
                   </div>
                 </div>
-                <div className="ps-product__shopping"><a className="ps-btn mb-10" href="cart.html">Add to cart<i className="ps-icon-next"></i></a>
+                <div className="ps-product__shopping" ><a className="ps-btn mb-10"  href="cart.html" style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></a>
                   <div className="ps-product__actions"><a className="mr-10" href="whishlist.html"><i className="ps-icon-heart"></i></a><a href="compare.html"><i className="ps-icon-share"></i></a></div>
                 </div>
               </div>
