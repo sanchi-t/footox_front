@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
 import axios from "axios";
+import { IGEmbed } from 'react-ig-embed';
 
 
 
@@ -123,7 +124,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-          
+          <div className='container' style={{position:'relative',left:'-165px'}}>
           <div className="ps-section--features-product ps-section masonry-root pt-40 pb-80"  style={{paddingTop:'20%'}}>
             <div className="ps-container" >
               <div className="ps-section__header mb-50">
@@ -138,37 +139,6 @@ const Homepage = () => {
               <div className="ps-section__content pb-50">
                 <div className="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
                   <div className="ps-masonry">
-                    {/* {products.map((item) => (
-                      <div className="grid-item allp" style={{ float: 'left' }}>
-                        <div className="grid-item__content-wrapper" style={{minHeight: "300px",position: 'relative'}}>
-                          <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail">
-                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
-                            </div>
-                            <div className="ps-shoe__content">
-                              <div className="ps-shoe__variants">
-                                <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
-                                  <div className='owl-stage-outer'>
-                                    <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                      <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
-                                    </OwlCarousel></div></div>
-              
-
-
-                              </div>
-                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
-                                <p className="ps-shoe__categories"><a href="#">
-                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))} */}
-                    
-
                     {products.map((item) => {
                       if(item.productGender==="Men")
                       return(
@@ -286,8 +256,9 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-          <div style={{padding:'130px'}}></div>
-          <div style={{padding:`${((Math.ceil(products.length/4))-1)*260}px`}}></div>
+          </div>
+          {/* <div style={{padding:'130px'}}></div>
+          <div style={{padding:`${((Math.ceil(products.length/4))-1)*260}px`}}></div> */}
           <div className="ps-home-testimonial bg--parallax pb-80" data-background={prod?.[1].images?.[0]} style={{display:'block',minHeight:'100px',maxHeight:'550px', background: `url(${prod?.[1].images?.[0]})` }}>
 
             <div className="container">
@@ -347,109 +318,6 @@ const Homepage = () => {
 
             </div>
           </div>
-          <div className="ps-section ps-owl-root ps-hotdeal--2 pt-80 pb-80">
-            <div className="ps-container">
-              <div className="ps-section__header mb-50">
-                <div className="row">
-                  <div className="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
-                    <h3 className="ps-section__title" data-mask="SALE OFF">- HOT DEAL TODAY</h3>
-                  </div>
-                  <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
-                    <div className="ps-owl-actions"><a className="ps-prev" href="#"><i className="ps-icon-arrow-right"></i>Prev</a><a className="ps-next" href="#">Next<i className="ps-icon-arrow-left"></i></a></div>
-                  </div>
-                </div>
-              </div>
-              <div className="ps-section__content">
-                <div className="row">
-                  <div className="ps-owl--collection owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="50000" data-owl-gap="30" data-owl-nav="false" data-owl-dots="false" data-owl-item="2" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="2" data-owl-item-lg="2" data-owl-duration="1000" data-owl-mousedrag="on">
-                    <OwlCarousel items={2} autoplay={true} dots={false} nav={false}>
-                      <div className="ps-product--hotdeal">
-                        <div className="ps-product__thumbnail"><a className="ps-product__overlay" href="product-detail.html"></a><img src="images/offer/clothes-1.jpg" alt="" /></div>
-                        <div className="ps-product__content"><a className="ps-product__title" href="product-detail.html">Slim Fit Men Sport Hoodie</a>
-                          <p className="ps-product__price">Only: <span>£155</span></p>
-                          <div className="ps-product__status">
-                            <div className="sold">Already sold: <span>10</span></div>
-                            <div className="avaiable">avaiable: <span>30</span></div>
-                          </div>
-                          <div className="progress">
-                            <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "60%" }}></div>
-                          </div>
-                          <ul className="ps-countdown" data-time="December 1, 2017 00:00:00">
-                            <li><span className="hours"></span><p>Hours</p></li>
-                            <li className="divider">:</li>
-                            <li><span className="minutes"></span><p>minutes</p></li>
-                            <li className="divider">:</li>
-                            <li><span className="seconds"></span><p>Seconds</p></li>
-                          </ul><a className="ps-btn" href="cart.html">Order Today<i className="ps-icon-next"></i></a>
-                        </div>
-                      </div>
-                    </OwlCarousel>
-                    <div className="ps-product--hotdeal">
-                      <div className="ps-product__thumbnail"><a className="ps-product__overlay" href="product-detail.html"></a><img src="images/offer/clothes-2.jpg" alt="" /></div>
-                      <div className="ps-product__content"><a className="ps-product__title" href="product-detail.html">Mens Long-sleeved Polos</a>
-                        <p className="ps-product__price">Only: <span>£79</span></p>
-                        <div className="ps-product__status">
-                          <div className="sold">Already sold: <span>10</span></div>
-                          <div className="avaiable">avaiable: <span>30</span></div>
-                        </div>
-                        <div className="progress">
-                          <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "60%" }}></div>
-                        </div>
-                        <ul className="ps-countdown" data-time="May 1, 2018 00:00:00">
-                          <li><span className="hours"></span><p>Hours</p></li>
-                          <li className="divider">:</li>
-                          <li><span className="minutes"></span><p>minutes</p></li>
-                          <li className="divider">:</li>
-                          <li><span className="seconds"></span><p>Seconds</p></li>
-                        </ul><a className="ps-btn" href="cart.html">Order Today<i className="ps-icon-next"></i></a>
-                      </div>
-                    </div>
-                    <div className="ps-product--hotdeal">
-                      <div className="ps-product__thumbnail"><a className="ps-product__overlay" href="product-detail.html"></a><img src="images/offer/clothes-1.jpg" alt="" /></div>
-                      <div className="ps-product__content"><a className="ps-product__title" href="product-detail.html">Slim Fit Men Sport Hoodie</a>
-                        <p className="ps-product__price">Only: <span>£155</span></p>
-                        <div className="ps-product__status">
-                          <div className="sold">Already sold: <span>10</span></div>
-                          <div className="avaiable">avaiable: <span>30</span></div>
-                        </div>
-                        <div className="progress">
-                          <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "60%" }}></div>
-                        </div>
-                        <ul className="ps-countdown" data-time="December 1, 2017 00:00:00">
-                          <li><span className="hours"></span><p>Hours</p></li>
-                          <li className="divider">:</li>
-                          <li><span className="minutes"></span><p>minutes</p></li>
-                          <li className="divider">:</li>
-                          <li><span className="seconds"></span><p>Seconds</p></li>
-                        </ul><a className="ps-btn" href="cart.html">Order Today<i className="ps-icon-next"></i></a>
-                      </div>
-                    </div>
-                    <div className="ps-product--hotdeal">
-                      <div className="ps-product__thumbnail"><a className="ps-product__overlay" href="product-detail.html"></a><img src="images/offer/clothes-2.jpg" alt="" /></div>
-                      <div className="ps-product__content"><a className="ps-product__title" href="product-detail.html">Mens Long-sleeved Polos</a>
-                        <p className="ps-product__price">Only: <span>£79</span></p>
-                        <div className="ps-product__status">
-                          <div className="sold">Already sold: <span>10</span></div>
-                          <div className="avaiable">avaiable: <span>30</span></div>
-                        </div>
-                        <div className="progress">
-                          <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "60%" }}></div>
-                        </div>
-                        <ul className="ps-countdown" data-time="May 1, 2018 00:00:00">
-                          <li><span className="hours"></span><p>Hours</p></li>
-                          <li className="divider">:</li>
-                          <li><span className="minutes"></span><p>minutes</p></li>
-                          <li className="divider">:</li>
-                          <li><span className="seconds"></span><p>Seconds</p></li>
-                        </ul><a className="ps-btn" href="cart.html">Order Today<i className="ps-icon-next"></i></a>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="ps-features pt-80 pb-80">
             <div className="ps-container">
               <div className="row">
@@ -492,14 +360,14 @@ const Homepage = () => {
           <div className="ps-section ps-home-blog pt-80 pb-80">
             <div className="ps-container">
               <div className="ps-section__header mb-50">
-                <h2 className="ps-section__title" data-mask="News">- Our Story</h2>
+                <h2 className="ps-section__title" data-mask="News">- Connect With Us</h2>
                 <div className="ps-section__action"><a className="ps-morelink text-uppercase" href="#">View all post<i className="fa fa-long-arrow-right"></i></a></div>
               </div>
               <div className="ps-section__content">
                 <div className="row">
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><img src="images/blog/1.jpg" alt="" /></div>
+                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><IGEmbed url="https://www.instagram.com/p/CdnAqLmPLH6/" /></div>
                       <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">An Inside Look at the Breaking2 Kit</a>
                         <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
                         <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
@@ -508,7 +376,7 @@ const Homepage = () => {
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><img src="images/blog/2.jpg" alt="" /></div>
+                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><IGEmbed url="https://www.instagram.com/p/CZwUxp2Pn-x/" /></div>
                       <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">Unpacking the Breaking2 Race Strategy</a>
                         <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
                         <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
@@ -517,7 +385,7 @@ const Homepage = () => {
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><img src="images/blog/3.jpg" alt="" /></div>
+                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><IGEmbed url="https://www.instagram.com/p/Cbw6aAUv1GW/" /></div>
                       <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">Nike’s Latest Football Cleat Breaks the Mold</a>
                         <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
                         <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>

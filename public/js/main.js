@@ -242,15 +242,20 @@
         });
     }
 
-    function masonry() {
+    const imageLoader=async(masonryTrigger)=>{
+        await masonryTrigger.imagesLoaded(function() {
+            masonryTrigger.isotope({
+                columnWidth: '.grid-sizer',
+                itemSelector: '.grid-item'
+            });
+        });
+    }
+     async function masonry() {
         var masonryTrigger = $('.ps-masonry');
         if (masonryTrigger.length > 0) {
-            masonryTrigger.imagesLoaded(function() {
-                masonryTrigger.isotope({
-                    columnWidth: '.grid-sizer',
-                    itemSelector: '.grid-item'
-                });
-            });
+            console.log('loading')
+            await imageLoader(masonryTrigger);
+            console.log('loded')
             var filters = masonryTrigger.closest('.masonry-root').find('.ps-masonry__filter > li > a');
             // console.log(filters,'asnch');
             // $(`[data-filter=".allp"]`).trigger('click');
@@ -258,12 +263,13 @@
                 
             // })
             filters.on('click', function() {
-                console.log(filters,'asnch');
+                //console.log(filters,'asnch');
                 var selector = $(this).attr('data-filter');
                 filters.find('a').removeClass('current');
                 $(this).parent('li').addClass('current');
                 $(this).parent('li').siblings('li').removeClass('current');
-                console.log($(this));
+                console.log('sanchit',$(this))
+                console.log('kuhoo',masonryTrigger)
                 masonryTrigger.isotope({
                     itemSelector: '.grid-item',
                     isotope: {
@@ -703,6 +709,8 @@
 
     $(window).on('load', function() {
         $('.ps-loading').addClass('loaded');
+        masonry();
+
     });
 
     $(window).on('load resize', function() {
