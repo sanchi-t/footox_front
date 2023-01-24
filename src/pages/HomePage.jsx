@@ -367,27 +367,27 @@ const Homepage = () => {
                 <div className="row">
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><IGEmbed url="https://www.instagram.com/p/CdnAqLmPLH6/" /></div>
-                      <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">An Inside Look at the Breaking2 Kit</a>
+                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" ></a><IGEmbed url="https://www.instagram.com/p/CdnAqLmPLH6/" /></div>
+                      <div className="ps-post__content"><a className="ps-post__title" >An Inside Look at the Breaking2 Kit</a>
                         <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
-                        <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
+                        <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" >Read more<i className="fa fa-long-arrow-right"></i></a>
                       </div>
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><IGEmbed url="https://www.instagram.com/p/CZwUxp2Pn-x/" /></div>
-                      <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">Unpacking the Breaking2 Race Strategy</a>
+                      <div className="ps-post__thumbnail"><a className="ps-post__overlay"></a><IGEmbed url="https://www.instagram.com/p/CZwUxp2Pn-x/" /></div>
+                      <div className="ps-post__content"><a className="ps-post__title" >Unpacking the Breaking2 Race Strategy</a>
                         <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
-                        <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
+                        <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink">Read more<i className="fa fa-long-arrow-right"></i></a>
                       </div>
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><IGEmbed url="https://www.instagram.com/p/Cbw6aAUv1GW/" /></div>
-                      <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">Nike’s Latest Football Cleat Breaks the Mold</a>
-                        <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
+                      <div className="ps-post__thumbnail"><a className="ps-post__overlay"></a><IGEmbed url="https://www.instagram.com/p/Cbw6aAUv1GW/" /></div>
+                      <div className="ps-post__content"><a className="ps-post__title">Nike’s Latest Football Cleat Breaks the Mold</a>
+                        <p className="ps-post__meta"><span>By:<a className="mr-5" >Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
                         <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further…</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
                       </div>
                     </div>

@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import OwlCarousel from 'react-owl-carousel';
 // import ReactHtmlParser from 'react-html-parser';
 import parse from 'html-react-parser';
+import { CardFooter } from "@chakra-ui/react";
 
 
 
@@ -32,6 +33,12 @@ const ProductDetails=()=>{
       window.scrollTo(0,0); 
 
     };
+
+    const Cart=()=>{
+      navigate(`/checkout`);
+      window.location.reload();
+      window.scrollTo(0,0);
+    }
 
     
 
@@ -162,7 +169,7 @@ const ProductDetails=()=>{
                     <input className="form-control" type="number" defaultValue="1"/>
                   </div>
                 </div>
-                <div className="ps-product__shopping" ><a className="ps-btn mb-10"  href="cart.html" style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></a>
+                <div className="ps-product__shopping" ><a className="ps-btn mb-10" onClick={()=>Cart()}  style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></a>
                   <div className="ps-product__actions"><a className="mr-10" href="whishlist.html"><i className="ps-icon-heart"></i></a><a href="compare.html"><i className="ps-icon-share"></i></a></div>
                 </div>
               </div>

@@ -9,6 +9,7 @@ import AdminNavbar from "../Admin/AdminNavbar";
 import CouponPage from "../Admin/CouponPage";
 import AddCoupon from "../Admin/AddCoupon";
 import Banner from "../Admin/Banner";
+import Checkout from "../pages/Checkout";
 
 
 
@@ -38,7 +39,9 @@ const AllRoutes = () => {
           element={<><AdminNavbar />
               <AddCoupon /></>}
         />
-        <Route path="/banner" element={<Banner/>}/>    
+        <Route path="/banner" element={<Banner/>}/>  
+        <Route path="/checkout" element={<Checkout/>}/>    
+  
       </Routes>
     </div>
   );
