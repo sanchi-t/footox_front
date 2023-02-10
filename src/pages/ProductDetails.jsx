@@ -7,7 +7,6 @@ import { getData } from "../redux/DataReducer/action";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import OwlCarousel from 'react-owl-carousel';
-// import ReactHtmlParser from 'react-html-parser';
 import parse from 'html-react-parser';
 import { CardFooter } from "@chakra-ui/react";
 
@@ -75,6 +74,7 @@ const ProductDetails=()=>{
 
           
       <body className="ps-loading">
+
       <Header/>
     <main className="ps-main">
       <div className="test">
@@ -87,6 +87,7 @@ const ProductDetails=()=>{
       </div>
       <div className="ps-product--detail pt-60">
         <div className="ps-container">
+        
           <div className="row">
             <div className="col-lg-10 col-md-12 col-lg-offset-1">
               <div className="ps-product__thumbnail">

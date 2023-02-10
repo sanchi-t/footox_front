@@ -936,7 +936,7 @@ jQuery.extend(true, _R, {
 });
 
 
-var	_ISM = _R.is_mobile(),
+var	_ISM = _R?.is_mobile(),
 	_ANDROID = _R.is_android();
 
 

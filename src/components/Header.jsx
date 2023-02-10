@@ -1,8 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
+import React, { useState } from "react";
+import ModalWindow from "./ModalWindow";
+import { GOneTapLogin } from '../components/Other/GLogin';
 
 const Header = () => {
   const navigate = useNavigate();
+  const [login, setLogin] = useState();
+  const ifLogin = (type) => {
+    setLogin(type);
+  };
+  const [onetap, setOnetap] = React.useState({});
+
+  const chooseonetap = (message) => {
+    setOnetap(message);
+    // if('user' in message && 'username' in message){
+      console.log(message);
+      // setLogin(true);
+    // }
+  };
+
+  console.log('sanchit onetap',onetap);
+  let token=localStorage.getItem('jwtToken');
 
   const handleDes = () => {
     console.log('click');
@@ -10,9 +29,11 @@ const Header = () => {
     window.location.reload();
     window.scrollTo(0,0); 
   };
+
   return (
     <>
-         
+    {(!token) && 
+        <GOneTapLogin chooseonetap={chooseonetap}/>}
       <div className="header--sidebar" />
         <header className="header">
           <div className="header__top">
@@ -119,7 +140,7 @@ const Header = () => {
                   </li>
                 </ul>
               </div>
-              <div className="navigation__column right">
+              <div className="navigation__column right" style={{maxWidth:'350px'}}>
               
                 <form className="ps-search--header" action="do_action" method="post">
                   <input className="form-control" type="text" placeholder="Search Product…" />
@@ -160,11 +181,17 @@ const Header = () => {
                 
                 
               </div>
-              <div style={{paddingTop: '24.8px'}}>
-                
-                  <img src='images/user.png' style={{height:'40px'}}></img>
-                </div>
               
+                
+                
+                  
+                  <ModalWindow ifLogin={ifLogin} />
+
+                
+                  {/* <img onClick={() => setIsOpen(true)} src='images/user.png' style={{height:'40px'}}></img> */}
+                  
+                {/* </div> */}
+                
             </div>
           </nav>
         </header>

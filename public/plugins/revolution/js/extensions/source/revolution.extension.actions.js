@@ -7,7 +7,7 @@
 (function($) {
 "use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile(),
+	_ISM = _R?.is_mobile(),
 	extension = {	alias:"Actions Min JS",
 					name:"revolution.extensions.actions.min.js",
 					min_core: "5.3",

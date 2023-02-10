@@ -9,12 +9,14 @@ const register = (payload, toast) => (dispatch) => {
   return axios
     .post("http://localhost:4000/signup", payload)
     .then((r) => {
-      setToast(toast, "Registered Successful", "success");
-      dispatch({ type: types.REGISTER_S, payload: r.data });
+      return r;
+      // setToast(toast, "Registered Successful", "success");
+      // dispatch({ type: types.REGISTER_S, payload: r.data });
     })
     .catch((e) => {
-      setToast(toast, e.response.data.message, "error");
-      dispatch({ type: types.REGISTER_F, payload: e });
+      return e;
+      // setToast(toast, e.response.data.message, "error");
+      // dispatch({ type: types.REGISTER_F, payload: e });
     });
 };
 
@@ -28,11 +30,13 @@ const login = (payload, toast) => (dispatch) => {
 
 
       setToast(toast, "Login Successful", "success");
-      return dispatch({ type: types.LOGIN_S, payload: r.data.token, description: r.data.description });
+      return(r);
+      // return dispatch({ type: types.LOGIN_S, payload: r.data.token, description: r.data.description });
     })
     .catch((e) => {
       setToast(toast, e.response.data.message, "error");
       dispatch({ type: types.LOGIN_F, payload: e });
+      return(e);
     });
 };
 

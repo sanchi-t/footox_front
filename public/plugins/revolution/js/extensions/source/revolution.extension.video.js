@@ -7,7 +7,7 @@
 (function($) {
 	"use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile(),
+	_ISM = _R?.is_mobile(),
 	_ANDROID = _R.is_android(),
 	extension = {	alias:"Video Min JS",
 					name:"revolution.extensions.video.min.js",
