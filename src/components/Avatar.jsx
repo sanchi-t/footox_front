@@ -13,14 +13,13 @@ const Avatar=()=> {
       profile=JSON.parse(profileText);
     }
 
-    console.log(profile?.picture)
     let username = localStorage.getItem('username');
-    console.log('username');
     const logoutHandler = () => {
         console.log('deleted here');
         localStorage.removeItem('username');
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('user');
+        localStorage.removeItem("all");
         window.location.reload();
         }
     // console.log(chooseMessage);

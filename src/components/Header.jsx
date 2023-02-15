@@ -7,27 +7,43 @@ import { GOneTapLogin } from '../components/Other/GLogin';
 const Header = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState();
-  const ifLogin = (type) => {
-    setLogin(type);
-  };
+  const [isToggle, setIsToggle] = useState(false);
   const [onetap, setOnetap] = React.useState({});
 
   const chooseonetap = (message) => {
     setOnetap(message);
     // if('user' in message && 'username' in message){
-      console.log(message);
       // setLogin(true);
     // }
   };
 
-  console.log('sanchit onetap',onetap);
+  const toggleButton = () => {
+    setIsToggle(!isToggle)
+}
+
   let token=localStorage.getItem('jwtToken');
+  let authData=JSON.parse(sessionStorage.getItem('authData'));
+  if(authData?.reload==='true'){
+    window.location.reload();
+    sessionStorage.setItem('authData', '{"reload":"false","modal":"open"}')
+  }
 
   const handleDes = () => {
     console.log('click');
     navigate(`/`);
     window.location.reload();
     window.scrollTo(0,0); 
+  };
+  const handleViewCart = () => {
+    if(token){
+      navigate(`/viewcart`);
+    }
+    else{
+      setIsToggle(true);
+    }
+    
+    // window.location.reload();
+    // window.scrollTo(0,0); 
   };
 
   return (
@@ -173,7 +189,7 @@ const Header = () => {
                       <p>Number of items:<span>36</span></p>
                       <p>Item Total:<span>£528.00</span></p>
                     </div>
-                    <div className="ps-cart__footer"><a className="ps-btn" href="cart.html">Check out<i className="ps-icon-arrow-left" /></a></div>
+                    <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>
                   </div>
                 </div>
                
@@ -185,7 +201,7 @@ const Header = () => {
                 
                 
                   
-                  <ModalWindow ifLogin={ifLogin} />
+                  <ModalWindow toggled={isToggle} toggle={toggleButton} />
 
                 
                   {/* <img onClick={() => setIsOpen(true)} src='images/user.png' style={{height:'40px'}}></img> */}

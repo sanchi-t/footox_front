@@ -16,6 +16,7 @@ const Footer=lazy(() =>  import('../components/Footer'));
 
 const Homepage = () => {
   const navigate = useNavigate();
+  console.log('state')
 
   const dispatch = useDispatch();
   const products1 = useSelector((store) => store.dataReducer.products);
@@ -57,7 +58,7 @@ const Homepage = () => {
       setProd(response.data)
     }
     const l = axiosTest()
-  }, [products])
+  }, [products,location])
 
 
   useEffect(() => {
@@ -85,7 +86,6 @@ const Homepage = () => {
   return (
     <React.Fragment>
       <body className="ps-loading">
-      
         <Header/>
         <main className="ps-main">
           <div className="ps-banner">
@@ -165,21 +165,21 @@ const Homepage = () => {
                       if(item.productGender==="Men")
                       return(
                         <div className="grid-item men" key={item.id} style={{float: 'left' }}>
-                        <div className="grid-item__content-wrapper" style={{minHeight: "300px",position: 'relative'}}>
-                          <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail">
+                        <div className="grid-item__content-wrapper" key={item.id} style={{minHeight: "300px",position: 'relative'}}>
+                          <div className="ps-shoe mb-30" key={item.id}>
+                            <div className="ps-shoe__thumbnail" key={item.id}>
                               {/* <div className="ps-badge"><span>New</span></div> */}
                               {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
                                 <span>-35%</span>
                                 </div> */}
-                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
+                              <a className="ps-shoe__favorite" href="#" key={item.id}><i className="ps-icon-heart" key={item.id}></i></a><img key={item.id} src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
                             </div>
-                            <div className="ps-shoe__content">
-                              <div className="ps-shoe__variants">
-                                <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
-                                  <div className='owl-stage-outer'>
-                                    <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                      <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
+                            <div className="ps-shoe__content" key={item.id}>
+                              <div className="ps-shoe__variants" key={item.id}>
+                                <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded" key={item.id}>
+                                  <div className='owl-stage-outer' key={item.id}>
+                                    <OwlCarousel items={4} autoplay={true} dots={false} nav={false} key={item.id}>
+                                      <img key={item.id} src={item.image?.[0]} alt="" /><img key={item.id} src={item.image?.[1]} alt="" /><img key={item.id} src={item.image?.[2]} alt="" /><img key={item.id} src={item.image?.[3]} alt="" />
                                     </OwlCarousel></div></div>
                                 {/* <select className="ps-rating ps-shoe__rating">
                                       <option value="1">1</option>
@@ -191,11 +191,11 @@ const Homepage = () => {
 
 
                               </div>
-                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
-                                <p className="ps-shoe__categories"><a href="#">
-                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
+                              <div className="ps-shoe__detail" key={item.id} style={{textAlign:'left'}}>
+                                <div key={item.id} style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
+                                <p key={item.id} className="ps-shoe__categories"><a key={item.id} href="#">
+                                  {item.gender} shoes</a>,<a key={item.id} href="#"> Nike</a>,<a key={item.id} href="#"> Jordan</a></p><span key={item.id} className="ps-shoe__price">
+                                  <del key={item.id}>₹{item.original_price}</del> ₹{item.selling_price}</span>
                               </div>
                             </div>
                           </div>
@@ -208,21 +208,21 @@ const Homepage = () => {
                       if(item.productGender==="Women")
                       return(
                         <div className="grid-item women" key={item.id} style={{float: 'left' }}>
-                        <div className="grid-item__content-wrapper" style={{minHeight: "300px",position: 'relative'}}>
-                          <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail">
+                        <div className="grid-item__content-wrapper" key={item.id} style={{minHeight: "300px",position: 'relative'}}>
+                          <div className="ps-shoe mb-30" key={item.id}>
+                            <div className="ps-shoe__thumbnail" key={item.id}>
                               {/* <div className="ps-badge"><span>New</span></div> */}
                               {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
                                 <span>-35%</span>
                                 </div> */}
-                              <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
+                              <a className="ps-shoe__favorite" key={item.id} href="#"><i key={item.id} className="ps-icon-heart"></i></a><img key={item.id} src={item.image?.[0]} alt="" /><a key={item.id} className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
                             </div>
-                            <div className="ps-shoe__content">
-                              <div className="ps-shoe__variants">
-                                <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
-                                  <div className='owl-stage-outer'>
-                                    <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                      <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
+                            <div key={item.id} className="ps-shoe__content">
+                              <div key={item.id} className="ps-shoe__variants">
+                                <div key={item.id} className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
+                                  <div key={item.id} className='owl-stage-outer'>
+                                    <OwlCarousel key={item.id} items={4} autoplay={true} dots={false} nav={false}>
+                                      <img key={item.id} src={item.image?.[0]} alt="" /><img key={item.id} src={item.image?.[1]} alt="" /><img key={item.id} src={item.image?.[2]} alt="" /><img key={item.id} src={item.image?.[3]} alt="" />
                                     </OwlCarousel></div></div>
                                 {/* <select className="ps-rating ps-shoe__rating">
                                       <option value="1">1</option>
@@ -234,11 +234,11 @@ const Homepage = () => {
 
 
                               </div>
-                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
-                                <p className="ps-shoe__categories"><a href="#">
-                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
+                              <div key={item.id} className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div key={item.id} style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a key={item.id} className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
+                                <p key={item.id} className="ps-shoe__categories"><a key={item.id} href="#">
+                                  {item.gender} shoes</a>,<a key={item.id} href="#"> Nike</a>,<a key={item.id} href="#"> Jordan</a></p><span key={item.id} className="ps-shoe__price">
+                                  <del key={item.id}>₹{item.original_price}</del> ₹{item.selling_price}</span>
                               </div>
                             </div>
                           </div>
@@ -250,23 +250,23 @@ const Homepage = () => {
                       if(item.category==="shoes")
                       return(
                       <div className="grid-item shoes" key={item.id}>
-                        <div className="grid-item__content-wrapper">
-                          <div className="ps-shoe mb-30">
-                            <div className="ps-shoe__thumbnail"><a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
+                        <div className="grid-item__content-wrapper" key={item.id}>
+                          <div className="ps-shoe mb-30" key={item.id}>
+                            <div className="ps-shoe__thumbnail" key={item.id}><a key={item.id} className="ps-shoe__favorite" href="#"><i key={item.id} className="ps-icon-heart"></i></a><img key={item.id} src={item.image?.[0]} alt="" /><a key={item.id} className="ps-shoe__overlay"  onClick={() => handleDes(item.id)}></a>
                             </div>
-                            <div className="ps-shoe__content">
-                              <div className="ps-shoe__variants">
-                              <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
-                                <div className='owl-stage-outer'>
-                                  <OwlCarousel items={4} autoplay={true} dots={false} nav={false}>
-                                    <img src={item.image?.[0]} alt="" /><img src={item.image?.[1]} alt="" /><img src={item.image?.[2]} alt="" /><img src={item.image?.[3]} alt="" />
+                            <div key={item.id} className="ps-shoe__content">
+                              <div key={item.id} className="ps-shoe__variants">
+                              <div key={item.id} className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
+                                <div key={item.id} className='owl-stage-outer'>
+                                  <OwlCarousel key={item.id} items={4} autoplay={true} dots={false} nav={false}>
+                                    <img key={item.id} src={item.image?.[0]} alt="" /><img key={item.id} src={item.image?.[1]} alt="" /><img key={item.id} src={item.image?.[2]} alt="" /><img key={item.id} src={item.image?.[3]} alt="" />
                                   </OwlCarousel></div></div>
                               </div>
-                              <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                                <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.name}</a></div>
-                                <p className="ps-shoe__categories"><a href="#">
-                                  {item.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                  <del>₹{item.original_price}</del> ₹{item.final_price}</span>
+                              <div key={item.id} className="ps-shoe__detail" style={{textAlign:'left'}}>
+                                <div key={item.id} style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a key={item.id} className="ps-shoe__name" href="#" >{item.name}</a></div>
+                                <p key={item.id} className="ps-shoe__categories"><a key={item.id} href="#">
+                                  {item.gender} shoes</a>,<a key={item.id} href="#"> Nike</a>,<a key={item.id} href="#"> Jordan</a></p><span key={item.id} className="ps-shoe__price">
+                                  <del key={item.id}>₹{item.original_price}</del> ₹{item.final_price}</span>
                               </div>
                             </div>
                           </div>
@@ -463,28 +463,11 @@ const Homepage = () => {
               </footer>
             </div>
           </div>
-          <div className="ps-subscribe">
-            <div className="ps-container">
-              <div className="row">
-                <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-                  <h3><i className="fa fa-envelope"></i>Sign up to Newsletter</h3>
-                </div>
-                <div className="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                  <form className="ps-subscribe__form" action="do_action" method="post">
-                    <input className="form-control" type="text" placeholder="" />
-                    <button>Sign up now</button>
-                  </form>
-                </div>
-                <div className="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                  <p>...and receive  <span>$20</span>  coupon for first shopping.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
+   
+          <Footer />
         </main>
       </body>
-      <Footer />
+      
     </React.Fragment>
   );
 }

@@ -74,6 +74,8 @@ const Login= ({ chooseMessage })=> {
             console.log('rs',res.data.token);
             localStorage.setItem('jwtToken', res.data.token);
             localStorage.setItem('username', res.data.username);
+            var data = JSON.stringify(res.data);
+            localStorage.setItem('all', data);
 
             chooseMessage(res.data);
           }
@@ -98,18 +100,21 @@ const Login= ({ chooseMessage })=> {
         if('data' in r){
           localStorage.setItem('jwtToken', r.data.token);
           localStorage.setItem('username', r.data.username);
+          var data = JSON.stringify(r.data);
+          localStorage.setItem('all', data);
+          // console.log('data',data)
           chooseMessage(r.data);
         }
         else{
+          setErrors();
           
-          setErrors({confirm:'The Password does not match'});
         }
         
       });
 
     }
     else{
-      setErrors()
+      setErrors({confirm:'The Password does not match'});
     }
     
   };

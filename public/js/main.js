@@ -705,6 +705,7 @@
         // stickyWidget();
         revolution();
         filterSlider();
+        
     });
 
     $(window).on('load', function() {

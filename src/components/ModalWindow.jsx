@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import  {useState,useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Login from '../pages/Login';
 import './Modal.css'
@@ -6,11 +7,25 @@ import Avatar from './Avatar';
 import Button from 'react-bootstrap/Button';
 
 
-const ModalWindow=()=>{
+const ModalWindow=({toggled,toggle})=>{
+  
   const [show, setShow] = useState(false);
   const [message, setMessage] = React.useState({});
+  let authData=JSON.parse(sessionStorage.getItem('authData'));
+  useEffect(() => {
+    if(toggled){
+      setShow(toggled);
+      toggle(!toggled);
+    }
+    
+  }, [toggled])
+
+  
+  // else{
+  //   setShow(false)
+  // }
   // const [token, setToken] = React.useState();
-  // console.log('again');
+  
   
   
   const chooseMessage = (message) => {

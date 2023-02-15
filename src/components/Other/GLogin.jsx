@@ -26,6 +26,8 @@ const GLogin=({ setGLogin })=>{
           }).then(response=>{
             if(response.status===200 || response.status===201){
                 localStorage.setItem('jwtToken', response.data.token);
+                var data = JSON.stringify(response.data);
+                localStorage.setItem('all', data);
                 setGLogin(obj);
             }
             console.log(response);
@@ -68,6 +70,8 @@ const GOneTapLogin=({ chooseonetap })=>{
           }).then(response=>{
             if(response.status===200 || response.status===201){
                 localStorage.setItem('jwtToken', response.data.token);
+                var data = JSON.stringify(response.data);
+                localStorage.setItem('all', data);
                 chooseonetap(data);
             }
             console.log(response);
