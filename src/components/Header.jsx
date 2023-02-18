@@ -62,7 +62,7 @@ const Header = () => {
           <nav className="navigation">
             <div className="container-fluid">
               <div className="navigation__column left" style={{width:'20%'}}>
-                <div className="header__logo"><a className="ps-logo" onClick={() => handleDes()}><img src='images/footox_logo.jpeg' alt="" /></a></div>
+                <div className="header__logo"><a className="ps-logo" style={{cursor:'pointer'}} onClick={() => handleDes()}><img src='images/footox_logo.jpeg' alt="" /></a></div>
               </div>
               <div className="navigation__column center">
                 <ul className="main-menu menu">

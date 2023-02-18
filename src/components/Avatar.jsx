@@ -16,10 +16,8 @@ const Avatar=()=> {
     let username = localStorage.getItem('username');
     const logoutHandler = () => {
         console.log('deleted here');
-        localStorage.removeItem('username');
-        localStorage.removeItem('jwtToken');
-        localStorage.removeItem('user');
-        localStorage.removeItem("all");
+        localStorage.clear();
+        sessionStorage.clear();
         window.location.reload();
         }
     // console.log(chooseMessage);

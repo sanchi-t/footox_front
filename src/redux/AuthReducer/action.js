@@ -26,16 +26,16 @@ const login = (payload, toast) => (dispatch) => {
   return axios
     .post("http://localhost:4000/login", payload)
     .then((r) => {
-      saveLocalData("userName", r.data.name);
+      // saveLocalData("userName", r.data.name);
 
 
-      setToast(toast, "Login Successful", "success");
+      // setToast(toast, "Login Successful", "success");
       return(r);
       // return dispatch({ type: types.LOGIN_S, payload: r.data.token, description: r.data.description });
     })
     .catch((e) => {
-      setToast(toast, e.response.data.message, "error");
-      dispatch({ type: types.LOGIN_F, payload: e });
+      // setToast(toast, e.response.data.message, "error");
+      // dispatch({ type: types.LOGIN_F, payload: e });
       return(e);
     });
 };

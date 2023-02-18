@@ -8,6 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 import '../components/Modal.css';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+import { getLocalData } from "../utils/localStorage";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -25,6 +28,7 @@ const Checkout=()=>{
 
     const products = useSelector((store) => store.dataReducer.products);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
 
     const [currentProducts, setCurrentProducts] = useState([]);
@@ -94,24 +98,46 @@ const Checkout=()=>{
       const handleSubmit = (event) => {
         const form={address:{}};
         event.preventDefault();
-        event.target.address.reset();
-        form.firstname=event.target.firstName.value;
-        form.lastname=event.target.lastName.value;
-        form.email=event.target.email.value;
-        form.mobile=event.target.mobile.value;
+        // event.target.address.reset();
+        const userData=JSON.parse(localStorage.getItem('all'));
+        form.name_reciever=event.target.name.value;
+        // form.lastname=event.target.lastName.value;
+        form.email_reciever=event.target.email.value;
+        form.mobile_reciever=event.target.mobile.value;
+        form.name_user=userData.username;
+        form.email_user=userData.email;
+        form.mobile_user=userData.mobile;
         form.address.place=event.target.address.value;
         form.address.save=checked;
-        axios.post('http://localhost:4000/address', {form})
+        form.items=JSON.parse(localStorage.getItem('cart'));
+        form.total=sessionStorage.getItem('total');
+        form.coupon={value:sessionStorage.getItem('coupon'),code:sessionStorage.getItem('code')};
+        
+        const uuid=sessionStorage.getItem('uuid');
+        axios.post('http://localhost:4000/orderPlaced', {form})
+          .then((response) => {
+            console.log(response);
+            sessionStorage.setItem('order',JSON.stringify(response.data.order));
+          
+          axios.post('http://localhost:4000/couponApplied', {email:localStorage.getItem('userInfo'),uuid:uuid,coupon:form.coupon})
           .then((response) => {
             console.log(response);
           });
+          });
         if(checked){
-          console.log('address',event.target.address.value);
+          axios.post('http://localhost:4000/address', {address:form.address,email:localStorage.getItem('userInfo')})
+          .then((response) => {
+            console.log(response);
+          });
+          
           
         }
         else{
           console.log(checked);
         }
+        navigate(`/confirmed`);
+        window.location.reload();
+        
         
       }
 
@@ -157,29 +183,14 @@ const Checkout=()=>{
                     <div className="ps-checkout__billing">
                       <h3>Billing Detail</h3>
                             <div className="form-group form-group--inline">
-                              <label>First Name<span>*</span>
+                              <label>Name<span>*</span>
                               </label>
-                              <input className="form-control" type="text" name="firstName" />
-                            </div>
-                            <div className="form-group form-group--inline">
-                              <label>Last Name<span>*</span>
-                              </label>
-                              <input className="form-control" type="text" name="lastName" />
-                            </div>
-                            <div className="form-group form-group--inline">
-                              <label>Company Name<span>*</span>
-                              </label>
-                              <input className="form-control" type="text" />
+                              <input className="form-control" type="text" name="name" />
                             </div>
                             <div className="form-group form-group--inline">
                               <label>Email Address<span>*</span>
                               </label>
                               <input className="form-control" type="email" name="email" />
-                            </div>
-                            <div className="form-group form-group--inline">
-                              <label>Company Name<span>*</span>
-                              </label>
-                              <input className="form-control" type="text" />
                             </div>
                             <div className="form-group form-group--inline">
                               <label>Phone<span>*</span>
@@ -247,6 +258,13 @@ const Checkout=()=>{
                       </div>
                       <footer>
                         <h3>Payment Method</h3>
+                        <div className="form-group paypal">
+                          <div className="ps-radio">
+                            <input className="form-control" type="radio" id="rdo01" name="cash" checked />
+                            <label for="rdo01">Cash On Delivery</label>
+                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                          </div>
+                        </div>
                         <div className="form-group cheque">
                           <div className="ps-radio">
                             <input className="form-control" type="radio" id="rdo01" name="payment" checked />

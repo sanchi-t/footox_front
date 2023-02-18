@@ -11,7 +11,7 @@ import Checkout from "../pages/Checkout";
 import InstagramPreview from "../components/InstagramPreview";
 import ViewCart from "../pages/ViewCart";
 import Authentication from "../Authentication/Auth";
-
+import OrderCorfirmed from "../pages/OrderConfirmed";
 
 
 
@@ -42,7 +42,9 @@ const AllRoutes = () => {
               <AddCoupon /></>}
         />
         <Route path="/banner" element={<Banner/>}/>  
-        <Route path="/checkout" element={<Checkout/>}/>    
+        <Route path="/checkout" element={<Checkout/>}/>   
+        <Route path="/confirmed" element={<OrderCorfirmed/>}/>    
+ 
   
       </Routes>
     </div>

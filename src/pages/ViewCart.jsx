@@ -50,17 +50,20 @@ const ViewCart=()=>{
             let sum=0;
             console.log(response);
             const all=response.data.cart.cart;
+            localStorage.setItem('cart',JSON.stringify(all));
             
             all.forEach((number, index) => {
-              cur.push(products.find((item) => item.productId === (number.id)));
+              cur.push(products.find((item) => item.productId === (number.id.split('/')[0])));
               quant.push(number.quantity);
               sum=sum+(number.quantity*Number(cur[index]?.selling_price));
+              number.price=number.quantity*Number(cur[index]?.selling_price);
               
               console.log('Index: ' + index + ' Value: ' + number.id);
               setItems([...cur]);
               setQuantity([...quant]);
               setTotal(sum);
           });
+          localStorage.setItem('cart',JSON.stringify(all));
           
           });
           
@@ -73,13 +76,17 @@ const ViewCart=()=>{
   sessionStorage.setItem('total', total);
   const increaseQuantity=(name,index)=>{
 
-    valueChange(name.productId,quantity[index]+1)}
+    const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
+    console.log('increse',skuId,index);
+    valueChange(skuId,quantity[index]+1)
+  }
 
 
   const decreaseQuantity=(name,index)=>{
+    const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
     console.log(quantity[index],'decrease')
     if(quantity[index]>1){
-      valueChange(name.productId,quantity[index]-1)}
+      valueChange(skuId,quantity[index]-1)}
     }
     
 
@@ -114,6 +121,8 @@ const ViewCart=()=>{
     {params:
       {'code':code,'products':items,'quantity':quantity,'date':date,'email':userData.email}
     }).then((response) => {
+      sessionStorage.setItem('uuid', response.data.uuid);
+      sessionStorage.setItem('code', code);
       setDiscount(response.data.discount);
       // sessionStorage.setItem('coupon', response.data.discount);
 
@@ -228,7 +237,7 @@ const ViewCart=()=>{
               </div>
               <div className="ps-cart__total">
                 {discount?
-                 <> <h3>Total Price: <span> <del>₹{total}</del><div style={{color:'green',position:'in-line'}}>₹{total-discount}</div></span></h3><a className="ps-btn" onClick={handleCheckout}>Process to checkout<i className="ps-icon-next"></i></a> </>: <> <h3>Total Price: <span>₹{total}</span></h3><a className="ps-btn" onClick={handleCheckout} >Process to checkout<i className="ps-icon-next"></i></a>
+                 <> <h3>Total Price: <span> <del>₹{total}</del><div style={{color:'green',position:'in-line'}}>₹{total-discount}</div></span></h3><a className="ps-btn" onClick={handleCheckout} style={{cursor:'pointer'}}>Process to checkout<i className="ps-icon-next"></i></a> </>: <> <h3>Total Price: <span>₹{total}</span></h3><a className="ps-btn" onClick={handleCheckout} >Process to checkout<i className="ps-icon-next"></i></a>
                  </>}
               </div>
             </div>

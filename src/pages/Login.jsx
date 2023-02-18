@@ -69,7 +69,7 @@ const Login= ({ chooseMessage })=> {
           window.location.reload();
         }
         else{
-          console.log('pathroute',res.data);
+          // console.log('pathroute',res.data);
           if('data' in res){
             console.log('rs',res.data.token);
             localStorage.setItem('jwtToken', res.data.token);
@@ -80,6 +80,7 @@ const Login= ({ chooseMessage })=> {
             chooseMessage(res.data);
           }
           else{
+            // console.log('response',res.)
             setErrors(res.response.data.errors)
             
           }
@@ -106,7 +107,8 @@ const Login= ({ chooseMessage })=> {
           chooseMessage(r.data);
         }
         else{
-          setErrors();
+          console.log('r',r.response.data.errors);
+          setErrors(r.response.data.errors);
           
         }
         
@@ -159,11 +161,11 @@ const Login= ({ chooseMessage })=> {
 			<span className={styles.spanLogin}>or use your email for registration</span>
 			<input className={styles.inputLogin} onChange={(e) => setState({ type: "name", payload: e.target.value })} type="text" placeholder="Name" />
 			<input className={styles.inputLogin} onChange={(e) => setState({ type: "email", payload: e.target.value })} type="email" placeholder="Email" />
-      <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors.email}</div>
+      <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors?.email}</div>
       <input className={styles.inputLogin} onChange={(e) => setState({ type: "mobile", payload: e.target.value })} type="tel" placeholder="Mobile" />
 			<input className={styles.inputLogin} onChange={(e) => setState({ type: "password", payload: e.target.value })} type="password" placeholder="Password" />
       <input className={styles.inputLogin} name="confirmPass" type="password" placeholder="Confirm Password" />
-      <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors.confirm}</div>
+      <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors?.confirm}</div>
 			<button className={styles.buttonLogin} >Sign Up</button>
 		</form>
 	</div>
@@ -194,12 +196,12 @@ const Login= ({ chooseMessage })=> {
 			</div>
 			<span className={styles.spanLogin}>or use your account</span>
 			<input  className={styles.inputLogin} type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
-      <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors.email}</div>
+      <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors?.email}</div>
 			<input  className={styles.inputLogin} type={eye ? "text" : "password"} placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
       <Button variant={"ghost"} onClick={handleEye} style={{left: '50px',top: '-39px',backgroundColor:'rgb(250, 239, 218)',outline:'none', border : '0'}}>
             <ViewIcon />
       </Button>
-      <div className="password error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors.password}</div>
+      <div className="password error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors?.password}</div>
       
 			<a className={styles.aLogin} href="#">Forgot your password?</a>
 			<button className={styles.buttonLogin} onClick={loginHandler} >Sign In</button>
