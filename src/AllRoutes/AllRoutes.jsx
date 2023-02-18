@@ -3,13 +3,15 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import ProductDetails from "../pages/ProductDetails";
 import ProductListing from "../pages/ProductListing";
 import HomePage from "../pages/HomePage";
-import Login from "../pages/Login";
 import AdminPage from "../Admin/AdminPage";
 import AdminNavbar from "../Admin/AdminNavbar";
-import CouponPage from "../Admin/CouponPage";
 import AddCoupon from "../Admin/AddCoupon";
 import Banner from "../Admin/Banner";
-
+import Checkout from "../pages/Checkout";
+import InstagramPreview from "../components/InstagramPreview";
+import ViewCart from "../pages/ViewCart";
+import Authentication from "../Authentication/Auth";
+import OrderCorfirmed from "../pages/OrderConfirmed";
 
 
 
@@ -23,22 +25,27 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<HomePage />} forceRefresh={true} />
+        
+        <Route path="/" element={<HomePage/>} forceRefresh={true} />
         <Route path="/:id" element={<ProductDetails />}/>
-        <Route path="/login" element={<Login />} />   
+        {/* <Route path="/login" element={<Login />} />    */}
         <Route
           path="/admin"
           element={<AdminPage />
           }
         />
-        <Route path="/coupon" element={<CouponPage />}
+        <Route path="/viewcart" element={<Authentication><ViewCart /></Authentication>}
         />
         <Route
           path="/couponAdd"
           element={<><AdminNavbar />
               <AddCoupon /></>}
         />
-        <Route path="/banner" element={<Banner/>}/>    
+        <Route path="/banner" element={<Banner/>}/>  
+        <Route path="/checkout" element={<Checkout/>}/>   
+        <Route path="/confirmed" element={<OrderCorfirmed/>}/>    
+ 
+  
       </Routes>
     </div>
   );

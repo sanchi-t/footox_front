@@ -7,8 +7,8 @@ import { getData } from "../redux/DataReducer/action";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import OwlCarousel from 'react-owl-carousel';
-// import ReactHtmlParser from 'react-html-parser';
 import parse from 'html-react-parser';
+import { CardFooter } from "@chakra-ui/react";
 
 
 
@@ -19,6 +19,8 @@ const ProductDetails=()=>{
     const [prod, setProd] = useState();
     const [color, setColor]=useState([]);
     const [imgg, setImg]=useState([]);
+    const [sizes, setSize]=useState([]);
+
 
     const products = useSelector((store) => store.dataReducer.products);
     const dispatch = useDispatch();
@@ -27,8 +29,15 @@ const ProductDetails=()=>{
       console.log('click');
       console.log(id);
       navigate(`/${id}`);
-      window.location.reload();
+      window.scrollTo(0,0); 
+
     };
+
+    const Cart=()=>{
+      navigate(`/checkout`);
+      window.location.reload();
+      window.scrollTo(0,0);
+    }
 
     
 
@@ -48,6 +57,7 @@ const ProductDetails=()=>{
           cur && setCurrentProducts(cur);
           cur && setColor(cur.color)
           cur && setImg(cur.image);
+          cur && setSize(cur.Sizes);
           setProd(products)
         }
       }, [id, products,dispatch,num]);
@@ -57,13 +67,14 @@ const ProductDetails=()=>{
       console.log(products,'cur2');
       console.log(currentProducts, products);
       let index = products.indexOf(currentProducts);
-      console.log('numberObj',index,color);
+      console.log('numberObj',index,sizes,sizes[0],sizes[0]);
       if(products){
 
     return (
 
           
       <body className="ps-loading">
+
       <Header/>
     <main className="ps-main">
       <div className="test">
@@ -76,6 +87,7 @@ const ProductDetails=()=>{
       </div>
       <div className="ps-product--detail pt-60">
         <div className="ps-container">
+        
           <div className="row">
             <div className="col-lg-10 col-md-12 col-lg-offset-1">
               <div className="ps-product__thumbnail">
@@ -137,9 +149,9 @@ const ProductDetails=()=>{
                 <div className="ps-product__block ps-product__size">
                   <h4 style={{textAlign:'left'}}>CHOOSE SIZE<a href="#">Size chart</a></h4>
                   <select style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px',appearance: 'none',paddingRight:'20px',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'right 1.9rem center',
-    backgroundSize: '1em'}}>
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'right 1.9rem center',
+                  backgroundSize: '1em'}}>
                     <option value="1" >SELECT SIZE</option>
                     <option value="2">4</option>
                     <option value="3">4.5</option>
@@ -158,7 +170,7 @@ const ProductDetails=()=>{
                     <input className="form-control" type="number" defaultValue="1"/>
                   </div>
                 </div>
-                <div className="ps-product__shopping" ><a className="ps-btn mb-10"  href="cart.html" style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></a>
+                <div className="ps-product__shopping" ><a className="ps-btn mb-10" onClick={()=>Cart()}  style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></a>
                   <div className="ps-product__actions"><a className="mr-10" href="whishlist.html"><i className="ps-icon-heart"></i></a><a href="compare.html"><i className="ps-icon-share"></i></a></div>
                 </div>
               </div>
@@ -329,24 +341,7 @@ const ProductDetails=()=>{
           </div>
         </div>
       </div>
-      <div className="ps-subscribe">
-        <div className="ps-container">
-          <div className="row">
-                <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-                  <h3><i className="fa fa-envelope"></i>Sign up to Newsletter</h3>
-                </div>
-                <div className="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                  <form className="ps-subscribe__form" action="do_action" method="post">
-                    <input className="form-control" type="text" placeholder=""/>
-                    <button>Sign up now</button>
-                  </form>
-                </div>
-                <div className="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                  <p>...and receive  <span>$20</span>  coupon for first shopping.</p>
-                </div>
-          </div>
-        </div>
-      </div>
+
     <Footer />
     </main>
   </body>

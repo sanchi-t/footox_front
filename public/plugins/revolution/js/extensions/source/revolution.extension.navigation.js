@@ -7,7 +7,7 @@
 (function($) {
 "use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile(),
+	_ISM = _R?.is_mobile(),
 	extension = {	alias:"Navigation Min JS",
 					name:"revolution.extensions.navigation.min.js",
 					min_core: "5.4.0",

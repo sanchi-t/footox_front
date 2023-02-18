@@ -1,8 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import OwlCarousel from 'react-owl-carousel';
+import React, { useState } from "react";
+import ModalWindow from "./ModalWindow";
+import { GOneTapLogin } from '../components/Other/GLogin';
 
 const Header = () => {
   const navigate = useNavigate();
+  const [login, setLogin] = useState();
+  const [isToggle, setIsToggle] = useState(false);
+  const [onetap, setOnetap] = React.useState({});
+
+  const chooseonetap = (message) => {
+    setOnetap(message);
+    // if('user' in message && 'username' in message){
+      // setLogin(true);
+    // }
+  };
+
+  const toggleButton = () => {
+    setIsToggle(!isToggle)
+}
+
+  let token=localStorage.getItem('jwtToken');
+  let authData=JSON.parse(sessionStorage.getItem('authData'));
+  if(authData?.reload==='true'){
+    window.location.reload();
+    sessionStorage.setItem('authData', '{"reload":"false","modal":"open"}')
+  }
 
   const handleDes = () => {
     console.log('click');
@@ -10,9 +34,22 @@ const Header = () => {
     window.location.reload();
     window.scrollTo(0,0); 
   };
+  const handleViewCart = () => {
+    if(token){
+      navigate(`/viewcart`);
+    }
+    else{
+      setIsToggle(true);
+    }
+    
+    // window.location.reload();
+    // window.scrollTo(0,0); 
+  };
+
   return (
     <>
-         
+    {(!token) && 
+        <GOneTapLogin chooseonetap={chooseonetap}/>}
       <div className="header--sidebar" />
         <header className="header">
           <div className="header__top">
@@ -25,7 +62,7 @@ const Header = () => {
           <nav className="navigation">
             <div className="container-fluid">
               <div className="navigation__column left" style={{width:'20%'}}>
-                <div className="header__logo"><a className="ps-logo" onClick={() => handleDes()}><img src='images/footox_logo.jpeg' alt="" /></a></div>
+                <div className="header__logo"><a className="ps-logo" style={{cursor:'pointer'}} onClick={() => handleDes()}><img src='images/footox_logo.jpeg' alt="" /></a></div>
               </div>
               <div className="navigation__column center">
                 <ul className="main-menu menu">
@@ -119,7 +156,7 @@ const Header = () => {
                   </li>
                 </ul>
               </div>
-              <div className="navigation__column right">
+              <div className="navigation__column right" style={{maxWidth:'350px'}}>
               
                 <form className="ps-search--header" action="do_action" method="post">
                   <input className="form-control" type="text" placeholder="Search Product…" />
@@ -152,7 +189,7 @@ const Header = () => {
                       <p>Number of items:<span>36</span></p>
                       <p>Item Total:<span>£528.00</span></p>
                     </div>
-                    <div className="ps-cart__footer"><a className="ps-btn" href="cart.html">Check out<i className="ps-icon-arrow-left" /></a></div>
+                    <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>
                   </div>
                 </div>
                
@@ -160,11 +197,17 @@ const Header = () => {
                 
                 
               </div>
-              <div style={{paddingTop: '24.8px'}}>
-                
-                  <img src='images/user.png' style={{height:'40px'}}></img>
-                </div>
               
+                
+                
+                  
+                  <ModalWindow toggled={isToggle} toggle={toggleButton} />
+
+                
+                  {/* <img onClick={() => setIsOpen(true)} src='images/user.png' style={{height:'40px'}}></img> */}
+                  
+                {/* </div> */}
+                
             </div>
           </nav>
         </header>

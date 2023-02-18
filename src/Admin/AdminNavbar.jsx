@@ -21,6 +21,7 @@ const AdminNavbar = () => {
       res(localStorage.removeItem("token"));
       res(localStorage.removeItem("userInfo"));
       res(localStorage.removeItem("userName"));
+      res(localStorage.removeItem("all"));
 
     }).then(() => {
       navigate("/login");
