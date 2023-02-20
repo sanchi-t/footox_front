@@ -8,10 +8,10 @@ import AdminNavbar from "../Admin/AdminNavbar";
 import AddCoupon from "../Admin/AddCoupon";
 import Banner from "../Admin/Banner";
 import Checkout from "../pages/Checkout";
-import InstagramPreview from "../components/InstagramPreview";
 import ViewCart from "../pages/ViewCart";
 import Authentication from "../Authentication/Auth";
 import OrderCorfirmed from "../pages/OrderConfirmed";
+import PaymentFailed from "../pages/PaymentFailed";
 
 
 
@@ -44,6 +44,8 @@ const AllRoutes = () => {
         <Route path="/banner" element={<Banner/>}/>  
         <Route path="/checkout" element={<Checkout/>}/>   
         <Route path="/confirmed" element={<OrderCorfirmed/>}/>    
+        <Route path="/failed" element={<PaymentFailed/>}/>    
+
  
   
       </Routes>

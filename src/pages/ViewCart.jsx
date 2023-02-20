@@ -90,9 +90,10 @@ const ViewCart=()=>{
     }
     
 
-  const deleteItem=(name)=>{
+  const deleteItem=(name,index)=>{
+    const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
     axios.delete('http://localhost:4000/checkout',{data:{
-    email:userData.email,id:name.productId}
+    email:userData.email,id:skuId}
   }).then((response) => {
     setCartData(response);
     console.log(response)
@@ -103,7 +104,7 @@ const ViewCart=()=>{
 
 
   const valueChange=(id,quantity)=>{
-    axios.post('http://localhost:4000/checkout', {
+    axios.put('http://localhost:4000/checkout', {
     email:userData.email,id:id,quantity:quantity
   }).then((response) => {
     setCartData(response);
@@ -169,7 +170,7 @@ const ViewCart=()=>{
                   </td>
                   <td>₹{item?.selling_price*quantity[index]}</td>
                   <td>
-                    <div className="ps-remove" onClick={() => deleteItem(item)}></div>
+                    <div className="ps-remove" onClick={() => deleteItem(item,index)}></div>
                   </td>
                 </tr>
                   )

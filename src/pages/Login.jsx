@@ -11,9 +11,6 @@ import { ViewIcon } from "@chakra-ui/icons";
 // import GoogleLogin from "react-google-login";
 import jwt_decode from "jwt-decode";
 import {GLogin} from "../components/Other/GLogin";
-// import { GoogleOAuthProvider,GoogleLogin } from '@react-oauth/google';
-// import GoogleOneTapLogin from 'react-google-one-tap-login';
-
 
 
 const Login= ({ chooseMessage })=> {
@@ -146,7 +143,7 @@ const Login= ({ chooseMessage })=> {
   
   return(
     <>
-      
+        
     
    
     <div className={`${styles.container} ${isContainerActive ? `${styles.rightpanelactive}` : ""}`} id="container">

@@ -9,6 +9,9 @@ import Footer from "../components/Footer";
 import OwlCarousel from 'react-owl-carousel';
 import parse from 'html-react-parser';
 import { CardFooter } from "@chakra-ui/react";
+import axios from "axios";
+// import CartData from "../components/CartData";
+
 
 
 
@@ -19,7 +22,11 @@ const ProductDetails=()=>{
     const [prod, setProd] = useState();
     const [color, setColor]=useState([]);
     const [imgg, setImg]=useState([]);
-    const [sizes, setSize]=useState([]);
+    const [sizes, setSize]=useState([[]]);
+    const [cartProduct,setCartProduct]=useState({index:0});
+    const userData=JSON.parse(localStorage.getItem('all'));
+    const [change,setChange]=useState(false);
+
 
 
     const products = useSelector((store) => store.dataReducer.products);
@@ -33,12 +40,45 @@ const ProductDetails=()=>{
 
     };
 
-    const Cart=()=>{
-      navigate(`/checkout`);
-      window.location.reload();
-      window.scrollTo(0,0);
+    const Cart=(e)=>{
+      e.preventDefault();
+      console.log('cart');
+      console.log(e.target.quantity.value);
+      const skuId=id+'/'+cartProduct.color+'/'+e.target.size.value;
+      cartProduct.skuId=skuId;
+      
+      console.log(cartProduct);
+      
+      axios.post('http://localhost:4000/checkout', {
+      email:userData.email,id:skuId,quantity:e.target.quantity.value
+    }).then((response) => {
+      // setCartData(response);
+      console.log(response)
+      setCartProduct(cartProduct);
+      setChange(!change);
+      // CartData();
+    });
+      // setCartProduct()
+      // navigate(`/checkout`);
+      // window.location.reload();
+      // window.scrollTo(0,0);
     }
 
+    // useEffect(() => {
+    //   console.log('rerub');
+    // }, [cartProduct]);
+
+
+    const handleColor=(item,color)=>{
+      // console.log(item,color);
+      let cartProduct1={};
+      cartProduct1.color=item;
+      cartProduct1.index=color;
+      setCartProduct(cartProduct1)
+      console.log(cartProduct);
+    }
+
+    console.log('cart',cartProduct);
     
 
     const [currentProducts, setCurrentProducts] = useState({});
@@ -64,18 +104,19 @@ const ProductDetails=()=>{
 
       // const imgg=currentProducts.image;
       // const color=currentProducts.color;
-      console.log(products,'cur2');
-      console.log(currentProducts, products);
+      // console.log(products,'cur2');
+      // console.log(currentProducts, products);
       let index = products.indexOf(currentProducts);
-      console.log('numberObj',index,sizes,sizes[0],sizes[0]);
+      // console.log('numberObj',index,sizes,sizes[0],color);
       if(products){
 
     return (
 
           
       <body className="ps-loading">
+        
 
-      <Header/>
+      <Header change={change}/>
     <main className="ps-main">
       <div className="test">
         <div className="container">
@@ -135,11 +176,12 @@ const ProductDetails=()=>{
                   <h4>QUICK REVIEW</h4>
                   <p>{parse(`${currentProducts.description}`)}</p>
                 </div>
+                <form onSubmit={Cart}>
                 <div className="ps-product__block ps-product__style">
                   <h4 style={{textAlign:'left'}}>CHOOSE YOUR STYLE</h4>
                   <ul>
                   {color.map((item,i) => (
-                    <li><a href="product-detail.html"><img src={currentProducts?.image?.[i]} alt=""/></a></li>
+                    <li><a><img onClick={()=>handleColor(item,i)} src={currentProducts?.image?.[i]} alt=""/></a></li>
                   ))}
                     {/* <li><a href="product-detail.html"><img src={currentProducts?.image?.[0]} alt=""/></a></li> */}
                     {/* <li><a href="product-detail.html"><img src={currentProducts?.image?.[2]} alt=""/></a></li>
@@ -148,13 +190,18 @@ const ProductDetails=()=>{
                 </div>
                 <div className="ps-product__block ps-product__size">
                   <h4 style={{textAlign:'left'}}>CHOOSE SIZE<a href="#">Size chart</a></h4>
-                  <select style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px',appearance: 'none',paddingRight:'20px',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                  <select name="size" style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px',appearance: 'none',paddingRight:'20px',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 1.9rem center',
                   backgroundSize: '1em'}}>
                     <option value="1" >SELECT SIZE</option>
-                    <option value="2">4</option>
-                    <option value="3">4.5</option>
+                    {sizes?.[cartProduct.index].map((item,index)=>{
+                      return(
+                        <option value={item}>{item}</option>
+                      );
+                    })}
+                    
+                    {/* <option value="3">4.5</option>
                     <option value="3">5</option>
                     <option value="3">6</option>
                     <option value="3">6.5</option>
@@ -164,15 +211,16 @@ const ProductDetails=()=>{
                     <option value="3">8.5</option>
                     <option value="3">9</option>
                     <option value="3">9.5</option>
-                    <option value="3">10</option>
+                    <option value="3">10</option> */}
                   </select>
                   <div className="form-group">
-                    <input className="form-control" type="number" defaultValue="1"/>
+                    <input className="form-control" name="quantity" type="number" defaultValue="1"/>
                   </div>
                 </div>
-                <div className="ps-product__shopping" ><a className="ps-btn mb-10" onClick={()=>Cart()}  style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></a>
+                <div className="ps-product__shopping" ><button className="ps-btn mb-10" type="submit"  style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></button>
                   <div className="ps-product__actions"><a className="mr-10" href="whishlist.html"><i className="ps-icon-heart"></i></a><a href="compare.html"><i className="ps-icon-share"></i></a></div>
                 </div>
+                </form>
               </div>
               <div className="clearfix"></div>
               <div className="ps-product__content mt-50">
