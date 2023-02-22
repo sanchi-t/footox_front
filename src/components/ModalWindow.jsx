@@ -5,9 +5,10 @@ import Login from '../pages/Login';
 import './Modal.css'
 import Avatar from './Avatar';
 import Button from 'react-bootstrap/Button';
-
+// import CartData from './CartData';
 
 const ModalWindow=({toggled,toggle})=>{
+  // console.log('here at modal window');
   
   const [show, setShow] = useState(false);
   const [message, setMessage] = React.useState({});
@@ -39,6 +40,7 @@ const ModalWindow=({toggled,toggle})=>{
   const handleShow = () => setShow(true);
   // console.log('abvatar',message);
   let token=localStorage.getItem('jwtToken');
+  let cart=localStorage.getItem('cart');
   
   
   
@@ -49,8 +51,16 @@ const ModalWindow=({toggled,toggle})=>{
 
   return (
     <>
+
+
+{/* <CartData/> */}
+
     {(token) &&
     <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'18px'}}>
+      
+      
+      
+
       <Avatar />
       </div>
 

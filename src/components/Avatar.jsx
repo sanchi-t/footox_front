@@ -17,10 +17,16 @@ const Avatar=()=> {
     const logoutHandler = () => {
         console.log('deleted here');
         localStorage.clear();
-        sessionStorage.clear();
+        // sessionStorage.clear();
+        window.location.reload();
+        sessionStorage.removeItem('coupon');
+        sessionStorage.removeItem('items');
+        sessionStorage.removeItem('quantity');
+        sessionStorage.removeItem('total');
         window.location.reload();
         }
     // console.log(chooseMessage);
+    // window.location.reload();
 
     return(<>
         <Menu>
@@ -28,8 +34,8 @@ const Avatar=()=> {
               as={Button}
               style={{backgroundColor: '#FFFFFF',border: 'none',margin:'0px',paddingRight:'0px',paddingLeft:'5px'}}
               rightIcon={<AiFillCaretDown  style={{width:'70%', color: 'black',float:'left'}} />}>
-                {(profile?.picture) &&
-                  <img style={{height:'50px',borderRadius: '50%'}} src={profile.picture} alt="avatar" />
+                {(localStorage.getItem('user')) &&
+                  <img style={{height:'50px',borderRadius: '50%'}} src={JSON.parse(localStorage.getItem('user')).picture} alt="avatar" />
                 }
                 {(!profile) &&
 

@@ -16,15 +16,31 @@ import { useNavigate } from "react-router-dom";
 
 
 const Checkout=()=>{
-    
+
+  function getSessionStorageOrDefault(key, defaultValue) {
+    const stored = sessionStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    return JSON.parse(stored);
+  }
+
+  function getSessionStorageNumberOrDefault(key, defaultValue) {
+    const stored = sessionStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    return Number(stored);
+  }
     const [prod, setProd] = useState();
     const [show, setShow] = useState(false);
-    const [coupon, setCoupon]=useState();
+    const [coupon, setCoupon]=useState(getSessionStorageNumberOrDefault('coupon', 0));
     const [currentAddress, setCurrentAddress]=useState('');
     const [checked, setChecked]=useState();
-    const [Quantity, setQuantity]=useState([]);
-    const [total, setTotal]=useState();
+    const [Quantity, setQuantity]=useState(getSessionStorageOrDefault('quantity', []));
+    const [total, setTotal]=useState(getSessionStorageNumberOrDefault('total', 0));
     const userData=JSON.parse(localStorage.getItem('all'));
+    
 
     const products = useSelector((store) => store.dataReducer.products);
     const dispatch = useDispatch();
@@ -32,21 +48,19 @@ const Checkout=()=>{
     
 
     const [currentProducts, setCurrentProducts] = useState([]);
-    const [items, setItems] = useState([[]]);
+    const [items, setItems] = useState(getSessionStorageOrDefault('items', [[]]));
     const [address, setAddress] = useState([]);
     // console.log(items);
 
     useEffect(() => {
-      const items = JSON.parse(sessionStorage.getItem('items'));
-      const quantity = JSON.parse(sessionStorage.getItem('quantity'));
-      const total = Number(sessionStorage.getItem('total'));
-      const coup=Number(sessionStorage.getItem("coupon"));
+      console.log('inside use effect');
+      
       // const address = JSON.parse(localStorage.getItem('all')).address;
-      console.log('useeffect',items,quantity)
-      setItems(items);
-      setQuantity(quantity);
-      setTotal(total);
-      setCoupon(coup);
+      // console.log('useeffect',items,quantity)
+      // setItems(items);
+      // setQuantity(quantity);
+      // setTotal(total);
+      // setCoupon(coup);
 
       axios.get('http://localhost:4000/address', {params:userData})
           .then((response) => {
@@ -54,7 +68,7 @@ const Checkout=()=>{
             console.log(response.data.address,'response');
           });
       
-    }, []);
+    }, [items.length,typeof items[0]]);
 
     let num = useState({});
     
@@ -107,11 +121,16 @@ const Checkout=()=>{
         form.name_user=userData.username;
         form.email_user=userData.email;
         form.mobile_user=userData.mobile;
-        form.address.place=event.target.address.value;
-        form.address.save=checked;
+        form.address={place:event.target.address.value,save:checked};
+        // form.address.save=checked;
+        
         form.items=JSON.parse(localStorage.getItem('cart'));
+        // form.items.forEach((val,index)=>{
+        //   val.price=Number(JSON.parse(sessionStorage.getItem('items'))[index].selling_price);
+        // })
         form.total=sessionStorage.getItem('total');
         form.coupon={value:sessionStorage.getItem('coupon'),code:sessionStorage.getItem('code')};
+        sessionStorage.setItem('order',JSON.stringify(form));
         
         const uuid=sessionStorage.getItem('uuid');
         axios.post('http://localhost:4000/orderPlaced', {form})
@@ -119,13 +138,14 @@ const Checkout=()=>{
             console.log(response);
             sessionStorage.setItem('order',JSON.stringify(response.data.order));
           
-          axios.post('http://localhost:4000/couponApplied', {email:localStorage.getItem('userInfo'),uuid:uuid,coupon:form.coupon})
+          axios.post('http://localhost:4000/couponApplied', {email:userData.email,uuid:uuid,coupon:form.coupon})
           .then((response) => {
             console.log(response);
           });
           });
         if(checked){
-          axios.post('http://localhost:4000/address', {address:form.address,email:localStorage.getItem('userInfo')})
+          console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+          axios.post('http://localhost:4000/address', {address:form.address,email:userData.email})
           .then((response) => {
             console.log(response);
           });
@@ -185,22 +205,22 @@ const Checkout=()=>{
                             <div className="form-group form-group--inline">
                               <label>Name<span>*</span>
                               </label>
-                              <input className="form-control" type="text" name="name" />
+                              <input className="form-control" type="text" defaultValue={JSON.parse(sessionStorage.getItem('order'))?.name_reciever || ''} name="name" />
                             </div>
                             <div className="form-group form-group--inline">
                               <label>Email Address<span>*</span>
                               </label>
-                              <input className="form-control" type="email" name="email" />
+                              <input className="form-control" type="email" defaultValue={JSON.parse(sessionStorage.getItem('order'))?.email_reciever || ''} name="email" />
                             </div>
                             <div className="form-group form-group--inline">
                               <label>Phone<span>*</span>
                               </label>
-                              <input className="form-control" type="text" name="mobile" />
+                              <input className="form-control" type="text" defaultValue={JSON.parse(sessionStorage.getItem('order'))?.mobile_reciever || ''} name="mobile" />
                             </div>
                             <div className="form-group form-group--inline">
                               <label>Address<span>*</span>
                               </label>
-                              <input className="form-control" type="text" name="address" onChange={handleAddress} value={currentAddress}/>
+                              <input className="form-control" type="text" name="address" onChange={handleAddress} value={JSON.parse(sessionStorage.getItem('order'))?.address.place || currentAddress}/>
                             </div>
                       <div className="form-group" >
                         <div className="ps-checkbox" style={{width:"200px",display:'inline'}}>

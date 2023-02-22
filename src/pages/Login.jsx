@@ -11,9 +11,6 @@ import { ViewIcon } from "@chakra-ui/icons";
 // import GoogleLogin from "react-google-login";
 import jwt_decode from "jwt-decode";
 import {GLogin} from "../components/Other/GLogin";
-// import { GoogleOAuthProvider,GoogleLogin } from '@react-oauth/google';
-// import GoogleOneTapLogin from 'react-google-one-tap-login';
-
 
 
 const Login= ({ chooseMessage })=> {
@@ -78,6 +75,7 @@ const Login= ({ chooseMessage })=> {
             localStorage.setItem('all', data);
 
             chooseMessage(res.data);
+            window.location.reload();
           }
           else{
             // console.log('response',res.)
@@ -105,6 +103,7 @@ const Login= ({ chooseMessage })=> {
           localStorage.setItem('all', data);
           // console.log('data',data)
           chooseMessage(r.data);
+          window.location.reload();
         }
         else{
           console.log('r',r.response.data.errors);
@@ -146,7 +145,7 @@ const Login= ({ chooseMessage })=> {
   
   return(
     <>
-      
+        
     
    
     <div className={`${styles.container} ${isContainerActive ? `${styles.rightpanelactive}` : ""}`} id="container">
