@@ -75,6 +75,7 @@ const Login= ({ chooseMessage })=> {
             localStorage.setItem('all', data);
 
             chooseMessage(res.data);
+            window.location.reload();
           }
           else{
             // console.log('response',res.)
@@ -102,6 +103,7 @@ const Login= ({ chooseMessage })=> {
           localStorage.setItem('all', data);
           // console.log('data',data)
           chooseMessage(r.data);
+          window.location.reload();
         }
         else{
           console.log('r',r.response.data.errors);

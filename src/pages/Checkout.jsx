@@ -121,8 +121,8 @@ const Checkout=()=>{
         form.name_user=userData.username;
         form.email_user=userData.email;
         form.mobile_user=userData.mobile;
-        form.address.place=event.target.address.value;
-        form.address.save=checked;
+        form.address={place:event.target.address.value,save:checked};
+        // form.address.save=checked;
         
         form.items=JSON.parse(localStorage.getItem('cart'));
         // form.items.forEach((val,index)=>{
@@ -144,6 +144,7 @@ const Checkout=()=>{
           });
           });
         if(checked){
+          console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
           axios.post('http://localhost:4000/address', {address:form.address,email:userData.email})
           .then((response) => {
             console.log(response);

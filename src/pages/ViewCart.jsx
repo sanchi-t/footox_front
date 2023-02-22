@@ -25,7 +25,7 @@ const ViewCart=()=>{
 
   const [cartData1, setCartData1] = useState(getLocalStorageOrDefault('cart', []));
 
-  const [items, setItems] = useState([{}]);
+  const [items, setItems] = useState([]);
   const [quantity, setQuantity] = useState([]);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -170,7 +170,7 @@ const ViewCart=()=>{
                 </tr>
               </thead>
               <tbody>
-                {items.map((item,index)=>{
+                {(items.length!==0) && items.map((item,index)=>{
                   return(
                     <tr>
                   <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((cartData1[index].id).split('/')[1])][0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>

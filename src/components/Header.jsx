@@ -79,7 +79,8 @@ const Header = (props) => {
     console.log('inside useState',quantity,items)
     // dispatch(getData());
 
-    if(!total || change){
+    if(!total || change!==undefined){
+      if(localStorage.getItem('jwtTolen')){
       console.log('yo sanchit')
       
     
@@ -105,7 +106,8 @@ const Header = (props) => {
               
               setItems([...cur]);
               setQuantity([...quant]);
-              setTotal(sum);
+
+              sum && setTotal(sum);
           });
         //   localStorage.setItem('cart',JSON.stringify(all));
         //   consol
@@ -115,20 +117,30 @@ const Header = (props) => {
           });
           console.log(items,quantity,total);}
 
+          else{
+            setTotal(Number(sessionStorage.getItem('total')));
+            setItems(JSON.parse(sessionStorage.getItem('items')));
+            setQuantity(JSON.parse(sessionStorage.getItem('quantity')));
+            setCartData(JSON.parse(localStorage.getItem('cart')));
+            
+          }
+        }
+
           
           
     
-  }, [cartData,typeof items?.[0],change])
+  }, [total,change])
 
   useEffect(() => {
+    if(localStorage.getItem('jwtToken')){
           sessionStorage.setItem('items', JSON.stringify(items));
           sessionStorage.setItem('quantity', JSON.stringify(quantity));
-          sessionStorage.setItem('total', total);
+          sessionStorage.setItem('total', total);}
   }, [total]);
 //   console.log(items,'yoyo',total);
   
 
-  // console.log('here at header');
+  console.log('here at header',change);
 
 
   
@@ -409,15 +421,23 @@ const Header = (props) => {
                 <div className="ps-cart" ><a className="ps-cart__toggle" href="#"><span><i>{(total===0)?0:items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
                   <div className="ps-cart__listing" style={{width:'350px'}}>
                     <div className="ps-cart__content" >
-                    {total && items.map((item,index)=>{
+                    {items && items.map((item,index)=>{
                       // console.log(cartData,'cartdata');
                       const val=cartData[index];
                       // const color=val.split('/')[1];
                       // console.log(val);
-                      const a=item.color.indexOf((cartData[index].id).split('/')[1])
+                      let a;
+                      if(cartData.length>0){
+                        console.log(cartData)
+                       a=item?.color.indexOf((cartData[index].id).split('/')[1])
+
+                      }
+                      else{
+                        a=0;
+                      }
                       return(
                         <div className="ps-cart-item"><a onClick={()=>handleDelete(item,index)} className="ps-cart-item__close"  />
-                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src={item?.image?.length>1 ?  item?.image[a][0] : "images/product/cart-preview/1.jpg"} alt="" /></div>
+                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src={item?.image[a][0] || "images/product/cart-preview/1.jpg"} alt="" /></div>
                         <div className="ps-cart-item__content"><a className="ps-cart-item__title" href="product-detail.html">{items?.productName}</a>
                           <p style={{float:'left',position:'relative'}}><span>Quantity:<i>{(quantity)[index]}</i></span><span>Total:<i>₹{item?.selling_price*quantity[index]}</i></span></p>
                         </div>
@@ -428,7 +448,7 @@ const Header = (props) => {
                       
                     </div>
                     <div className="ps-cart__total">
-                      <p>Number of items:<span>{quantity.length}</span></p>
+                      <p>Number of items:<span>{quantity?quantity.length:0}</span></p>
                       <p>Item Total:<span>₹{total}</span></p>
                     </div>
                     <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>

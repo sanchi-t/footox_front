@@ -2,6 +2,8 @@ import { GoogleOAuthProvider,GoogleLogin } from '@react-oauth/google';
 import GoogleOneTapLogin from 'react-google-one-tap-login';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import React, { useState,useEffect } from "react";
+
 
 
 const clientId='907385226953-mc9c2r4j8t9nmne9dch68s65tmkq2gqg.apps.googleusercontent.com'
@@ -14,8 +16,9 @@ const GLogin=({ setGLogin })=>{
         // localStorage.setItem('jwtToken', credentialResponse.credential);
         var data = JSON.stringify(obj);
         localStorage.setItem('user', data);
-        
-        axios({
+
+        if(!localStorage.getItem('jwtToken')){
+          axios({
             method: 'post',
             url: 'http://localhost:4000/googlelogin',
             data: {payload}, // you are sending body instead
@@ -29,9 +32,13 @@ const GLogin=({ setGLogin })=>{
                 var data = JSON.stringify(response.data);
                 localStorage.setItem('all', data);
                 setGLogin(obj);
+                window.location.reload();
             }
             console.log(response);
           })
+  }
+        
+        
         //   setGLogin(obj);
         // setGoogle(true);
        
@@ -58,8 +65,8 @@ const GOneTapLogin=({ chooseonetap })=>{
         // localStorage.setItem('jwtToken', credentialResponse.credential);
         var obj = JSON.stringify(data);
         localStorage.setItem('user', obj);
-        
-        axios({
+        if(!localStorage.getItem('jwtToken')){
+          axios({
             method: 'post',
             url: 'http://localhost:4000/googleloginonetap',
             data: {payload}, // you are sending body instead
@@ -73,9 +80,15 @@ const GOneTapLogin=({ chooseonetap })=>{
                 var data = JSON.stringify(response.data);
                 localStorage.setItem('all', data);
                 chooseonetap(data);
+                window.location.reload();
             }
             console.log(response);
           })
+          
+  }
+        
+        
+        
         //   setGLogin(obj);
         // setGoogle(true);
        

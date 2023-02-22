@@ -48,6 +48,9 @@ const ProductDetails=()=>{
       e.preventDefault();
       console.log('cart');
       console.log(e.target.quantity.value);
+      if(!cartProduct.color){
+        cartProduct.color=currentProducts.color[0];
+      }
       const skuId=id+'/'+cartProduct.color+'/'+e.target.size.value;
       cartProduct.skuId=skuId;
       
@@ -55,30 +58,40 @@ const ProductDetails=()=>{
       if(!userData){
         console.log(currentProducts);
         let items=sessionStorage.getItem('items');
-        if(items!=='[{}]'){
+        if(items && items.length>0){
           items=JSON.parse(items);
           await items.push(currentProducts);
           await sessionStorage.setItem('items',JSON.stringify(items));
           let quant=JSON.parse(sessionStorage.getItem('quantity'));
           let tot=Number(sessionStorage.getItem('total'));
           tot=tot+(Number(currentProducts.selling_price)*Number(e.target.quantity.value));
+          let cart=JSON.parse(localStorage.getItem('cart'));
+          await cart.push({id:skuId,quantity:Number(e.target.quantity.value),price:Number(currentProducts.selling_price)*Number(e.target.quantity.value)});
           await quant.push(e.target.quantity.value);
           await sessionStorage.setItem('quantity',JSON.stringify(quant));
           await sessionStorage.setItem('total',tot);
+          await localStorage.setItem('cart',JSON.stringify(cart));
           console.log(change);
-          await setChange(!change);
+          
         }
         else{
           await sessionStorage.setItem('items',JSON.stringify([currentProducts]));
           await sessionStorage.setItem('quantity',JSON.stringify([e.target.quantity.value]));
           await sessionStorage.setItem('total',(Number(currentProducts.selling_price)*Number(e.target.quantity.value)));
-          await setChange(!change);
+          await localStorage.setItem('cart',(JSON.stringify([{id:skuId,quantity:Number(e.target.quantity.value),price:Number(currentProducts.selling_price)*Number(e.target.quantity.value)}])));
+          // await setChange(!change);
         }
 
         
         // sessionStorage.setItem
+        console.log('change is changing',change);
+        setCartProduct(cartProduct);
+        setChange(!change);
 
       }
+
+
+
       else{
 
       
@@ -128,10 +141,14 @@ const ProductDetails=()=>{
       }, [dispatch, products.length,num]);
       useEffect(() => {
         if (id) {
+          // const cartProduct1={color:'',index:0};
           const cur = products.find((item) => item.productId === id);
 
           cur && setCurrentProducts(cur);
           cur && setColor(cur.color)
+          // cartProduct1.color=cur?.color[0];
+          // cartProduct1.index=0;
+          // cur &&setCartProduct(cartProduct1)
           cur && setImg(cur.image[0]);
           cur && setAllImage(cur.image);
           cur && setSize(cur.Sizes);
