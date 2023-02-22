@@ -123,7 +123,11 @@ const Checkout=()=>{
         form.mobile_user=userData.mobile;
         form.address.place=event.target.address.value;
         form.address.save=checked;
+        
         form.items=JSON.parse(localStorage.getItem('cart'));
+        // form.items.forEach((val,index)=>{
+        //   val.price=Number(JSON.parse(sessionStorage.getItem('items'))[index].selling_price);
+        // })
         form.total=sessionStorage.getItem('total');
         form.coupon={value:sessionStorage.getItem('coupon'),code:sessionStorage.getItem('code')};
         sessionStorage.setItem('order',JSON.stringify(form));
@@ -134,13 +138,13 @@ const Checkout=()=>{
             console.log(response);
             sessionStorage.setItem('order',JSON.stringify(response.data.order));
           
-          axios.post('http://localhost:4000/couponApplied', {email:localStorage.getItem('userInfo'),uuid:uuid,coupon:form.coupon})
+          axios.post('http://localhost:4000/couponApplied', {email:userData.email,uuid:uuid,coupon:form.coupon})
           .then((response) => {
             console.log(response);
           });
           });
         if(checked){
-          axios.post('http://localhost:4000/address', {address:form.address,email:localStorage.getItem('userInfo')})
+          axios.post('http://localhost:4000/address', {address:form.address,email:userData.email})
           .then((response) => {
             console.log(response);
           });

@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import './Modal.css'
 import Avatar from './Avatar';
 import Button from 'react-bootstrap/Button';
-import CartData from './CartData';
+// import CartData from './CartData';
 
 const ModalWindow=({toggled,toggle})=>{
   // console.log('here at modal window');

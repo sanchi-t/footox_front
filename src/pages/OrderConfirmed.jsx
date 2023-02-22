@@ -63,6 +63,7 @@ const OrderCorfirmed =()=>{
   const handleClick = () => {
     axios.post('http://localhost:4000/orderConfirmed', {order:JSON.parse(sessionStorage.getItem('order'))})
           .then((response) => {
+            
             console.log(response);
           });
         
@@ -73,6 +74,8 @@ const OrderCorfirmed =()=>{
       var yyyy = today.getFullYear();
 
       today = mm + '/' + dd + '/' + yyyy;
+      sessionStorage.removeItem('order');
+      sessionStorage.removeItem('code');
 
 
     return(

@@ -11,6 +11,20 @@ import { useLocation,useNavigate } from "react-router-dom";
 
 
 const ViewCart=()=>{
+
+
+  function getLocalStorageOrDefault(key, defaultValue) {
+    const stored = localStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    // console.log(stored)
+    return JSON.parse(stored);
+  }
+
+
+  const [cartData1, setCartData1] = useState(getLocalStorageOrDefault('cart', []));
+
   const [items, setItems] = useState([{}]);
   const [quantity, setQuantity] = useState([]);
   const [total, setTotal] = useState(0);
@@ -159,7 +173,7 @@ const ViewCart=()=>{
                 {items.map((item,index)=>{
                   return(
                     <tr>
-                  <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>
+                  <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((cartData1[index].id).split('/')[1])][0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>
                   <td>₹{item?.selling_price}</td>
                   <td>
                     <div className="form-group--number">

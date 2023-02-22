@@ -17,7 +17,12 @@ const Avatar=()=> {
     const logoutHandler = () => {
         console.log('deleted here');
         localStorage.clear();
-        sessionStorage.clear();
+        // sessionStorage.clear();
+        window.location.reload();
+        sessionStorage.removeItem('coupon');
+        sessionStorage.removeItem('items');
+        sessionStorage.removeItem('quantity');
+        sessionStorage.removeItem('total');
         window.location.reload();
         }
     // console.log(chooseMessage);

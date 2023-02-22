@@ -22,10 +22,14 @@ const ProductDetails=()=>{
     const [prod, setProd] = useState();
     const [color, setColor]=useState([]);
     const [imgg, setImg]=useState([]);
+    const [allImage, setAllImage]=useState([[]]);
+    const [indexNo, setIndexNo]=useState(0);
     const [sizes, setSize]=useState([[]]);
     const [cartProduct,setCartProduct]=useState({index:0});
     const userData=JSON.parse(localStorage.getItem('all'));
     const [change,setChange]=useState(false);
+    // const products = useSelector((store) => store.dataReducer.products);
+
 
 
 
@@ -40,7 +44,7 @@ const ProductDetails=()=>{
 
     };
 
-    const Cart=(e)=>{
+    const Cart=async(e)=>{
       e.preventDefault();
       console.log('cart');
       console.log(e.target.quantity.value);
@@ -48,9 +52,39 @@ const ProductDetails=()=>{
       cartProduct.skuId=skuId;
       
       console.log(cartProduct);
+      if(!userData){
+        console.log(currentProducts);
+        let items=sessionStorage.getItem('items');
+        if(items!=='[{}]'){
+          items=JSON.parse(items);
+          await items.push(currentProducts);
+          await sessionStorage.setItem('items',JSON.stringify(items));
+          let quant=JSON.parse(sessionStorage.getItem('quantity'));
+          let tot=Number(sessionStorage.getItem('total'));
+          tot=tot+(Number(currentProducts.selling_price)*Number(e.target.quantity.value));
+          await quant.push(e.target.quantity.value);
+          await sessionStorage.setItem('quantity',JSON.stringify(quant));
+          await sessionStorage.setItem('total',tot);
+          console.log(change);
+          await setChange(!change);
+        }
+        else{
+          await sessionStorage.setItem('items',JSON.stringify([currentProducts]));
+          await sessionStorage.setItem('quantity',JSON.stringify([e.target.quantity.value]));
+          await sessionStorage.setItem('total',(Number(currentProducts.selling_price)*Number(e.target.quantity.value)));
+          await setChange(!change);
+        }
+
+        
+        // sessionStorage.setItem
+
+      }
+      else{
+
+      
       
       axios.post('http://localhost:4000/checkout', {
-      email:userData.email,id:skuId,quantity:e.target.quantity.value
+      email:userData.email,id:skuId,quantity:e.target.quantity.value,price:(Number(currentProducts.selling_price)*Number(e.target.quantity.value))
     }).then((response) => {
       // setCartData(response);
       console.log(response)
@@ -63,6 +97,7 @@ const ProductDetails=()=>{
       // window.location.reload();
       // window.scrollTo(0,0);
     }
+  }
 
     // useEffect(() => {
     //   console.log('rerub');
@@ -75,10 +110,11 @@ const ProductDetails=()=>{
       cartProduct1.color=item;
       cartProduct1.index=color;
       setCartProduct(cartProduct1)
+      setIndexNo(color);
       console.log(cartProduct);
     }
 
-    console.log('cart',cartProduct);
+    // console.log('cart',cartProduct);
     
 
     const [currentProducts, setCurrentProducts] = useState({});
@@ -96,7 +132,8 @@ const ProductDetails=()=>{
 
           cur && setCurrentProducts(cur);
           cur && setColor(cur.color)
-          cur && setImg(cur.image);
+          cur && setImg(cur.image[0]);
+          cur && setAllImage(cur.image);
           cur && setSize(cur.Sizes);
           setProd(products)
         }
@@ -108,6 +145,8 @@ const ProductDetails=()=>{
       // console.log(currentProducts, products);
       let index = products.indexOf(currentProducts);
       // console.log('numberObj',index,sizes,sizes[0],color);
+
+      console.log('colors',indexNo)
       if(products){
 
     return (
@@ -136,26 +175,26 @@ const ProductDetails=()=>{
                   <div className="ps-product__variants">
                   {/* {imgg?.map((item) => (                   
                   <div className="item"><img src={item? item:"images/shoe-detail/2.jpg"} alt=""/></div>))} */}
-                    <div className="item"><img src={imgg?.[0]? imgg[0]:"images/shoe-detail/2.jpg"} alt=""/></div>
-                     <div className="item"><img src={imgg?.[1]? imgg[1]:"images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img src={imgg?.[2]? imgg[2]:"images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img src={imgg?.[3]? imgg[3]:"images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img src={imgg?.[4]? imgg[4]:"images/shoe-detail/2.jpg"} alt=""/></div>
-                  </div><a className="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src={currentProducts.image?.[0]} alt=""/><i className="fa fa-play"></i></a>
+                    <div className="item"><img src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                     <div className="item"><img src={allImage[indexNo][1] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={allImage[indexNo][2] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                  </div><a className="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src={allImage[indexNo][0]} alt=""/><i className="fa fa-play"></i></a>
                 </div>
                 <div className="ps-product__image">
-                  <div className="item"><img className="zoom" src={imgg?.[0]? imgg[0]:"images/shoe-detail/2.jpg"} alt="" data-zoom-image={imgg?.[0]? imgg[0]:"images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={imgg?.[1]? imgg[1]:"images/shoe-detail/2.jpg"} alt="" data-zoom-image={imgg?.[1]? imgg[1]:"images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={imgg?.[2]? imgg[2]:"images/shoe-detail/2.jpg"} alt="" data-zoom-image={imgg?.[2]? imgg[2]:"images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={imgg?.[3]? imgg[3]:"images/shoe-detail/2.jpg"} alt="" data-zoom-image={imgg?.[3]? imgg[3]:"images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={imgg?.[4]? imgg[4]:"images/shoe-detail/2.jpg"} alt="" data-zoom-image={imgg?.[5]? imgg[5]:"images/shoe-detail/2.jpg"}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][0] || "images/shoe-detail/2.jpg"}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][1] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][1] || "images/shoe-detail/2.jpg"}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][2] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][2] || "images/shoe-detail/2.jpg"}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][3] || "images/shoe-detail/2.jpg"}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][5] || "images/shoe-detail/2.jpg"}/></div>
                 </div>
               </div>
               <div className="ps-product__thumbnail--mobile">
-                <div className="ps-product__main-img"><img src={currentProducts.image?.[0]} alt=""/></div>
+                <div className="ps-product__main-img"><img src={allImage[indexNo][0]} alt=""/></div>
                 <div className="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
                 <OwlCarousel items={3} margin={20} autoplay={true} loop={true} dots={false} nav={false}>
-                  <img src={currentProducts?.image?.[0]} alt=""/><img src={currentProducts?.image?.[1]} alt=""/><img src={currentProducts?.image?.[2]} alt=""/>
+                  <img src={allImage[indexNo][0]} alt=""/><img src={allImage[indexNo][1]} alt=""/><img src={allImage[indexNo][2]} alt=""/>
                   </OwlCarousel>
                   </div>
               </div>
@@ -181,7 +220,7 @@ const ProductDetails=()=>{
                   <h4 style={{textAlign:'left'}}>CHOOSE YOUR STYLE</h4>
                   <ul>
                   {color.map((item,i) => (
-                    <li><a><img onClick={()=>handleColor(item,i)} src={currentProducts?.image?.[i]} alt=""/></a></li>
+                    <li><a onClick={()=>handleColor(item,i)}><img  src={allImage[i][0]} alt=""/></a></li>
                   ))}
                     {/* <li><a href="product-detail.html"><img src={currentProducts?.image?.[0]} alt=""/></a></li> */}
                     {/* <li><a href="product-detail.html"><img src={currentProducts?.image?.[2]} alt=""/></a></li>
@@ -214,7 +253,7 @@ const ProductDetails=()=>{
                     <option value="3">10</option> */}
                   </select>
                   <div className="form-group">
-                    <input className="form-control" name="quantity" type="number" defaultValue="1"/>
+                    <input className="form-control" name="quantity" type="number" min="1" defaultValue="1"/>
                   </div>
                 </div>
                 <div className="ps-product__shopping" ><button className="ps-btn mb-10" type="submit"  style={{float:'left'}}>Add to cart<i className="ps-icon-next" ></i></button>
@@ -333,11 +372,11 @@ const ProductDetails=()=>{
               <div className="ps-shoes--carousel">
                 <div className="ps-shoe">
                   <div className="ps-shoe__thumbnail" onClick={() => handleDes(item.productId)}>
-                    <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]} alt=""/><a className="ps-shoe__overlay" ></a>
+                    <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]?.[0]} alt=""/><a className="ps-shoe__overlay" ></a>
                   </div>
                   <div className="ps-shoe__content">
                     <div className="ps-shoe__variants">
-                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={item.image?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={item.image?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={item.image?.[2]} alt=""/><img style={{width:'64px'}} src={item.image?.[3]} alt=""/></div>
+                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={item.image?.[0]?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={item.image?.[0]?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={item.image?.[2]} alt=""/><img style={{width:'64px'}} src={item.image?.[3]} alt=""/></div>
                       {/* <select className="ps-rating ps-shoe__rating">
                         <option value="1">1</option>
                         <option value="1">2</option>
@@ -362,11 +401,11 @@ const ProductDetails=()=>{
                   <div className="ps-shoe__thumbnail">
                     
                     <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src=
-                    {currentProducts.image?.[0]} alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
+                    {currentProducts.image?.[0]?.[0]} alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
                   </div>
                   <div className="ps-shoe__content">
                   <div className="ps-shoe__variants">
-                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[2]} alt=""/><img style={{width:'64px'}} src={currentProducts.image?.[3]} alt=""/></div>
+                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]?.[2]} alt=""/><img style={{width:'64px'}} src={currentProducts.image?.[0]?.[3]} alt=""/></div>
                       {/* <select className="ps-rating ps-shoe__rating">
                         <option value="1">1</option>
                         <option value="1">2</option>

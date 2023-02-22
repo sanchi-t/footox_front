@@ -16,7 +16,7 @@ const Footer=lazy(() =>  import('../components/Footer'));
 
 const Homepage = () => {
   const navigate = useNavigate();
-  console.log('state')
+  // console.log('state')
 
   const dispatch = useDispatch();
   const products1 = useSelector((store) => store.dataReducer.products);
@@ -81,7 +81,7 @@ const Homepage = () => {
   products.sort(function(a,b){
     return new Date(b.modifiedDate) - new Date(a.modifiedDate);
   });
-  console.log(products,'sort');
+  // console.log(products,'sort');
 
   return (
     <React.Fragment>
@@ -172,14 +172,14 @@ const Homepage = () => {
                               {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
                                 <span>-35%</span>
                                 </div> */}
-                              <a className="ps-shoe__favorite" href="#" key={item.id}><i className="ps-icon-heart" key={item.id}></i></a><img key={item.id} src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
+                              <a className="ps-shoe__favorite" href="#" key={item.id}><i className="ps-icon-heart" key={item.id}></i></a><img key={item.id} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
                             </div>
                             <div className="ps-shoe__content" key={item.id}>
                               <div className="ps-shoe__variants" key={item.id}>
                                 <div className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded" key={item.id}>
                                   <div className='owl-stage-outer' key={item.id}>
                                     <OwlCarousel items={4} autoplay={true} dots={false} nav={false} key={item.id}>
-                                      <img key={item.id} src={item.image?.[0]} alt="" /><img key={item.id} src={item.image?.[1]} alt="" /><img key={item.id} src={item.image?.[2]} alt="" /><img key={item.id} src={item.image?.[3]} alt="" />
+                                      <img key={item.id} src={item.image?.[0][0]} alt="" /><img key={item.id} src={item.image?.[0][1]} alt="" /><img key={item.id} src={item.image?.[0][2]} alt="" /><img key={item.id} src={item.image?.[0][3]} alt="" />
                                     </OwlCarousel></div></div>
                                 {/* <select className="ps-rating ps-shoe__rating">
                                       <option value="1">1</option>
@@ -215,14 +215,14 @@ const Homepage = () => {
                               {/* <div className="ps-badge ps-badge--sale ps-badge--2nd">
                                 <span>-35%</span>
                                 </div> */}
-                              <a className="ps-shoe__favorite" key={item.id} href="#"><i key={item.id} className="ps-icon-heart"></i></a><img key={item.id} src={item.image?.[0]} alt="" /><a key={item.id} className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
+                              <a className="ps-shoe__favorite" key={item.id} href="#"><i key={item.id} className="ps-icon-heart"></i></a><img key={item.id} src={item.image?.[0][0]} alt="" /><a key={item.id} className="ps-shoe__overlay" onClick={() => handleDes(item.productId)}></a>
                             </div>
                             <div key={item.id} className="ps-shoe__content">
                               <div key={item.id} className="ps-shoe__variants">
                                 <div key={item.id} className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
                                   <div key={item.id} className='owl-stage-outer'>
                                     <OwlCarousel key={item.id} items={4} autoplay={true} dots={false} nav={false}>
-                                      <img key={item.id} src={item.image?.[0]} alt="" /><img key={item.id} src={item.image?.[1]} alt="" /><img key={item.id} src={item.image?.[2]} alt="" /><img key={item.id} src={item.image?.[3]} alt="" />
+                                      <img key={item.id} src={item.image?.[0][0]} alt="" /><img key={item.id} src={item.image?.[0][1]} alt="" /><img key={item.id} src={item.image?.[0][2]} alt="" /><img key={item.id} src={item.image?.[0][3]} alt="" />
                                     </OwlCarousel></div></div>
                                 {/* <select className="ps-rating ps-shoe__rating">
                                       <option value="1">1</option>
@@ -259,7 +259,7 @@ const Homepage = () => {
                               <div key={item.id} className="ps-shoe__variant normal owl-carousel owl-theme owl-loaded">
                                 <div key={item.id} className='owl-stage-outer'>
                                   <OwlCarousel key={item.id} items={4} autoplay={true} dots={false} nav={false}>
-                                    <img key={item.id} src={item.image?.[0]} alt="" /><img key={item.id} src={item.image?.[1]} alt="" /><img key={item.id} src={item.image?.[2]} alt="" /><img key={item.id} src={item.image?.[3]} alt="" />
+                                    <img key={item.id} src={item.image?.[0][0]} alt="" /><img key={item.id} src={item.image?.[0][1]} alt="" /><img key={item.id} src={item.image?.[0][2]} alt="" /><img key={item.id} src={item.image?.[0][3]} alt="" />
                                   </OwlCarousel></div></div>
                               </div>
                               <div key={item.id} className="ps-shoe__detail" style={{textAlign:'left'}}>

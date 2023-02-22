@@ -12,12 +12,51 @@ import { useLocation } from "react-router-dom";
 
 const Header = (props) => {
   const {change}=props;
-  const [items, setItems] = useState([{}]);
-  const [quantity, setQuantity] = useState([]);
-  const [total, setTotal] = useState(0);
+
+
+
+
+
+  function getSessionStorageOrDefault(key, defaultValue) {
+    const stored = sessionStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    // console.log(stored)
+    return JSON.parse(stored);
+  }
+
+  function getLocalStorageOrDefault(key, defaultValue) {
+    const stored = localStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    // console.log(stored)
+    return JSON.parse(stored);
+  }
+
+  function getSessionStorageNumberOrDefault(key, defaultValue) {
+    const stored = sessionStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    return Number(stored);
+  }
+
+
+
+
+
+
+
+
+
+  const [items, setItems] = useState(getSessionStorageOrDefault('items', []));
+  const [quantity, setQuantity] = useState(getSessionStorageOrDefault('quantity', []));
+  const [total, setTotal] = useState(getSessionStorageNumberOrDefault('total', 0));
   const [discount, setDiscount] = useState(0);
   sessionStorage.setItem('coupon', discount);
-  const [cartData, setCartData] = useState();
+  const [cartData, setCartData] = useState(getLocalStorageOrDefault('cart', []));
   const products = useSelector((store) => store.dataReducer.products);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -37,26 +76,33 @@ const Header = (props) => {
         }
       }, [dispatch, products.length,num]);
   useEffect(() => {
-    console.log('inside useState')
+    console.log('inside useState',quantity,items)
     // dispatch(getData());
+
+    if(!total || change){
+      console.log('yo sanchit')
+      
     
     axios.get('http://localhost:4000/checkout', {params:
     userData
-  }).then((response) => {
+  }).then(async(response) => {
             const cur =[];
             const quant=[];
             let sum=0;
             // console.log(response);
             const all=response.data.cart.cart;
+            console.log(all,'all',response);
             localStorage.setItem('cart',JSON.stringify(all));
+            setCartData(all);
             
-            all.forEach((number, index) => {
+            await all.forEach((number, index) => {
               cur.push(products.find((item) => item.productId === (number.id.split('/')[0])));
               quant.push(number.quantity);
               sum=sum+(number.quantity*Number(cur[index]?.selling_price));
               number.price=number.quantity*Number(cur[index]?.selling_price);
               
             //   console.log('Index: ' + index + ' Value: ' + number.id);
+              
               setItems([...cur]);
               setQuantity([...quant]);
               setTotal(sum);
@@ -67,32 +113,25 @@ const Header = (props) => {
           
           
           });
+          console.log(items,quantity,total);}
+
+          
           
     
-  }, [cartData,typeof items[0],change])
+  }, [cartData,typeof items?.[0],change])
+
+  useEffect(() => {
+          sessionStorage.setItem('items', JSON.stringify(items));
+          sessionStorage.setItem('quantity', JSON.stringify(quantity));
+          sessionStorage.setItem('total', total);
+  }, [total]);
 //   console.log(items,'yoyo',total);
-  sessionStorage.setItem('items', JSON.stringify(items));
-  sessionStorage.setItem('quantity', JSON.stringify(quantity));
-  sessionStorage.setItem('total', total);
+  
 
-  console.log('here at header');
+  // console.log('here at header');
 
 
-  function getSessionStorageOrDefault(key, defaultValue) {
-    const stored = sessionStorage.getItem(key);
-    if (!stored) {
-      return defaultValue;
-    }
-    return JSON.parse(stored);
-  }
-
-  function getSessionStorageNumberOrDefault(key, defaultValue) {
-    const stored = sessionStorage.getItem(key);
-    if (!stored) {
-      return defaultValue;
-    }
-    return Number(stored);
-  }
+  
 
 
 
@@ -191,6 +230,39 @@ const Header = (props) => {
     sessionStorage.setItem('authData', '{"reload":"false","modal":"open"}')
   }
 
+  const handleDelete=(item,index)=>{
+    console.log('before',quantity,items,index);
+
+    if(localStorage.getItem('jwtToken')){
+      console.log('signed in');
+      const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
+        axios.delete('http://localhost:4000/checkout',{data:{
+        email:userData.email,id:skuId}
+      }).then((response) => {
+        setTotal(0);
+        // setCartData(response);
+        console.log(response)
+      });
+
+    }
+    else{
+      let total1=total-(Number(items[index].selling_price)*Number(quantity[index]));
+      items.splice(index,1);
+      quantity.splice(index,1);
+      console.log('after',quantity,items);
+      sessionStorage.setItem('items',JSON.stringify(items));
+      sessionStorage.setItem('quantity',JSON.stringify(quantity));
+      sessionStorage.setItem('total',total1);
+      
+      setItems(items);
+      setTotal(total1);
+      setQuantity(quantity);
+
+    }
+    
+    // console.log(item,index);
+  }
+
   const handleDes = () => {
     console.log('click');
     navigate(`/`);
@@ -204,10 +276,15 @@ const Header = (props) => {
     else{
       setIsToggle(true);
     }
+
+
+  
     
     // window.location.reload();
     // window.scrollTo(0,0); 
   };
+
+  console.log(items,quantity,cartData);
   if(products){
 
   return (
@@ -329,13 +406,18 @@ const Header = (props) => {
                   <button><i className="ps-icon-search" /></button>
                 </form>
                 
-                <div className="ps-cart" ><a className="ps-cart__toggle" href="#"><span><i>{items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
+                <div className="ps-cart" ><a className="ps-cart__toggle" href="#"><span><i>{(total===0)?0:items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
                   <div className="ps-cart__listing" style={{width:'350px'}}>
                     <div className="ps-cart__content" >
-                    {items.length!==0 && items.map((item,index)=>{
+                    {total && items.map((item,index)=>{
+                      // console.log(cartData,'cartdata');
+                      const val=cartData[index];
+                      // const color=val.split('/')[1];
+                      // console.log(val);
+                      const a=item.color.indexOf((cartData[index].id).split('/')[1])
                       return(
-                        <div className="ps-cart-item"><a className="ps-cart-item__close" href="#" />
-                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src={item?.image?.length>1 ?  item?.image[0] : "images/product/cart-preview/1.jpg"} alt="" /></div>
+                        <div className="ps-cart-item"><a onClick={()=>handleDelete(item,index)} className="ps-cart-item__close"  />
+                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src={item?.image?.length>1 ?  item?.image[a][0] : "images/product/cart-preview/1.jpg"} alt="" /></div>
                         <div className="ps-cart-item__content"><a className="ps-cart-item__title" href="product-detail.html">{items?.productName}</a>
                           <p style={{float:'left',position:'relative'}}><span>Quantity:<i>{(quantity)[index]}</i></span><span>Total:<i>₹{item?.selling_price*quantity[index]}</i></span></p>
                         </div>
@@ -346,7 +428,7 @@ const Header = (props) => {
                       
                     </div>
                     <div className="ps-cart__total">
-                      <p>Number of items:<span>{items.length}</span></p>
+                      <p>Number of items:<span>{quantity.length}</span></p>
                       <p>Item Total:<span>₹{total}</span></p>
                     </div>
                     <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>
