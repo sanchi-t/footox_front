@@ -1,0 +1,44 @@
+/* body {
+  font-family: Arial;
+} */
+
+.coupon {
+    border: 5px dotted black;
+    width: 50%;
+    
+    border-radius: 15px;
+    margin: 0 auto;
+    max-width: 400px;
+    font-size: 90;
+    margin-left: 50px;
+  }
+  
+  
+  
+  
+  .container {
+    padding: 2px 6px;
+    background-color: #f1f1f1;
+    font-size: 90;
+    /* padding-top: 21px; */
+  }
+  
+  .description{
+      font-size: 20px;
+      color: black;
+  }
+  
+  
+  
+  .promo {
+    background: #2ac37d;
+    padding: 3px;
+    font-weight: 20px;
+    font-size: 20px;
+    color: black;
+    
+  }
+  
+  .expire {
+    color: red;
+  }

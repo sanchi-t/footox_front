@@ -8,7 +8,7 @@ import styles from './OrderConfirmed.module.css';
 import { useState } from "react";
 
 
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const OrderCorfirmed =()=>{
 
@@ -61,7 +61,7 @@ const OrderCorfirmed =()=>{
     window.location.reload();
   };
   const handleClick = () => {
-    axios.post('http://localhost:4000/orderConfirmed', {order:JSON.parse(sessionStorage.getItem('order'))})
+    axios.post(`${BackendServer}orderConfirmed`, {order:JSON.parse(sessionStorage.getItem('order'))})
           .then((response) => {
             
             console.log(response);

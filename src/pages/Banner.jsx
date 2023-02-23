@@ -8,6 +8,7 @@ import OwlCarousel from 'react-owl-carousel';
 import axios from "axios";
 import { IGEmbed } from 'react-ig-embed';
 
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 
 const Banner = () => {
@@ -44,7 +45,7 @@ const Banner = () => {
 
   useEffect(() => {
     async function axiosTest() {
-      const response = await axios.get('http://localhost:4000/banner')
+      const response = await axios.get(`${BackendServer}banner`)
       setProd(response.data)
     }
     const l = axiosTest()

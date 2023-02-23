@@ -3,11 +3,11 @@ import { setToast } from "../../components/Other/CheckProperty";
 import { saveLocalData } from "../../utils/localStorage";
 import * as types from "./actionType";
 
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 const register = (payload, toast) => (dispatch) => {
   dispatch({ type: types.REGISTER_R });
   return axios
-    .post("http://localhost:4000/signup", payload)
+    .post(`${BackendServer}signup`, payload)
     .then((r) => {
       return r;
       // setToast(toast, "Registered Successful", "success");
@@ -24,7 +24,7 @@ const login = (payload, toast) => (dispatch) => {
   saveLocalData("userInfo", payload.email,)
   dispatch({ type: types.LOGIN_R });
   return axios
-    .post("http://localhost:4000/login", payload)
+    .post(`${BackendServer}login`, payload)
     .then((r) => {
       // saveLocalData("userName", r.data.name);
 

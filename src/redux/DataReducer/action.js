@@ -1,10 +1,15 @@
 import * as types from "./actionType";
 import axios from "axios";
 
+const {REACT_APP_GET_DATAI, REACT_APP_BACKEND_PORT} = process.env
+
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+
 const getData = (params) => (dispatch) => {
   dispatch({ type: types.GET_DATA_R });
   return axios
-    .get("http://localhost:4000/admin1", params)
+    .get(`${BackendServer}admin1`, params)
+    // .get(`${REACT_APP_GET_DATAI}`, params)
     .then((res) => {
       dispatch({ type: types.GET_DATA_S, payload: res.data });
     })
@@ -17,7 +22,7 @@ const getData = (params) => (dispatch) => {
 const updateData = (id, payload) => (dispatch) => {
   dispatch({ type: types.UPDATE_DATA_R });
   return axios.post
-    (`http://localhost:4000/admin1/`, {id,payload},{
+    (`${BackendServer}admin1/`, {id,payload},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -34,7 +39,7 @@ const updateData = (id, payload) => (dispatch) => {
 const deleteData = (id) => (dispatch) => {
   dispatch({ type: types.DELETE_DATA_R });
   return axios
-    .post(`http://localhost:4000/admin1`,{id},{
+    .post(`${BackendServer}admin1`,{id},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -50,7 +55,7 @@ const deleteData = (id) => (dispatch) => {
 const addData = (details) => (dispatch) => {
   dispatch({ type: types.Add_DATA_R });
   return axios.post
-    (`http://localhost:4000/admin2/`, {details},{
+    (`${BackendServer}admin2/`, {details},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -63,18 +68,13 @@ const addData = (details) => (dispatch) => {
     });
 };
 
-//https://desktime-tanner-redux.herokuapp.com/allproducts
-
-
-
-
 
 
 
 const getCoupon = (params) => (dispatch) => {
   dispatch({ type: types.GET_DATA_R });
   return axios
-    .get("http://localhost:4000/coupon", params)
+    .get(`${BackendServer}coupon`, params)
     .then((res) => {
       dispatch({ type: types.GET_DATA_S, payload: res.data });
     })
@@ -87,7 +87,7 @@ const getCoupon = (params) => (dispatch) => {
 const updateCoupon = (id, payload) => (dispatch) => {
   dispatch({ type: types.UPDATE_DATA_R });
   return axios.post
-    (`http://localhost:4000/coupon`, {id,payload},{
+    (`${BackendServer}coupon`, {id,payload},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -103,7 +103,7 @@ const updateCoupon = (id, payload) => (dispatch) => {
 const getOneCoupon = (id,mode) => (dispatch) => {
   dispatch({ type: types.UPDATE_DATA_R });
   return axios.post
-    (`http://localhost:4000/couponGetOne`, {id,mode},{
+    (`${BackendServer}couponGetOne`, {id,mode},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -119,7 +119,7 @@ const getOneCoupon = (id,mode) => (dispatch) => {
 const deleteCoupon = (id) => (dispatch) => {
   dispatch({ type: types.DELETE_DATA_R });
   return axios
-    .post(`http://localhost:4000/coupon`,{id},{
+    .post(`${BackendServer}coupon`,{id},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -137,7 +137,7 @@ const addCoupon = (details) => (dispatch) => {
 
   dispatch({ type: types.Add_DATA_R });
   return axios.post
-    (`http://localhost:4000/couponAdd/`, {details},{
+    (`${BackendServer}couponAdd/`, {details},{
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -156,7 +156,7 @@ const addCoupon = (details) => (dispatch) => {
 const getBannerData = () => async (dispatch) => {
   dispatch({ type: types.GET_DATA_R });
   const res = await axios
-    .get("http://localhost:4000/banner");
+    .get(`${BackendServer}banner`);
   dispatch({ type: types.GET_DATA_S, payload: res.data });
   const err = res;
   dispatch({ type: types.GET_DATA_F });
@@ -166,4 +166,3 @@ const getBannerData = () => async (dispatch) => {
 
 
 export { getData, updateData, deleteData,addData,getCoupon,updateCoupon,deleteCoupon,addCoupon,getOneCoupon,getBannerData };
-

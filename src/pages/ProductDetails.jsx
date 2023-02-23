@@ -11,7 +11,7 @@ import parse from 'html-react-parser';
 import { CardFooter } from "@chakra-ui/react";
 import axios from "axios";
 // import CartData from "../components/CartData";
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 
 
@@ -96,7 +96,7 @@ const ProductDetails=()=>{
 
       
       
-      axios.post('http://localhost:4000/checkout', {
+      axios.post(`${BackendServer}checkout`, {
       email:userData.email,id:skuId,quantity:e.target.quantity.value,price:(Number(currentProducts.selling_price)*Number(e.target.quantity.value))
     }).then((response) => {
       // setCartData(response);

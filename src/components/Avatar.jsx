@@ -40,6 +40,9 @@ const Avatar=()=> {
   const handlePreviousOrder = () =>{
     navigate('/showProducts', {state:{email:email}})
   }
+  const handleCoupons = () =>{
+    navigate('/showCoupon', {state:{email:email}})
+  }
     // console.log(chooseMessage);
     // window.location.reload();
 
@@ -69,6 +72,9 @@ const Avatar=()=> {
               </MenuItem>
               <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={handleProfile} >
                 My Profile
+              </MenuItem>
+              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={handleCoupons} >
+                Coupons
               </MenuItem>
             </MenuList>
         </Menu>
