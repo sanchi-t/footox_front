@@ -80,7 +80,7 @@ const Header = (props) => {
     // dispatch(getData());
 
     if(!total || change!==undefined){
-      if(localStorage.getItem('jwtTolen')){
+      if(localStorage.getItem('jwtToken')){
       console.log('yo sanchit')
       
     
@@ -117,7 +117,7 @@ const Header = (props) => {
           });
           console.log(items,quantity,total);}
 
-          else{
+          else if(!localStorage.getItem('jwtTolen')){
             setTotal(Number(sessionStorage.getItem('total')));
             setItems(JSON.parse(sessionStorage.getItem('items')));
             setQuantity(JSON.parse(sessionStorage.getItem('quantity')));
@@ -129,7 +129,7 @@ const Header = (props) => {
           
           
     
-  }, [total,change])
+  }, [items?.length,typeof items?.[0],total,change])
 
   useEffect(() => {
     if(localStorage.getItem('jwtToken')){
@@ -257,7 +257,7 @@ const Header = (props) => {
       });
 
     }
-    else{
+    else if(!localStorage.getItem('jwtTolen')){
       let total1=total-(Number(items[index].selling_price)*Number(quantity[index]));
       items.splice(index,1);
       quantity.splice(index,1);
@@ -306,7 +306,7 @@ const Header = (props) => {
     {(!token) && 
         <GOneTapLogin chooseonetap={chooseonetap}/>}
       <div className="header--sidebar" />
-        <header className="header">
+        <header className="header" style={{position:'relative',zIndex:1000}}>
           <div className="header__top">
             <div className="container-fluid">
               <div className="row">
@@ -429,7 +429,13 @@ const Header = (props) => {
                       let a;
                       if(cartData.length>0){
                         console.log(cartData)
-                       a=item?.color.indexOf((cartData[index].id).split('/')[1])
+                        if(item?.color.indexOf((cartData[index]?.id))){
+                          a=item?.color.indexOf((cartData[index]?.id).split('/')[1])
+                        }
+                        else{
+                          a=0;
+                        }
+                       
 
                       }
                       else{
@@ -437,7 +443,7 @@ const Header = (props) => {
                       }
                       return(
                         <div className="ps-cart-item"><a onClick={()=>handleDelete(item,index)} className="ps-cart-item__close"  />
-                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src={item?.image[a][0] || "images/product/cart-preview/1.jpg"} alt="" /></div>
+                        <div className="ps-cart-item__thumbnail"><a href="product-detail.html" /><img src={item?.image?.[a]?.[0] || "images/product/cart-preview/1.jpg"} alt="" /></div>
                         <div className="ps-cart-item__content"><a className="ps-cart-item__title" href="product-detail.html">{items?.productName}</a>
                           <p style={{float:'left',position:'relative'}}><span>Quantity:<i>{(quantity)[index]}</i></span><span>Total:<i>₹{item?.selling_price*quantity[index]}</i></span></p>
                         </div>

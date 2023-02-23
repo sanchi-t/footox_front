@@ -39,6 +39,7 @@ const Checkout=()=>{
     const [checked, setChecked]=useState();
     const [Quantity, setQuantity]=useState(getSessionStorageOrDefault('quantity', []));
     const [total, setTotal]=useState(getSessionStorageNumberOrDefault('total', 0));
+    const [stock, setStock] = useState([]);
     const userData=JSON.parse(localStorage.getItem('all'));
     
 
@@ -109,7 +110,7 @@ const Checkout=()=>{
       // console.log('checkout page',items,Quantity)
 
 
-      const handleSubmit = (event) => {
+      const handleSubmit =async (event) => {
         const form={address:{}};
         event.preventDefault();
         // event.target.address.reset();
@@ -133,30 +134,50 @@ const Checkout=()=>{
         sessionStorage.setItem('order',JSON.stringify(form));
         
         const uuid=sessionStorage.getItem('uuid');
-        axios.post('http://localhost:4000/orderPlaced', {form})
-          .then((response) => {
-            console.log(response);
-            sessionStorage.setItem('order',JSON.stringify(response.data.order));
-          
-          axios.post('http://localhost:4000/couponApplied', {email:userData.email,uuid:uuid,coupon:form.coupon})
-          .then((response) => {
-            console.log(response);
-          });
-          });
-        if(checked){
-          console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-          axios.post('http://localhost:4000/address', {address:form.address,email:userData.email})
-          .then((response) => {
-            console.log(response);
-          });
-          
-          
-        }
-        else{
+        const response = axios.get("http://localhost:4000/getStock").then((response) => {
+          // console.log(response.data);
+          setStock(response.data);
+          console.log(stock);
+        });
+        // console.log(response);
+    
+        await axios.post("http://localhost:4000/changeStock", { items: form.items }).then((res) => {
+          console.log(res.data, "aaa");
+          // alert(res.data);
+    
+          if (res.data != "Not Available") {
+            axios.post("http://localhost:4000/orderPlaced", { form }).then(async (response) => {
+              console.log(response);
+              sessionStorage.setItem("order", JSON.stringify(response.data.order));
+    
+              console.log(form.coupon);
+              if (form.coupon.value != 0) {
+                axios
+                  .post("http://localhost:4000/couponApplied", {
+                    email: localStorage.getItem("userInfo"),
+                    uuid: uuid,
+                    coupon: form.coupon,
+                  })
+                  .then((response) => {
+                    console.log(response);
+                  });
+              }
+            });
+             navigate(`/confirmed`);
+             window.location.reload();
+          } else {
+            alert("Order is out of stock");
+          }
+        });
+        if (checked) {
+          axios
+            .post("http://localhost:4000/address", { address: form.address, email: localStorage.getItem("userInfo") })
+            .then((response) => {
+              console.log(response);
+            });
+        } else {
           console.log(checked);
         }
-        navigate(`/confirmed`);
-        window.location.reload();
         
         
       }

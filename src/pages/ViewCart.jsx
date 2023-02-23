@@ -36,6 +36,8 @@ const ViewCart=()=>{
   const dispatch = useDispatch();
   const location = useLocation();
   const userData=JSON.parse(localStorage.getItem('all'));
+  const [change,setChange]=useState(false);
+
 
   const navigate = useNavigate();
 
@@ -82,12 +84,15 @@ const ViewCart=()=>{
           });
           
     
-  }, [cartData,typeof items[0]])
+  }, [cartData,typeof items[0],change])
   console.log(items,'yoyo',products);
 
-  sessionStorage.setItem('items', JSON.stringify(items));
-  sessionStorage.setItem('quantity', JSON.stringify(quantity));
-  sessionStorage.setItem('total', total);
+  useEffect(() => {
+    sessionStorage.setItem('items', JSON.stringify(items));
+    sessionStorage.setItem('quantity', JSON.stringify(quantity));
+    sessionStorage.setItem('total', total);
+  }, [dispatch, change,cartData]);
+  
   const increaseQuantity=(name,index)=>{
 
     const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
@@ -109,7 +114,8 @@ const ViewCart=()=>{
     axios.delete('http://localhost:4000/checkout',{data:{
     email:userData.email,id:skuId}
   }).then((response) => {
-    setCartData(response);
+    setCartData(skuId);
+    setChange(!change);
     console.log(response)
   });
   }
@@ -154,7 +160,7 @@ const ViewCart=()=>{
   
   return(
     <body className="loading">
-      <Header/>
+      <Header change={change}/>
     <main className="ps-main">
       <div className="ps-content pt-80 pb-80">
         <div className="ps-container">
@@ -170,7 +176,7 @@ const ViewCart=()=>{
                 </tr>
               </thead>
               <tbody>
-                {(items.length!==0) && items.map((item,index)=>{
+                {items.map((item,index)=>{
                   return(
                     <tr>
                   <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((cartData1[index].id).split('/')[1])][0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>

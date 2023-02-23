@@ -12,6 +12,10 @@ import ViewCart from "../pages/ViewCart";
 import Authentication from "../Authentication/Auth";
 import OrderCorfirmed from "../pages/OrderConfirmed";
 import PaymentFailed from "../pages/PaymentFailed";
+import WishlistPage from "../pages/Wishlist";
+import ProfilePage from "../pages/Myprofile";
+// import OrderPage from "../pages/previousOrders";
+import ProductPage from "../pages/Product";
 
 
 
@@ -44,7 +48,11 @@ const AllRoutes = () => {
         <Route path="/banner" element={<Banner/>}/>  
         <Route path="/checkout" element={<Checkout/>}/>   
         <Route path="/confirmed" element={<OrderCorfirmed/>}/>    
-        <Route path="/failed" element={<PaymentFailed/>}/>    
+        <Route path="/failed" element={<PaymentFailed/>}/>  
+        <Route path="/showProfile" element={<ProfilePage/>} />
+        <Route path="/showWishlist" element={<WishlistPage/>}/>
+        {/* <Route path="/showPreviousOrder" element={<OrderPage/>}/> */}
+        <Route path="/showProducts" element={<ProductPage/>}/>  
 
  
   
