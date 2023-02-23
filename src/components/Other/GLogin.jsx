@@ -6,7 +6,9 @@ import React, { useState,useEffect } from "react";
 
 
 
-const clientId='907385226953-mc9c2r4j8t9nmne9dch68s65tmkq2gqg.apps.googleusercontent.com'
+const clientId= process.env.REACT_APP_GOOGLE_CLIENT_ID;
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+console.log(clientId);
 
 const GLogin=({ setGLogin })=>{
     async function GoogleLoginSucc(credentialResponse){
@@ -20,7 +22,7 @@ const GLogin=({ setGLogin })=>{
         if(!localStorage.getItem('jwtToken')){
           axios({
             method: 'post',
-            url: 'http://localhost:4000/googlelogin',
+            url: `${BackendServer}googlelogin`,
             data: {payload}, // you are sending body instead
             headers: {
              // 'Authorization': `bearer ${token}`,
@@ -68,7 +70,7 @@ const GOneTapLogin=({ chooseonetap })=>{
         if(!localStorage.getItem('jwtToken')){
           axios({
             method: 'post',
-            url: 'http://localhost:4000/googleloginonetap',
+            url: `${BackendServer}googleloginonetap`,
             data: {payload}, // you are sending body instead
             headers: {
              // 'Authorization': `bearer ${token}`,
@@ -96,7 +98,7 @@ const GOneTapLogin=({ chooseonetap })=>{
     
     
     return(
-        <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={GoogleLoginSucc} googleAccountConfigs={{ client_id:'907385226953-mc9c2r4j8t9nmne9dch68s65tmkq2gqg.apps.googleusercontent.com'}} />
+        <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={GoogleLoginSucc} googleAccountConfigs={{ client_id: clientId}} />
 
     );
 }

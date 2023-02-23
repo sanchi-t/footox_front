@@ -7,6 +7,8 @@ import { getData } from "../redux/DataReducer/action";
 import { AiOutlineRight } from "react-icons/ai";
 import { useLocation,useNavigate } from "react-router-dom";
 
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+
 
 
 
@@ -58,7 +60,7 @@ const ViewCart=()=>{
   useEffect(() => {
     // dispatch(getData());
     
-    axios.get('http://localhost:4000/checkout', {params:
+    axios.get(`${BackendServer}checkout`, {params:
     userData
   }).then((response) => {
             const cur =[];
@@ -111,7 +113,7 @@ const ViewCart=()=>{
 
   const deleteItem=(name,index)=>{
     const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
-    axios.delete('http://localhost:4000/checkout',{data:{
+    axios.delete('`${BackendServer}checkout',{data:{
     email:userData.email,id:skuId}
   }).then((response) => {
     setCartData(skuId);
@@ -124,7 +126,7 @@ const ViewCart=()=>{
 
 
   const valueChange=(id,quantity)=>{
-    axios.put('http://localhost:4000/checkout', {
+    axios.put(`${BackendServer}checkout`, {
     email:userData.email,id:id,quantity:quantity
   }).then((response) => {
     setCartData(response);
@@ -138,7 +140,7 @@ const ViewCart=()=>{
     console.log('code',code)
     const date= new Date();
     // console.log(date,'date');
-    axios.get('http://localhost:4000/couponApplied', 
+    axios.get(`${BackendServer}couponApplied`, 
     {params:
       {'code':code,'products':items,'quantity':quantity,'date':date,'email':userData.email}
     }).then((response) => {
@@ -179,7 +181,7 @@ const ViewCart=()=>{
                 {items.map((item,index)=>{
                   return(
                     <tr>
-                  <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((cartData1[index].id).split('/')[1])][0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>
+                  <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((cartData1[index].id).split('/')?.[1])]?.[0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>
                   <td>₹{item?.selling_price}</td>
                   <td>
                     <div className="form-group--number">

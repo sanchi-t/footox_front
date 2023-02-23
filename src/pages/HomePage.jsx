@@ -12,7 +12,7 @@ import { InstagramEmbed } from 'react-social-media-embed';
 const Header=lazy(() =>  import('../components/Header'));
 const Footer=lazy(() =>  import('../components/Footer'));
 
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Homepage = () => {
 
   useEffect(() => {
     async function axiosTest() {
-      const response = await axios.get('http://localhost:4000/banner')
+      const response = await axios.get(`${BackendServer}banner`)
       setProd(response.data)
     }
     const l = axiosTest()
@@ -63,7 +63,7 @@ const Homepage = () => {
 
   useEffect(() => {
     async function axiosTest() {
-      const response = await axios.get('http://localhost:4000/link')
+      const response = await axios.get(`${BackendServer}link`)
       setLink(response.data)
     }
     const l = axiosTest()

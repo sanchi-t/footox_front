@@ -12,7 +12,7 @@ import { getLocalData } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 
 
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 
 const Checkout=()=>{
@@ -63,7 +63,7 @@ const Checkout=()=>{
       // setTotal(total);
       // setCoupon(coup);
 
-      axios.get('http://localhost:4000/address', {params:userData})
+      axios.get(`${BackendServer}address`, {params:userData})
           .then((response) => {
             setAddress(response.data.address.address);
             console.log(response.data.address,'response');
@@ -134,26 +134,26 @@ const Checkout=()=>{
         sessionStorage.setItem('order',JSON.stringify(form));
         
         const uuid=sessionStorage.getItem('uuid');
-        const response = axios.get("http://localhost:4000/getStock").then((response) => {
+        const response = axios.get(`${BackendServer}getStock`).then((response) => {
           // console.log(response.data);
           setStock(response.data);
           console.log(stock);
         });
         // console.log(response);
     
-        await axios.post("http://localhost:4000/changeStock", { items: form.items }).then((res) => {
+        await axios.post(`${BackendServer}changeStock`, { items: form.items }).then((res) => {
           console.log(res.data, "aaa");
           // alert(res.data);
     
           if (res.data != "Not Available") {
-            axios.post("http://localhost:4000/orderPlaced", { form }).then(async (response) => {
+            axios.post(`${BackendServer}orderPlaced`, { form }).then(async (response) => {
               console.log(response);
               sessionStorage.setItem("order", JSON.stringify(response.data.order));
     
               console.log(form.coupon);
               if (form.coupon.value != 0) {
                 axios
-                  .post("http://localhost:4000/couponApplied", {
+                  .post(`${BackendServer}couponApplied`, {
                     email: localStorage.getItem("userInfo"),
                     uuid: uuid,
                     coupon: form.coupon,
@@ -171,7 +171,7 @@ const Checkout=()=>{
         });
         if (checked) {
           axios
-            .post("http://localhost:4000/address", { address: form.address, email: localStorage.getItem("userInfo") })
+            .post(`${BackendServer}address`, { address: form.address, email: localStorage.getItem("userInfo") })
             .then((response) => {
               console.log(response);
             });

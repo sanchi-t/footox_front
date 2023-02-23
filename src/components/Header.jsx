@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../redux/DataReducer/action";
 import { useLocation } from "react-router-dom";
 // import CartData from "./CartData";
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const Header = (props) => {
   const {change}=props;
@@ -84,7 +84,7 @@ const Header = (props) => {
       console.log('yo sanchit')
       
     
-    axios.get('http://localhost:4000/checkout', {params:
+    axios.get(`${BackendServer}checkout`, {params:
     userData
   }).then(async(response) => {
             const cur =[];

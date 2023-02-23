@@ -1,12 +1,13 @@
 import * as types from "./actionType";
 import axios from "axios";
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const getMensData = (params) => (dispatch) => {
   dispatch({ type: types.GET_MENS_DATA_R });
 
   return axios
     .get(
-      "http://localhost:4000/men",
+      `${BackendServer}men`,
       params
     )
     .then((res) => {
