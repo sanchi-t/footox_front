@@ -248,10 +248,12 @@ const Header = (props) => {
     if(localStorage.getItem('jwtToken')){
       console.log('signed in');
       const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
-        axios.delete('http://localhost:4000/checkout',{data:{
+        axios.delete(`${BackendServer}checkout`,{data:{
         email:userData.email,id:skuId}
       }).then((response) => {
         setTotal(0);
+        setQuantity([]);
+        setItems([]);
         // setCartData(response);
         console.log(response)
       });

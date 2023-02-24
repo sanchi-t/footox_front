@@ -30,6 +30,7 @@ import {
     updateData,
   } from "../redux/DataReducer/action";
   import { DeleteIcon, Icon, EditIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+  const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
   const WishlistPage = () => {
    const [prod, setProd] = useState([]);
        const [nishu, setNishu] = useState({
@@ -44,9 +45,9 @@ import {
       const email = location.state.email;
     
       const axiosTest = async () =>{
-        const response = await axios.get("http://localhost:4000/getOrder");
+        const response = await axios.get(`${BackendServer}getOrder`);
   
-         const response1 = await axios.get("http://localhost:4000/getImage");
+         const response1 = await axios.get(`${BackendServer}getImage`);
     
       // prod.push(response.data);
       // prod.push(response1.data);

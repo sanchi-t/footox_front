@@ -46,8 +46,14 @@ const ViewCart=()=>{
   
   
   const handleCheckout=()=>{
-    navigate('/checkout');
-    window.location.reload();
+    if(items.length>0){
+      navigate('/checkout');
+      window.location.reload();
+    }
+    else{
+      alert("No Item Present In Cart")
+    }
+    // 
   }
 
   let num = useState({});
@@ -86,14 +92,14 @@ const ViewCart=()=>{
           });
           
     
-  }, [cartData,typeof items[0],change])
+  }, [cartData,typeof items[0],total])
   console.log(items,'yoyo',products);
 
   useEffect(() => {
     sessionStorage.setItem('items', JSON.stringify(items));
     sessionStorage.setItem('quantity', JSON.stringify(quantity));
     sessionStorage.setItem('total', total);
-  }, [dispatch, change,cartData]);
+  }, [dispatch, total,cartData]);
   
   const increaseQuantity=(name,index)=>{
 
@@ -113,10 +119,13 @@ const ViewCart=()=>{
 
   const deleteItem=(name,index)=>{
     const skuId=JSON.parse(localStorage.getItem('cart'))[index].id
-    axios.delete('`${BackendServer}checkout',{data:{
+    axios.delete(`${BackendServer}checkout`,{data:{
     email:userData.email,id:skuId}
   }).then((response) => {
-    setCartData(skuId);
+    setTotal(0);
+    // setQuantity([]);
+    setItems([]);
+    // setCartData(skuId);
     setChange(!change);
     console.log(response)
   });
@@ -130,6 +139,7 @@ const ViewCart=()=>{
     email:userData.email,id:id,quantity:quantity
   }).then((response) => {
     setCartData(response);
+    setChange(!change);
     console.log(response)
   });}
   
@@ -157,6 +167,7 @@ const ViewCart=()=>{
     });
     // console.log(event.target.coupon.value);
   }
+  console.log(change,'change');
   if(products){
 
   

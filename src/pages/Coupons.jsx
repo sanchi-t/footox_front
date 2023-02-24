@@ -20,14 +20,14 @@ import {
   Kbd,
   Stack,
 } from "@chakra-ui/react";
-
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const Coupon =()=>{
     // console.log("Hi")
     const [coupon, setCoupon] = useState([]);
 
      useEffect(()=>{
-        axios.get('http://localhost:4000/coupon', {}).then((response) => {
+        axios.get(`${BackendServer}coupon`, {}).then((response) => {
       // setCartData(response);
       console.log(response.data)
     //   setCoupon(response.data)
