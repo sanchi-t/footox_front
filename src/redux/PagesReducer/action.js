@@ -23,7 +23,7 @@ const getWomensData = (params) => (dispatch) => {
 
   return axios
     .get(
-      "http://localhost:4000/women",
+      `${BackendServer}women`,
       params
     )
     .then((res) => {
@@ -36,7 +36,7 @@ const getWomensData = (params) => (dispatch) => {
 const getShoesData = (params) => (dispatch) => {
   dispatch({ type: types.GET_MENS_DATA_R });
   return axios
-    .get("http://localhost:4000/shoes", params)
+    .get(`${BackendServer}shoes`, params)
     .then((res) => {
       dispatch({ type: types.GET_SHOES_DATA_S, payload: res.data });
     })
