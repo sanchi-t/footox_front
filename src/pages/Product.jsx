@@ -42,7 +42,8 @@ import {
   
       // const [products, setProducts] = useState(null);
       const location = useLocation();
-      const email = location.state.email;
+      const email = JSON.parse(localStorage.getItem('all')).email;
+      // const cartData =JSON.parse(localStorage.getItem('cart'));
     
       const axiosTest = async () =>{
         const response = await axios.get(`${BackendServer}getOrder`);
@@ -101,13 +102,15 @@ import {
                   //   var sku = products.productId + "/" + col + "/" + item;
   
                      var products = nishu.products.data?.find((item1)=>item1.productId===proid); 
-                     console.log(products)
+                     console.log(products, 'sanchit')
                     
   
                     filteredProducts1[num - 1] = {
                       user : item.name_reciever,
+                      id : orders.id,
                       productName: products.productName,
-                      image : products.image[0][0],
+                      image : products.image,
+                      color : products.color,
                       Quantity: orders.quantity,
                       price :orders.price ? orders.price: 0,
                       Status : item.status,
@@ -219,7 +222,7 @@ import {
               <Box width={"15%"} mx={"2"}>
                 <Image
                   width={"70%"}
-                  src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ae07b5f1-8847-4f07-957b-6bc625b9b308/sb-force-58-skate-shoes-LJNW5L.png"
+                  src={item.image[item.color.indexOf((item.id).split('/')[1])]?.[0]}
                   alt={item.productName}
                 />
               </Box>
