@@ -76,12 +76,12 @@ const Header = (props) => {
         }
       }, [dispatch, products.length,num]);
   useEffect(() => {
-    console.log('inside useState',quantity,items)
+    // console.log('inside useState',quantity,items)
     // dispatch(getData());
 
     if(!total || change!==undefined){
       if(localStorage.getItem('jwtToken')){
-      console.log('yo sanchit')
+      // console.log('yo sanchit')
       
     
     axios.get(`${BackendServer}checkout`, {params:
@@ -92,7 +92,7 @@ const Header = (props) => {
             let sum=0;
             // console.log(response);
             const all=response.data.cart.cart;
-            console.log(all,'all',response);
+            // console.log(all,'all',response);
             localStorage.setItem('cart',JSON.stringify(all));
             setCartData(all);
             
@@ -115,7 +115,8 @@ const Header = (props) => {
           
           
           });
-          console.log(items,quantity,total);}
+          // console.log(items,quantity,total);
+        }
 
           else if(!localStorage.getItem('jwtTolen')){
             setTotal(Number(sessionStorage.getItem('total')));
@@ -140,7 +141,7 @@ const Header = (props) => {
 //   console.log(items,'yoyo',total);
   
 
-  console.log('here at header',change);
+  // console.log('here at header',change);
 
 
   
@@ -164,78 +165,10 @@ const Header = (props) => {
   const toggleButton = () => {
     setIsToggle(!isToggle)
 }
-
-// const [items, setItems] = useState(getSessionStorageOrDefault('items', [{}]));
-  // const [quantity, setQuantity] = useState(getSessionStorageOrDefault('quantity', []));
-  // const [total, setTotal] = useState(getSessionStorageNumberOrDefault('total', 0));
-  // const [cartData, setCartData] = useState();
-  // const products = useSelector((store) => store.dataReducer.products);
-  // const dispatch = useDispatch();
-  // const location = useLocation();
-  // const userData=JSON.parse(localStorage.getItem('all'));
-  // let num = useState({});
-
-  //   useEffect(() => {
-  //       if (products.length === 0) {
-  //         dispatch(getData());
-  //       }
-  //     }, [dispatch, products.length,num]);
-  // useEffect(() => {
-  //   // dispatch(getData());
-    
-  //   axios.get('http://localhost:4000/checkout', {params:
-  //   userData
-  // }).then((response) => {
-  //           const cur =[];
-  //           const quant=[];
-  //           let sum=0;
-  //           const all=response.data.cart.cart;
-  //           localStorage.setItem('cart',JSON.stringify(all));
-            
-  //           all.forEach((number, index) => {
-  //             cur.push(products.find((item) => item.productId === (number.id.split('/')[0])));
-  //             quant.push(number.quantity);
-  //             sum=sum+(number.quantity*Number(cur[index]?.selling_price));
-  //             number.price=number.quantity*Number(cur[index]?.selling_price);
-  //             setItems([...cur]);
-  //             setQuantity([...quant]);
-  //             setTotal(sum);
-  //         });
-  //         localStorage.setItem('cart',JSON.stringify(all));
-          
-  //         });
-          
-    
-  // }, [cartData,typeof items[0]])
-  // // console.log(items,'yoyo',products);
-
-  // sessionStorage.setItem('items', JSON.stringify(items));
-  // sessionStorage.setItem('quantity', JSON.stringify(quantity));
-  // sessionStorage.setItem('total', total);
-  
   let token=localStorage.getItem('jwtToken');
   let cart=localStorage.getItem('cart');
 
-  // useEffect(() => {
-  //   console.log('useState');
-  //   let items=JSON.parse(sessionStorage.getItem('items'));
-  //   let quantity=JSON.parse(sessionStorage.getItem('quantity'));
-  //   let total=Number(sessionStorage.getItem('total'));
-  //   console.log(items);
-
-  //   items && setItems(items);
-  //   setQuantity(quantity);
-  //   setTotal(total);
-    
-  // }, [total])
-
-  // console.log(items)
-
   
-
-
-  
-
   let authData=JSON.parse(sessionStorage.getItem('authData'));
   if(authData?.reload==='true'){
     window.location.reload();
@@ -252,8 +185,9 @@ const Header = (props) => {
         email:userData.email,id:skuId}
       }).then((response) => {
         setTotal(0);
+        items.splice(index,1)
         setQuantity([]);
-        setItems([]);
+        setItems(items);
         // setCartData(response);
         console.log(response)
       });

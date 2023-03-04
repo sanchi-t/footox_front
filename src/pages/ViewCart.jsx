@@ -192,7 +192,7 @@ const ViewCart=()=>{
                 {items.map((item,index)=>{
                   return(
                     <tr>
-                  <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((cartData1[index].id).split('/')?.[1])]?.[0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>
+                  <td><a className="ps-product__preview" href="product-detail.html"><img className="mr-15" style={{height:'100px'}} src={item?.image?.length>1 ?  item?.image[item.color.indexOf((JSON.parse(localStorage.getItem('cart'))[index].id).split('/')?.[1])]?.[0] : "images/product/cart-preview/1.jpg" } alt=""/> {item?.productName}</a></td>
                   <td>₹{item?.selling_price}</td>
                   <td>
                     <div className="form-group--number">
