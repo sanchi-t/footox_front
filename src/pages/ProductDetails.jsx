@@ -46,17 +46,22 @@ const ProductDetails=()=>{
 
     const Cart=async(e)=>{
       e.preventDefault();
-      console.log('cart');
-      console.log(e.target.quantity.value);
+      // console.log('cart');
+      if(!e.target.size.value){
+        alert("Select The Size First");
+          return;
+      }
+      // console.log(e.target.size.value);
       if(!cartProduct.color){
         cartProduct.color=currentProducts.color[0];
       }
+
       const skuId=id+'/'+cartProduct.color+'/'+e.target.size.value;
       cartProduct.skuId=skuId;
       
-      console.log(cartProduct);
+      // console.log(cartProduct);
       if(!userData){
-        console.log(currentProducts);
+        // console.log(currentProducts);
         let items=sessionStorage.getItem('items');
         if(items && items.length>0){
           items=JSON.parse(items);
@@ -71,7 +76,7 @@ const ProductDetails=()=>{
           await sessionStorage.setItem('quantity',JSON.stringify(quant));
           await sessionStorage.setItem('total',tot);
           await localStorage.setItem('cart',JSON.stringify(cart));
-          console.log(change);
+          // console.log(change);
           
         }
         else{
@@ -84,7 +89,7 @@ const ProductDetails=()=>{
 
         
         // sessionStorage.setItem
-        console.log('change is changing',change);
+        // console.log('change is changing',change);
         setCartProduct(cartProduct);
         setChange(!change);
 
@@ -100,7 +105,7 @@ const ProductDetails=()=>{
       email:userData.email,id:skuId,quantity:e.target.quantity.value,price:(Number(currentProducts.selling_price)*Number(e.target.quantity.value))
     }).then((response) => {
       // setCartData(response);
-      console.log(response)
+      // console.log(response)
       setCartProduct(cartProduct);
       setChange(!change);
       // CartData();
@@ -124,7 +129,7 @@ const ProductDetails=()=>{
       cartProduct1.index=color;
       setCartProduct(cartProduct1)
       setIndexNo(color);
-      console.log(cartProduct);
+      // console.log(cartProduct);
     }
 
     // console.log('cart',cartProduct);
@@ -163,7 +168,7 @@ const ProductDetails=()=>{
       let index = products.indexOf(currentProducts);
       // console.log('numberObj',index,sizes,sizes[0],color);
 
-      console.log('colors',indexNo)
+      // console.log('colors',indexNo)
       if(products){
 
     return (
@@ -250,7 +255,7 @@ const ProductDetails=()=>{
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 1.9rem center',
                   backgroundSize: '1em'}}>
-                    <option value="1" >SELECT SIZE</option>
+                    <option value="" >SELECT SIZE</option>
                     {sizes?.[cartProduct.index].map((item,index)=>{
                       return(
                         <option value={item}>{item}</option>

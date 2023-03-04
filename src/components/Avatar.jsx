@@ -12,7 +12,7 @@ const Avatar=()=> {
     let profile; 
   
     if(profileText!==null){
-      console.log(profileText,'ji');
+      // console.log(profileText,'ji');
       profile=JSON.parse(profileText);
     }
     // console.log(profile?.picture)
@@ -21,7 +21,7 @@ const Avatar=()=> {
 
     let username = localStorage.getItem('username');
     const logoutHandler = () => {
-        console.log('deleted here');
+        // console.log('deleted here');
         localStorage.clear();
         // sessionStorage.clear();
         window.location.reload();
