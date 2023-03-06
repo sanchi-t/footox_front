@@ -1,4 +1,15 @@
+
+
+
 const SlideShow=([prod])=>{
+
+  useEffect(() => {
+    async function axiosTest() {
+      const response = await axios.get(`${BackendServer}banner`)
+      setProd(response.data)
+    }
+    const l = axiosTest()
+  }, [products])
     return (
         <>
         <div className="ps-banner">
