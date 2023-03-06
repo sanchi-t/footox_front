@@ -709,12 +709,14 @@
     });
 
     $(window).on('load', function() {
+        revolution();
         $('.ps-loading').addClass('loaded');
         masonry();
 
     });
 
     $(window).on('load resize', function() {
+        revolution();
         resizeHeader()
     });
 
