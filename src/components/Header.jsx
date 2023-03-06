@@ -176,7 +176,7 @@ const Header = (props) => {
   }
 
   const handleDelete=(item,index)=>{
-    console.log('before',quantity,items,index);
+    // console.log('before',quantity,items,index);
 
     if(localStorage.getItem('jwtToken')){
       console.log('signed in');
@@ -189,7 +189,7 @@ const Header = (props) => {
         setQuantity([]);
         setItems(items);
         // setCartData(response);
-        console.log(response)
+        // console.log(response)
       });
 
     }
@@ -197,7 +197,10 @@ const Header = (props) => {
       let total1=total-(Number(items[index].selling_price)*Number(quantity[index]));
       items.splice(index,1);
       quantity.splice(index,1);
-      console.log('after',quantity,items);
+      // console.log('after',quantity,items);
+      const cart=JSON.parse(localStorage.getItem('cart')).splice(index,1)
+      console.log(cart,'cart');
+      localStorage.setItem('cart',JSON.stringify(cart));
       sessionStorage.setItem('items',JSON.stringify(items));
       sessionStorage.setItem('quantity',JSON.stringify(quantity));
       sessionStorage.setItem('total',total1);
@@ -232,7 +235,7 @@ const Header = (props) => {
     // window.scrollTo(0,0); 
   };
 
-  console.log(items,quantity,cartData);
+  // console.log(items,quantity,cartData);
   if(products){
 
   return (
@@ -257,12 +260,8 @@ const Header = (props) => {
               </div>
               <div className="navigation__column center">
                 <ul className="main-menu menu">
-                  <li className="menu-item menu-item-has-children dropdown"><a href="index.html">Home</a>
-                    <ul className="sub-menu">
-                      <li className="menu-item"><a href="index.html">Homepage #1</a></li>
-                      <li className="menu-item"><a href="#">Homepage #2</a></li>
-                      <li className="menu-item"><a href="#">Homepage #3</a></li>
-                    </ul>
+                  <li className="menu-item menu-item-has-children dropdown" style={{cursor:'pointer'}} onClick={handleDes}><a>Home</a>
+                    
                   </li>
                   <li className="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
                     <div className="mega-menu">
@@ -364,7 +363,7 @@ const Header = (props) => {
                       // console.log(val);
                       let a;
                       if(cartData.length>0){
-                        console.log(cartData)
+                        // console.log(cartData)
                         if(item?.color.indexOf((cartData[index]?.id))){
                           a=item?.color.indexOf((cartData[index]?.id).split('/')[1])
                         }
