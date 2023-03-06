@@ -60,7 +60,7 @@ const Banner = () => {
     }
     const l = axiosTest()
   }, [products])
-  console.log('kuhoo', prod)
+  console.log('sancit', prod,slide);
   useEffect(() => {
     dispatch(getData(queryParams));
   }, [])
