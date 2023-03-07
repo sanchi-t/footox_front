@@ -68,7 +68,7 @@ const ModalWindow=({toggled,toggle})=>{
       
       {(!token) && 
         <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'28px'}}>
-      <Button variant="primary" onClick={handleShow}>
+      <Button style={{width:'90%',textAlign:'center'}} variant="primary" onClick={handleShow}>
                 Login
       </Button>
       

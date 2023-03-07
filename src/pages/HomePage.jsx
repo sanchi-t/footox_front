@@ -341,28 +341,19 @@ const Homepage = () => {
                       <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a>
                       <InstagramEmbed url={link1||'https://www.instagram.com/p/CdnAqLmPLH6/'} />
                       </div>
-                      <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">An Inside Look at the Breaking2 Kit</a>
-                        <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
-                        <p>{parse(`${links?.users?.[0]?.productDescription}`)}</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
-                      </div>
+                      
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
                       <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><InstagramEmbed url={link2||"https://www.instagram.com/p/CZwUxp2Pn-x/"} /></div>
-                      <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">Unpacking the Breaking2 Race Strategy</a>
-                        <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
-                        <p>{parse(`${links?.users?.[0]?.productDescription2}`)}</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
-                      </div>
+                      
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
                       <div className="ps-post__thumbnail"><a className="ps-post__overlay" href="blog-detail.html"></a><InstagramEmbed url={link3||"https://www.instagram.com/p/Cbw6aAUv1GW/"} /></div>
-                      <div className="ps-post__content"><a className="ps-post__title" href="blog-detail.html">Nike’s Latest Football Cleat Breaks the Mold</a>
-                        <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">Jun 10, 2017</span></p>
-                        <p>{parse(`${links?.users?.[0]?.productDescription3}`)}</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>

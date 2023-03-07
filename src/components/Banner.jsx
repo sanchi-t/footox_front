@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import RevSlider, { Slide, Caption } from 'react-rev-slider';
 import './Banner.css';
+import Slider from './Slider/Slider';
 
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
@@ -71,6 +72,7 @@ const Banner = () => {
 
   return (
     <React.Fragment>
+      <Slider/>
       {/* <RevSlider config={config} >
           <Slide
         src={slide[0]}
@@ -138,7 +140,7 @@ const Banner = () => {
     </Slide>
 </RevSlider> */}
     
-    <div className="ps-banner">
+    {/* <div className="ps-banner">
             <div className="rev_slider fullscreenbanner" id="home-banner">
               <ul className="ps-banner">
                 <li data-index="rs-29723" data-transition="random" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-rotate="0" data-saveperformance="off"><img className="rev-slidebg" src={slide[0]} alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="5" data-no-retina />
@@ -165,7 +167,7 @@ const Banner = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
           <div className="ps-section masonry-root pt-80 pb-40">
             <div className="ps-container">
               <div className="ps-section__header mb-50">
