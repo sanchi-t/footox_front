@@ -79,11 +79,11 @@ const ProductListing=()=>{
                     <div className="ps-shoe__thumbnail">
                       {/* <div className="ps-badge"><span>New</span></div> */}
                       {/* <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div> */}
-                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img style ={{height : '350px'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
+                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img style ={{height : '350px', width : '300px'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
                     </div>
                     <div className="ps-shoe__content">
                       <div className="ps-shoe__variants">
-                        <div className="ps-shoe__variant normal"><img  style = {{height : '50px',width :"50px" }} src={item.image?.[0][1]} alt="" /><img style ={{height : '55px',width :"55px" }} src={item.image?.[0][2]}alt="" /><img style ={{height : '55px',width :"55px" }} src={item.image?.[0][3]} alt="" /><img style ={{height : '55px',width : "55px" }} src={item.image?.[0][4]} alt="" /></div>
+                        <div className="ps-shoe__variant normal"><img  style = {{height : '50px',width :"50px" }} src={item.image?.[0][1]} alt="" /><img style ={{height : '50px',width :"50px" }} src={item.image?.[0][2]}alt="" /><img style ={{height : '50px',width :"50px" }} src={item.image?.[0][3]} alt="" /><img style ={{height : '50px',width : "50px" }} src={item.image?.[0][4]} alt="" /></div>
                         {/* <select className="ps-rating ps-shoe__rating">
                           <option value={1}>1</option>
                           <option value={1}>2</option>
