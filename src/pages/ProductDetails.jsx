@@ -197,7 +197,7 @@ const ProductDetails=()=>{
             
               <div className="ps-product__thumbnail">
                 <div className="ps-product__preview">
-                <div className="arrow_prev"><span style={{display: 'flex',justifyContent: 'center'}} ><RiArrowUpSLine size={40}/></span></div>
+                <div className="arrow_prev"><span style={{display: 'flex',justifyContent: 'center',cursor:'pointer'}} ><RiArrowUpSLine size={40}/></span></div>
                   <div className="ps-product__variants">
                     
                   {/* {imgg?.map((item) => (                   
@@ -209,7 +209,7 @@ const ProductDetails=()=>{
                     <div className="item"><img  src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt=""/></div>
                     <div className="item"><img  src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt=""/></div>
                   </div>
-                  <div className="arrow_next"><span style={{display: 'flex',justifyContent: 'center'}}><RiArrowDownSLine size={40}/></span></div>
+                  <div className="arrow_next"><span style={{display: 'flex',justifyContent: 'center',cursor:'pointer'}}><RiArrowDownSLine size={40}/></span></div>
                 </div>
                 <div className="ps-product__image">
                   <div className="item"><img className="zoom" src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][0] || "images/shoe-detail/2.jpg"}/></div>
