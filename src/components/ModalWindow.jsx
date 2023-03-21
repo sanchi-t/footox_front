@@ -56,7 +56,7 @@ const ModalWindow=({toggled,toggle})=>{
 {/* <CartData/> */}
 
     {(token) &&
-    <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'18px'}}>
+    <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'1.8rem'}}>
       
       
       
@@ -67,8 +67,8 @@ const ModalWindow=({toggled,toggle})=>{
     }
       
       {(!token) && 
-        <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'28px'}}>
-      <Button style={{width:'90%',paddingLeft:'7px',paddingRight:'10px'}} variant="primary" onClick={handleShow}>
+        <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'2.8rem'}}>
+      <Button style={{width:'90%',paddingLeft:'0.7rem',paddingRight:'1.0rem'}} variant="primary" onClick={handleShow}>
                 Login
       </Button>
       

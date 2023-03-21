@@ -2,7 +2,7 @@
     transform: none;
 }
 .modal-dialog{
-  top:40px;
+  top:4rem;
 }
 .modal-open {
   overflow: scroll;
