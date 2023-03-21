@@ -431,7 +431,7 @@ const Header = (props) => {
                   </li>
                 </ul>
               </div>
-              <div className="navigation__column right" style={{maxWidth:'35.0rem'}}>
+              <div className="navigation__column right" style={{maxWidth:'350px'}}>
               
                 <form className="ps-search--header" action="do_action" method="post">
                   <input className="form-control" type="text" placeholder="Search Product…" />
@@ -439,16 +439,16 @@ const Header = (props) => {
                 </form>
                 
                 <div className="ps-cart" ><a className="ps-cart__toggle" href="#"><span><i>{(total===0)?0:items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
-                  <div className="ps-cart__listing" style={{width:'35.0rem'}}>
+                  <div className="ps-cart__listing" style={{width:'350px'}}>
                     <div className="ps-cart__content" >
                     {items && items.map((item,index)=>{
                       // console.log(cartData,'cartdata');
                       const val=cartData[index];
                       // let quant = (quantity)
+                      let a;
                       // const color=val.split('/')[1];
                       // console.log(val);
-                      let a;
-                      sum = sum + (quantity)[index];
+                      sum = sum + Number((quantity)[index]);
                       if(cartData.length>0){
                         // console.log(cartData)
                         if(item?.color.indexOf((cartData[index]?.id))){
@@ -496,7 +496,7 @@ const Header = (props) => {
                   <ModalWindow toggled={isToggle} toggle={toggleButton} />
 
                 
-                  {/* <img onClick={() => setIsOpen(true)} src='images/user.png' style={{height:'4.0rem'}}></img> */}
+                  {/* <img onClick={() => setIsOpen(true)} src='images/user.png' style={{height:'40px'}}></img> */}
                   
                 {/* </div> */}
                 
