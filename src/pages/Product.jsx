@@ -79,7 +79,7 @@ import {
       // setProd(nishu.orders);
       const prod1 = nishu.orders.filter((items) =>items.email_reciever === email);
       console.log(prod1,'aman');
-       console.log('prod233', nishu.products);
+       console.log('prod233', nishu.products.data);
   
       //  const items = prod1[0].items;
       //  const id = [];
@@ -122,6 +122,11 @@ import {
               })}
             </>
           ))}
+          // if(filteredProducts1.length ===0){
+          //   filteredProducts1[0] ={
+          //     order: 'You never ordered anything',
+          //   }
+          // };
   
     
   
@@ -134,75 +139,32 @@ import {
         <Heading style={{paddingLeft:'3%',fontSize:'40px'}}>My Orders</Heading>
         <br></br>
   
-        <Box
+        {/* <Box
+          m="auto"
+          w={"95%"}
+          bg={'#50CF96'}
+          boxShadow={"rgba(80, 270, 150, 0.24) 0px 3px 8px"}
+          p={"1.1rem"}
+        > */}
+          
+          {
+            filteredProducts1.length == 0 ?  <Box
+            m="auto"
+            w={"95%"}
+            // bg={'#50CF96'}
+            // boxShadow={"rgba(80, 270, 150, 0.24) 0px 3px 8px"}
+            p={"1.8rem"}
+          ><Text fontSize={'50px'}>You haven't ordered yet</Text></Box> :
+         
+          filteredProducts1.map((item, index) => (
+              <>
+              <Box
           m="auto"
           w={"95%"}
           bg={'#50CF96'}
           boxShadow={"rgba(80, 270, 150, 0.24) 0px 3px 8px"}
           p={"1.1rem"}
         >
-          {/* <Flex alignItems={"left"} textAlign={"left"}>
-            <Box
-              m="auto"
-              w={"40%"}
-              p={"1rem"}
-            >
-              <Flex
-                alignItems={"center"}
-                textAlign={"center"}
-                justifyContent={"stretch"}
-                my={"1"}
-              >
-                <Container className="rounded border-right-0-dark">
-                  <Row>
-                    <Col className="rounded border border-dark">
-  
-                      <Select
-                        //   name="Color"
-                        // variant="outline"
-                        style={{border: 'none'}}
-                        placeholder="Attribute"
-                        onChange={(e) => handleAttributes(e)}
-                      >
-                        <option value="Product Id">Product Id</option>
-                        <option value="Product Name">Product Name</option>
-                        <option value="Status">Status</option>
-                        <option value="Quantity">Quantity</option>
-                      </Select>
-                    </Col>
-                    <Col className="rounded border border-dark">
-                      <Select
-                        //   name="Color"
-                        style={{border: 'none'}}
-                        placeholder="Operations"
-                        onChange={(e) => handleOperator(e)}
-                      >
-                        <option value="Contains">Contains</option>
-                        <option value="Equals">Equals</option>
-                      </Select>
-                    </Col>
-                    <Col className="rounded border border-dark">
-                      <Input
-                        type={"text"}
-                        style={textStyle}
-                        onChange={handleInputFilter}
-                        value={InputFilter}
-                      ></Input>
-                    </Col>
-  
-                   
-                  </Row>
-  
-                  
-                </Container>
-              </Flex>
-            </Box>
-            <Spacer />
-          </Flex> */}
-         
-         
-          {filteredProducts1.map((item, index) => (
-              <>
              <Box
           m="auto"
           w={"95%"}
@@ -218,7 +180,7 @@ import {
               my={"5"}
               fontSize={["7px", "10px", "12px", "15px"]}
             >
-              {/* <Box w="15%">{index + 1}</Box> */}
+              <Box w="15%">{item.order}</Box>
               <Box width={"15%"} mx={"2"}>
                 <Image
                   width={"70%"}
@@ -267,12 +229,14 @@ import {
             </Flex>
             </Box>
             <br></br>
+            </Box>
             </>
             
             
-          ))}
+          ))
+                    }
   
-        </Box>
+        {/* </Box> */}
         <br>
         </br>
         <Footer/>

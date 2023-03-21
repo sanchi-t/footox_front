@@ -7,14 +7,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../redux/DataReducer/action";
 import { useLocation } from "react-router-dom";
+import { useRef } from 'react';
+
 // import CartData from "./CartData";
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const Header = (props) => {
   const {change}=props;
-
-
-
+  let sum = 0;
 
 
   function getSessionStorageOrDefault(key, defaultValue) {
@@ -25,6 +25,9 @@ const Header = (props) => {
     // console.log(stored)
     return JSON.parse(stored);
   }
+  const aboutSection = useRef(null);
+
+  
 
   function getLocalStorageOrDefault(key, defaultValue) {
     const stored = localStorage.getItem(key);
@@ -218,8 +221,25 @@ const Header = (props) => {
     console.log('click');
     navigate(`/`);
     window.location.reload();
-    window.scrollTo(0,0); 
+    window.scrollTo(0,700); 
   };
+
+  // const scrollDown = () => {
+  //   navigate(`/`)
+  //   // window.scrollTo({
+  //   //  bottom: 4500,
+  //   //   behavior: 'smooth',
+  //   // });
+  //   window.scrollTo(0,4800); 
+  // };
+  // const scrollDown = (ref) => {
+  //   window.scrollTo({
+  //     top: ref.current.offsetTop,
+  //     behavior: 'smooth',
+  //   });
+  // };
+
+  
   const handleViewCart = () => {
     if(token){
       navigate(`/viewcart`);
@@ -260,9 +280,9 @@ const Header = (props) => {
               </div>
               <div className="navigation__column center">
                 <ul className="main-menu menu">
-                  <li className="menu-item menu-item-has-children dropdown" style={{cursor:'pointer'}} onClick={handleDes}><a>Home</a>
+                  {/* <li className="menu-item menu-item-has-children dropdown" style={{cursor:'pointer'}} onClick={handleDes}><a>Home</a> */}
                     
-                  </li>
+                  {/* </li> */}
                   <li className="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
                     <div className="mega-menu">
                       <div className="mega-wrap">
@@ -280,7 +300,7 @@ const Header = (props) => {
                         <div className="mega-column">
                           <h4 className="mega-heading">Shoes</h4>
                           <ul className="mega-item">
-                            <li><a href="product-listing.html">All Shoes</a></li>
+                            <li><a href='allproducts'>All Shoes</a></li>
                             <li><a href="product-listing.html">Running</a></li>
                             <li><a href="product-listing.html">Training &amp; Gym</a></li>
                             <li><a href="product-listing.html">Basketball</a></li>
@@ -289,7 +309,7 @@ const Header = (props) => {
                             <li><a href="product-listing.html">Baseball</a></li>
                           </ul>
                         </div>
-                        <div className="mega-column">
+                        {/* <div className="mega-column">
                           <h4 className="mega-heading">CLOTHING</h4>
                           <ul className="mega-item">
                             <li><a href="product-listing.html">Compression &amp; Nike Pro</a></li>
@@ -300,8 +320,8 @@ const Header = (props) => {
                             <li><a href="product-listing.html">Pants &amp; Tights</a></li>
                             <li><a href="product-listing.html">Shorts</a></li>
                           </ul>
-                        </div>
-                        <div className="mega-column">
+                        </div> */}
+                        {/* <div className="mega-column">
                           <h4 className="mega-heading">Accessories</h4>
                           <ul className="mega-item">
                             <li><a href="product-listing.html">Compression &amp; Nike Pro</a></li>
@@ -312,8 +332,8 @@ const Header = (props) => {
                             <li><a href="product-listing.html">Pants &amp; Tights</a></li>
                             <li><a href="product-listing.html">Shorts</a></li>
                           </ul>
-                        </div>
-                        <div className="mega-column">
+                        </div> */}
+                        {/* <div className="mega-column">
                           <h4 className="mega-heading">BRAND</h4>
                           <ul className="mega-item">
                             <li><a href="product-listing.html">NIKE</a></li>
@@ -321,14 +341,79 @@ const Header = (props) => {
                             <li><a href="product-listing.html">Dior</a></li>
                             <li><a href="product-listing.html">B&amp;G</a></li>
                           </ul>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
+
+
                   </li>
-                  <li className="menu-item"><a href="#">Women</a></li>
+                  <li className="menu-item menu-item-has-children has-mega-menu"><a href="#">Women</a>
+                  <div className="mega-menu">
+                      <div className="mega-wrap">
+                        <div className="mega-column">
+                          <ul className="mega-item mega-features">
+                            <li><a href="product-listing.html">NEW RELEASES</a></li>
+                            <li><a href="product-listing.html">FEATURES SHOES</a></li>
+                            <li><a href="product-listing.html">BEST SELLERS</a></li>
+                            <li><a href="product-listing.html">NOW TRENDING</a></li>
+                            <li><a href="product-listing.html">SUMMER ESSENTIALS</a></li>
+                            <li><a href="product-listing.html">MOTHER'S DAY COLLECTION</a></li>
+                            <li><a href="product-listing.html">FAN GEAR</a></li>
+                          </ul>
+                        </div>
+                        <div className="mega-column">
+                          <h4 className="mega-heading">Shoes</h4>
+                          <ul className="mega-item">
+                            <li><a href='allproducts'>All Shoes</a></li>
+                            <li><a href="product-listing.html">Running</a></li>
+                            <li><a href="product-listing.html">Training &amp; Gym</a></li>
+                            <li><a href="product-listing.html">Basketball</a></li>
+                            <li><a href="product-listing.html">Football</a></li>
+                            <li><a href="product-listing.html">Soccer</a></li>
+                            <li><a href="product-listing.html">Baseball</a></li>
+                          </ul>
+                        </div>
+                        {/* <div className="mega-column">
+                          <h4 className="mega-heading">CLOTHING</h4>
+                          <ul className="mega-item">
+                            <li><a href="product-listing.html">Compression &amp; Nike Pro</a></li>
+                            <li><a href="product-listing.html">Tops &amp; T-Shirts</a></li>
+                            <li><a href="product-listing.html">Polos</a></li>
+                            <li><a href="product-listing.html">Hoodies &amp; Sweatshirts</a></li>
+                            <li><a href="product-listing.html">Jackets &amp; Vests</a></li>
+                            <li><a href="product-listing.html">Pants &amp; Tights</a></li>
+                            <li><a href="product-listing.html">Shorts</a></li>
+                          </ul>
+                        </div> */}
+                        {/* <div className="mega-column">
+                          <h4 className="mega-heading">Accessories</h4>
+                          <ul className="mega-item">
+                            <li><a href="product-listing.html">Compression &amp; Nike Pro</a></li>
+                            <li><a href="product-listing.html">Tops &amp; T-Shirts</a></li>
+                            <li><a href="product-listing.html">Polos</a></li>
+                            <li><a href="product-listing.html">Hoodies &amp; Sweatshirts</a></li>
+                            <li><a href="product-listing.html">Jackets &amp; Vests</a></li>
+                            <li><a href="product-listing.html">Pants &amp; Tights</a></li>
+                            <li><a href="product-listing.html">Shorts</a></li>
+                          </ul>
+                        </div> */}
+                        {/* <div className="mega-column">
+                          <h4 className="mega-heading">BRAND</h4>
+                          <ul className="mega-item">
+                            <li><a href="product-listing.html">NIKE</a></li>
+                            <li><a href="product-listing.html">Adidas</a></li>
+                            <li><a href="product-listing.html">Dior</a></li>
+                            <li><a href="product-listing.html">B&amp;G</a></li>
+                          </ul>
+                        </div> */}
+                      </div>
+                    </div>
+
+                  </li>
+
                   <li className="menu-item"><a href="#">Kids</a></li>
-                  <li className="menu-item menu-item-has-children dropdown"><a href="#">News</a>
-                    <ul className="sub-menu">
+                  <li className="menu-item menu-item-has-children dropdown"><a style={{cursor:'pointer'}} onClick={()=>props.scrollDown('social')}>Social Media</a>
+                    {/* <ul className="sub-menu">
                       <li className="menu-item menu-item-has-children dropdown"><a href="blog-grid.html">Blog-grid</a>
                         <ul className="sub-menu">
                           <li className="menu-item"><a href="blog-grid.html">Blog Grid 1</a></li>
@@ -336,13 +421,13 @@ const Header = (props) => {
                         </ul>
                       </li>
                       <li className="menu-item"><a href="blog-list.html">Blog List</a></li>
-                    </ul>
+                    </ul> */}
                   </li>
-                  <li className="menu-item menu-item-has-children dropdown"><a href="#">Contact</a>
-                    <ul className="sub-menu">
+                  <li className="menu-item menu-item-has-children dropdown" style={{cursor:'pointer'}} onClick={()=>props.scrollDown('contact')}><a >Contact</a>
+                    {/* <ul className="sub-menu">
                       <li className="menu-item"><a href="contact-us.html">Contact Us #1</a></li>
                       <li className="menu-item"><a href="contact-us.html">Contact Us #2</a></li>
-                    </ul>
+                    </ul> */}
                   </li>
                 </ul>
               </div>
@@ -359,9 +444,10 @@ const Header = (props) => {
                     {items && items.map((item,index)=>{
                       // console.log(cartData,'cartdata');
                       const val=cartData[index];
+                      // let quant = (quantity)
                       // const color=val.split('/')[1];
                       // console.log(val);
-                      let a;
+                      sum = sum + (quantity)[index];
                       if(cartData.length>0){
                         // console.log(cartData)
                         if(item?.color.indexOf((cartData[index]?.id))){
@@ -389,7 +475,9 @@ const Header = (props) => {
                       
                     </div>
                     <div className="ps-cart__total">
-                      <p>Number of items:<span>{quantity?quantity.length:0}</span></p>
+                      <p>Number of items:<span>
+                        {/* {quantity?quantity.length:0} */} {quantity?sum:0}
+                      </span></p>
                       <p>Item Total:<span>₹{total}</span></p>
                     </div>
                     <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>

@@ -21,7 +21,9 @@ const ProductListing=()=>{
   const handleDes = (id) => {
     console.log('click');
     console.log(id);
-    navigate(`/description/${id}`);
+    navigate(`/${id}`);
+    window.location.reload();
+    window.scrollTo(0,0); 
   };
 
   useEffect(() => {
@@ -41,6 +43,7 @@ const ProductListing=()=>{
       dispatch(getData(queryParams));
     }
   }, [dispatch, location.search, products?.length, searchParams]);
+  console.log(products);
 
     return(
         <>
@@ -50,22 +53,22 @@ const ProductListing=()=>{
           <div className="ps-products-wrap pt-80 pb-80">
             <div className="ps-products" data-mh="product-listing">
               <div className="ps-product-action">
-                <div className="ps-product__filter">
+                {/* <div className="ps-product__filter">
                   <select className="ps-select selectpicker">
                     <option value={1}>Shortby</option>
                     <option value={2}>Name</option>
                     <option value={3}>Price (Low to High)</option>
                     <option value={3}>Price (High to Low)</option>
                   </select>
-                </div>
+                </div> */}
                 <div className="ps-pagination">
                   <ul className="pagination">
-                    <li><a href="#"><i className="fa fa-angle-left" /></a></li>
+                    {/* <li><a href="#"><i className="fa fa-angle-left" /></a></li> */}
                     <li className="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">...</a></li>
-                    <li><a href="#"><i className="fa fa-angle-right" /></a></li>
+                    {/* <li><a href="#"><i className="fa fa-angle-right" /></a></li> */}
                   </ul>
                 </div>
               </div>
@@ -76,21 +79,21 @@ const ProductListing=()=>{
                     <div className="ps-shoe__thumbnail">
                       {/* <div className="ps-badge"><span>New</span></div> */}
                       {/* <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div> */}
-                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img src={item.image?.[0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
+                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img style ={{height : '350px'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
                     </div>
                     <div className="ps-shoe__content">
                       <div className="ps-shoe__variants">
-                        <div className="ps-shoe__variant normal"><img width="55" src={item.image?.[1]} alt="" /><img width="55" src={item.image?.[2]}alt="" /><img width="55" src={item.image?.[3]} alt="" /><img width="55" src={item.image?.[4]} alt="" /></div>
-                        <select className="ps-rating ps-shoe__rating">
+                        <div className="ps-shoe__variant normal"><img  style = {{height : '50px',width :"50px" }} src={item.image?.[0][1]} alt="" /><img style ={{height : '55px',width :"55px" }} src={item.image?.[0][2]}alt="" /><img style ={{height : '55px',width :"55px" }} src={item.image?.[0][3]} alt="" /><img style ={{height : '55px',width : "55px" }} src={item.image?.[0][4]} alt="" /></div>
+                        {/* <select className="ps-rating ps-shoe__rating">
                           <option value={1}>1</option>
                           <option value={1}>2</option>
                           <option value={1}>3</option>
                           <option value={1}>4</option>
                           <option value={2}>5</option>
-                        </select>
+                        </select> */}
                       </div>
                       <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
-                        <p className="ps-shoe__categories"><a href="#">{item.gender}</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                        <p className="ps-shoe__categories" style={{width: '120px'}}><a href="#">{item.productName}</a></p><span className="ps-shoe__price">
                           <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
                       </div>
                     </div>
@@ -98,16 +101,16 @@ const ProductListing=()=>{
                 </div>
                 ))}
               </div>
-              <div className="ps-product-action">
-                <div className="ps-product__filter">
+              {/* <div className="ps-product-action"> */}
+                {/* <div className="ps-product__filter">
                   <select className="ps-select selectpicker">
                     <option value={1}>Shortby</option>
                     <option value={2}>Name</option>
                     <option value={3}>Price (Low to High)</option>
                     <option value={3}>Price (High to Low)</option>
                   </select>
-                </div>
-                <div className="ps-pagination">
+                </div> */}
+                {/* <div className="ps-pagination">
                   <ul className="pagination">
                     <li><a href="#"><i className="fa fa-angle-left" /></a></li>
                     <li className="active"><a href="#">1</a></li>
@@ -116,8 +119,8 @@ const ProductListing=()=>{
                     <li><a href="#">...</a></li>
                     <li><a href="#"><i className="fa fa-angle-right" /></a></li>
                   </ul>
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
             </div>
             <div className="ps-sidebar" data-mh="product-listing">
               <aside className="ps-widget--sidebar ps-widget--category">
@@ -126,26 +129,26 @@ const ProductListing=()=>{
                 </div>
                 <div className="ps-widget__content">
                   <ul className="ps-list--checked">
-                    <li className="current"><a href="product-listing.html">Life(521)</a></li>
-                    <li><a href="product-listing.html">Running(76)</a></li>
-                    <li><a href="product-listing.html">Baseball(21)</a></li>
-                    <li><a href="product-listing.html">Football(105)</a></li>
-                    <li><a href="product-listing.html">Soccer(108)</a></li>
+                    <li className="current"><a href="product-listing.html">Slides</a></li>
+                    <li><a href="product-listing.html">Sneakers</a></li>
+                    <li><a href="product-listing.html">Sports</a></li>
+                    <li><a href="product-listing.html">Flip-Flop</a></li>
+                    {/* <li><a href="product-listing.html">Soccer(108)</a></li>
                     <li><a href="product-listing.html">Trainning &amp; game(47)</a></li>
-                    <li><a href="product-listing.html">More</a></li>
+                    <li><a href="product-listing.html">More</a></li> */}
                   </ul>
                 </div>
               </aside>
-              <aside className="ps-widget--sidebar ps-widget--filter">
+              {/* <aside className="ps-widget--sidebar ps-widget--filter">
                 <div className="ps-widget__header">
-                  <h3>Category</h3>
+                  <h3>Price</h3>
                 </div>
                 <div className="ps-widget__content">
                   <div className="ac-slider" data-default-min={300} data-default-max={2000} data-max={3450} data-step={50} data-unit="$" />
                   <p className="ac-slider__meta">Price:<span className="ac-slider__value ac-slider__min" />-<span className="ac-slider__value ac-slider__max" /></p><a className="ac-slider__filter ps-btn" href="#">Filter</a>
                 </div>
-              </aside>
-              <aside className="ps-widget--sidebar ps-widget--category">
+              </aside> */}
+              {/* <aside className="ps-widget--sidebar ps-widget--category">
                 <div className="ps-widget__header">
                   <h3>Shoe Brand</h3>
                 </div>
@@ -160,8 +163,8 @@ const ProductListing=()=>{
                     <li><a href="product-listing.html">Louis Vuiton(47)</a></li>
                   </ul>
                 </div>
-              </aside>
-              <aside className="ps-widget--sidebar ps-widget--category">
+              </aside> */}
+              {/* <aside className="ps-widget--sidebar ps-widget--category">
                 <div className="ps-widget__header">
                   <h3>Width</h3>
                 </div>
@@ -173,7 +176,7 @@ const ProductListing=()=>{
                     <li><a href="product-listing.html">Extra Wide</a></li>
                   </ul>
                 </div>
-              </aside>
+              </aside> */}
               <div className="ps-sticky desktop">
                 <aside className="ps-widget--sidebar">
                   <div className="ps-widget__header">
@@ -183,40 +186,40 @@ const ProductListing=()=>{
                     <table className="table ps-table--size">
                       <tbody>
                         <tr>
-                          <td className="active">3</td>
-                          <td>5.5</td>
-                          <td>8</td>
-                          <td>10.5</td>
-                          <td>13</td>
-                        </tr>
-                        <tr>
-                          <td>3.5</td>
-                          <td>6</td>
-                          <td>8.5</td>
-                          <td>11</td>
-                          <td>13.5</td>
-                        </tr>
-                        <tr>
+                          {/* <td className="active"></td> */}
+                          <td>1</td>
+                          <td>2</td>
+                          <td>3</td>
                           <td>4</td>
-                          <td>6.5</td>
-                          <td>9</td>
-                          <td>11.5</td>
-                          <td>14</td>
                         </tr>
                         <tr>
+                          <td>5</td>
+                          <td>6</td>
+                          <td>7</td>
+                          <td>8</td>
+                         
+                        </tr>
+                        <tr>
+                          <td><a>9</a></td>
+                          <td>10</td>
+                          <td>11</td>
+                          <td>12</td>
+                          {/* <td>14</td> */}
+                        </tr>
+                        {/* <tr>
                           <td>4.5</td>
                           <td>7</td>
                           <td>9.5</td>
                           <td>12</td>
                           <td>14.5</td>
-                        </tr>
-                        <tr>
+                        </tr> */}
+                        {/* <tr>
                           <td>5</td>
                           <td>7.5</td>
                           <td>10</td>
                           <td>12.5</td>
                           <td>15</td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </table>
                   </div>
@@ -246,7 +249,7 @@ const ProductListing=()=>{
               </div>
             </div>
           </div>
-          <div className="ps-subscribe">
+          {/* <div className="ps-subscribe">
             <div className="ps-container">
               <div className="row">
                 <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
@@ -263,10 +266,11 @@ const ProductListing=()=>{
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           
         </main>
       </div>
+      <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
 
           <Footer></Footer>
         </>

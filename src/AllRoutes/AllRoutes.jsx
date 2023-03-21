@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation} from "react-router-dom";
+// import {Switch} from 'react-router';
 import ProductDetails from "../pages/ProductDetails";
 import ProductListing from "../pages/ProductListing";
 import HomePage from "../pages/HomePage";
@@ -17,6 +18,7 @@ import ProfilePage from "../pages/Myprofile";
 // import OrderPage from "../pages/previousOrders";
 import ProductPage from "../pages/Product";
 import Coupon from "../pages/Coupons";
+import Contact from "../pages/contact";
 
 
 
@@ -31,8 +33,15 @@ const AllRoutes = () => {
     <div>
       <Routes>
         
+        
         <Route path="/" element={<HomePage/>} forceRefresh={true} />
+        <Route path="/" element={<Contact />} onEnter = {()=>window.scrollTo(0,100)}/>
+       
+        
         <Route path="/:id" element={<ProductDetails />}/>
+        <Route path="allproducts" element={<ProductListing />}/>
+        
+        
         {/* <Route path="/login" element={<Login />} />    */}
         {/* <Route
           path="/admin"
