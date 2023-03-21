@@ -102,7 +102,7 @@
   }
   
   hr {
-    height: 2px;
+    height: 0.2rem;
     background: white;
     width: 50%;
   }
@@ -113,30 +113,30 @@
     visibility: inherit;
     transition: none 0s ease 0s;
     text-align: center;
-    line-height: 25px;
-    border-width: 0px;
-    margin: 0px;
-    padding: 15px 30px;
-    letter-spacing: 1px;
+    line-height: 2.5rem;
+    border-width: 0.0rem;
+    margin: 0.0rem;
+    padding: 15px 3.0rem;
+    letter-spacing: 0.1rem;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 1.8rem;
     white-space: nowrap;
-    min-height: 0px;
-    min-width: 0px;
+    min-height: 0.0rem;
+    min-width: 0.0rem;
     max-height: none;
     max-width: none;
     opacity: 1;
     transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    transform-origin: 50% 50% 0px;
+    transform-origin: 50% 50% .0rem;
   }
 
 
   .ps-banner__title{
     color: #ec4c76;
     font-family: "Montserrat", sans-serif;
-    font-size: 72px;
+    font-size: 7.2rem;
     font-weight: 700;
-    letter-spacing: 5px;
+    letter-spacing: 0.5rem;
     line-height: 1.5em;
     box-sizing: border-box;
   }
