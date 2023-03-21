@@ -11,6 +11,8 @@ import parse from 'html-react-parser';
 import { CardFooter } from "@chakra-ui/react";
 import axios from "axios";
 // import CartData from "../components/CartData";
+import {RiArrowUpSLine,RiArrowDownSLine} from 'react-icons/ri';
+
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 
@@ -192,17 +194,22 @@ const ProductDetails=()=>{
         
           <div className="row">
             <div className="col-lg-10 col-md-12 col-lg-offset-1">
+            
               <div className="ps-product__thumbnail">
                 <div className="ps-product__preview">
+                <div className="arrow_prev"><span style={{display: 'flex',justifyContent: 'center'}} ><RiArrowUpSLine size={40}/></span></div>
                   <div className="ps-product__variants">
+                    
                   {/* {imgg?.map((item) => (                   
                   <div className="item"><img src={item? item:"images/shoe-detail/2.jpg"} alt=""/></div>))} */}
-                    <div className="item"><img src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                     <div className="item"><img src={allImage[indexNo][1] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img src={allImage[indexNo][2] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                  </div><a className="popup-youtube ps-product__video" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><img src={allImage[indexNo][0]} alt=""/><i className="fa fa-play"></i></a>
+                  
+                    <div className="item"><img  src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                     <div className="item"><img  src={allImage[indexNo][1] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][2] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                  </div>
+                  <div className="arrow_next"><span style={{display: 'flex',justifyContent: 'center'}}><RiArrowDownSLine size={40}/></span></div>
                 </div>
                 <div className="ps-product__image">
                   <div className="item"><img className="zoom" src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][0] || "images/shoe-detail/2.jpg"}/></div>
@@ -212,6 +219,9 @@ const ProductDetails=()=>{
                   <div className="item"><img className="zoom" src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][5] || "images/shoe-detail/2.jpg"}/></div>
                 </div>
               </div>
+              
+              
+
               <div className="ps-product__thumbnail--mobile">
                 <div className="ps-product__main-img"><img src={allImage[indexNo][0]} alt=""/></div>
                 <div className="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
@@ -220,6 +230,7 @@ const ProductDetails=()=>{
                   </OwlCarousel>
                   </div>
               </div>
+              
               <div className="ps-product__info">
                 <div className="ps-product__rating">
                   <select className="ps-rating">
@@ -392,13 +403,13 @@ const ProductDetails=()=>{
               if(item.productGender===currentProducts.productGender && item.productproductId!==currentProducts.productId)
                   return(
               <div className="ps-shoes--carousel">
-                <div className="ps-shoe">
+                <div className="ps-shoe" style={{minHeight: "30.0rem",position: 'relative'}}>
                   <div className="ps-shoe__thumbnail" onClick={() => handleDes(item.productId)}>
-                    <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src={item.image?.[0]?.[0]} alt=""/><a className="ps-shoe__overlay" ></a>
+                    <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img style={{height:'42rem'}} src={item.image?.[0]?.[0]} alt=""/><a className="ps-shoe__overlay" ></a>
                   </div>
                   <div className="ps-shoe__content">
                     <div className="ps-shoe__variants">
-                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={item.image?.[0]?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={item.image?.[0]?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={item.image?.[2]} alt=""/><img style={{width:'64px'}} src={item.image?.[3]} alt=""/></div>
+                      <div className="ps-shoe__variant normal"><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={item.image?.[0]?.[0]} alt=""/><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={item.image?.[0][1]} alt=""/><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={item.image?.[0][2]} alt=""/><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={item.image?.[0][3]} alt=""/></div>
                       {/* <select className="ps-rating ps-shoe__rating">
                         <option value="1">1</option>
                         <option value="1">2</option>
@@ -422,12 +433,12 @@ const ProductDetails=()=>{
                 <div className="ps-shoe">
                   <div className="ps-shoe__thumbnail">
                     
-                    <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img src=
+                    <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart"></i></a><img style={{height:'42rem'}} src=
                     {currentProducts.image?.[0]?.[0]} alt=""/><a className="ps-shoe__overlay" href="product-detail.html"></a>
                   </div>
                   <div className="ps-shoe__content">
                   <div className="ps-shoe__variants">
-                      <div className="ps-shoe__variant normal"><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]?.[0]} alt=""/><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]?.[1]} alt=""/><img style={{width:'64px',float:'left'}} src={currentProducts.image?.[0]?.[2]} alt=""/><img style={{width:'64px'}} src={currentProducts.image?.[0]?.[3]} alt=""/></div>
+                      <div className="ps-shoe__variant normal"><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={currentProducts.image?.[0]?.[0]} alt=""/><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={currentProducts.image?.[0]?.[1]} alt=""/><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={currentProducts.image?.[0]?.[2]} alt=""/><img style = {{height : '5.5rem',width :"5.5rem",float:'left' }} src={currentProducts.image?.[0]?.[3]} alt=""/></div>
                       {/* <select className="ps-rating ps-shoe__rating">
                         <option value="1">1</option>
                         <option value="1">2</option>

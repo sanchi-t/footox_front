@@ -6549,4 +6549,32 @@ html .bg--parallax {
 .pl-100 {
   padding-left: 10.0rem; }
 
+
+
+  .ps-product__variants img{
+    height: 6.12rem;
+    weight: 6.12rem;
+  }
+
+  .slick-next.slick-arrow{
+
+    /* font-size: 0;
+    line-height: 0;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px\9;
+    -webkit-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: 0;
+    background: 0 0; 
+    position: absolute;
+    display: block;
+    padding: 0; */
+  }
+ 
 /*# sourceMappingURL=style.css.map */

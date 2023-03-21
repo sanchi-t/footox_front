@@ -14,6 +14,7 @@ const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 const Header = (props) => {
   const {change}=props;
+  let sum = 0;
 
 
   function getSessionStorageOrDefault(key, defaultValue) {
@@ -443,9 +444,11 @@ const Header = (props) => {
                     {items && items.map((item,index)=>{
                       // console.log(cartData,'cartdata');
                       const val=cartData[index];
+                      // let quant = (quantity)
                       // const color=val.split('/')[1];
                       // console.log(val);
                       let a;
+                      sum = sum + (quantity)[index];
                       if(cartData.length>0){
                         // console.log(cartData)
                         if(item?.color.indexOf((cartData[index]?.id))){
@@ -473,7 +476,9 @@ const Header = (props) => {
                       
                     </div>
                     <div className="ps-cart__total">
-                      <p>Number of items:<span>{quantity?quantity.length:0}</span></p>
+                      <p>Number of items:<span>
+                        {/* {quantity?quantity.length:0} */} {quantity?sum:0}
+                      </span></p>
                       <p>Item Total:<span>₹{total}</span></p>
                     </div>
                     <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>

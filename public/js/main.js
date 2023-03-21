@@ -487,14 +487,17 @@
             slidesToScroll: 1,
             asNavFor: '.ps-product__variants',
             dots: false,
+            
+
             arrows: false,
 
         });
         second.slick({
             slidesToShow: 3,
             slidesToScroll: 1,
-            arrows: false,
-            arrow: false,
+            prevArrow:'.arrow_prev',
+            nextArrow:'.arrow_next',
+            // arrows: true,
             focusOnSelect: true,
             asNavFor: '.ps-product__image',
             vertical: true,
