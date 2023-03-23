@@ -77,7 +77,7 @@ import {
       console.log('prod2', nishu.orders);
        console.log('prod', prod);
       // setProd(nishu.orders);
-      const prod1 = nishu.orders.filter((items) =>items.email_reciever === email);
+      const prod1 = nishu.orders.filter((items) =>items.email_user === email);
       console.log(prod1,'aman');
        console.log('prod233', nishu.products.data);
   

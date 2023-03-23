@@ -203,20 +203,20 @@ const ProductDetails=()=>{
                   {/* {imgg?.map((item) => (                   
                   <div className="item"><img src={item? item:"images/shoe-detail/2.jpg"} alt=""/></div>))} */}
                   
-                    <div className="item"><img  src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                     <div className="item"><img  src={allImage[indexNo][1] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img  src={allImage[indexNo][2] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img  src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt=""/></div>
-                    <div className="item"><img  src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][0] } alt=""/></div>
+                     <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][2] } alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][3] } alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][4] } alt=""/></div>
                   </div>
                   <div className="arrow_next"><span style={{display: 'flex',justifyContent: 'center',cursor:'pointer'}}><RiArrowDownSLine size={40}/></span></div>
                 </div>
                 <div className="ps-product__image">
-                  <div className="item"><img className="zoom" src={allImage[indexNo][0] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][0] || "images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={allImage[indexNo][1] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][1] || "images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={allImage[indexNo][2] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][2] || "images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={allImage[indexNo][3] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][3] || "images/shoe-detail/2.jpg"}/></div>
-                  <div className="item"><img className="zoom" src={allImage[indexNo][4] || "images/shoe-detail/2.jpg"} alt="" data-zoom-image={allImage[indexNo][5] || "images/shoe-detail/2.jpg"}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][0] } alt="" data-zoom-image={allImage[indexNo][0]}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][1]} alt="" data-zoom-image={allImage[indexNo][1]}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][2]} alt="" data-zoom-image={allImage[indexNo][2]}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][3]} alt="" data-zoom-image={allImage[indexNo][3]}/></div>
+                  <div className="item"><img className="zoom" src={allImage[indexNo][4]} alt="" data-zoom-image={allImage[indexNo][5]}/></div>
                 </div>
               </div>
               

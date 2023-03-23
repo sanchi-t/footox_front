@@ -448,7 +448,7 @@ const Header = (props) => {
                       // const color=val.split('/')[1];
                       // console.log(val);
                       let a;
-                      sum = sum + (quantity)[index];
+                      sum = sum + Number((quantity)[index]);
                       if(cartData.length>0){
                         // console.log(cartData)
                         if(item?.color.indexOf((cartData[index]?.id))){

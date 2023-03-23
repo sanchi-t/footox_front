@@ -8,7 +8,7 @@ import OwlCarousel from 'react-owl-carousel';
 import axios from "axios";
 import parse from 'html-react-parser';
 import { useRef } from 'react';
-import { InstagramEmbed } from 'react-social-media-embed';
+// import { InstagramEmbed } from 'react-social-media-embed';
 import Banner from '../components/Banner';
 // import Contact from './contact';
 
@@ -353,20 +353,20 @@ const Homepage = () => {
                     <div className="ps-post">
                    
                      <div className="ps-post_thumbnail"><a className="ps-post_overlay" href="blog-detail.html"></a>
-                      <InstagramEmbed url={link1||'https://www.instagram.com/p/CdnAqLmPLH6/'} />
+                      {/* <InstagramEmbed url={link1||'https://www.instagram.com/p/CdnAqLmPLH6/'} /> */}
                       </div>
                       
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post_thumbnail"><a className="ps-post_overlay" href="blog-detail.html"></a><InstagramEmbed url={link2||"https://www.instagram.com/p/CZwUxp2Pn-x/"} /></div>
+                      {/* <div className="ps-post_thumbnail"><a className="ps-post_overlay" href="blog-detail.html"></a><InstagramEmbed url={link2||"https://www.instagram.com/p/CZwUxp2Pn-x/"} /></div> */}
                       
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-post">
-                      <div className="ps-post_thumbnail"><a className="ps-post_overlay" href="blog-detail.html"></a><InstagramEmbed url={link3||"https://www.instagram.com/p/Cbw6aAUv1GW/"} /></div>
+                      {/* <div className="ps-post_thumbnail"><a className="ps-post_overlay" href="blog-detail.html"></a><InstagramEmbed url={link3||"https://www.instagram.com/p/Cbw6aAUv1GW/"} /></div> */}
                      
                     </div>
                   </div>
