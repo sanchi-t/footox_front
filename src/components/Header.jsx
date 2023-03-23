@@ -445,7 +445,6 @@ const Header = (props) => {
                       // console.log(cartData,'cartdata');
                       const val=cartData[index];
                       // let quant = (quantity)
-                      let a;
                       // const color=val.split('/')[1];
                       // console.log(val);
                       let a;

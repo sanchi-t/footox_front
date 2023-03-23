@@ -8,9 +8,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import OwlCarousel from 'react-owl-carousel';
 import parse from 'html-react-parser';
-import { CardFooter } from "@chakra-ui/react";
-import axios from "axios";
+import {useRef } from "react";
+import Slider from "react-slick";import axios from "axios";
 // import CartData from "../components/CartData";
+// import ReactImageMagnify from 'react-image-magnify';
+
 import {RiArrowUpSLine,RiArrowDownSLine} from 'react-icons/ri';
 
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
@@ -18,7 +20,48 @@ const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
 
 
 
+
+
+
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div style={{ display: 'flex',justifyContent: 'center',cursor:'pointer'}}>
+    <RiArrowDownSLine size={40}
+      className={className}
+      onClick={onClick}
+    /></div>
+  );
+}
+
+function PrevArrow(props) {
+  const { className,onClick } = props;
+  return (
+    <div style={{ display: 'flex',justifyContent: 'center',cursor:'pointer'}}>
+    <RiArrowUpSLine size={40}
+      className={className}
+      onClick={onClick}
+    /></div>
+  );
+}
+
+
+
+
+
+
+
+
 const ProductDetails=()=>{
+  const [nav1, setNav1] = useState(null);
+  const [nav2, setNav2] = useState(null);
+  const slider1Ref = useRef(null);
+  const slider2Ref = useRef(null);
+
+  useEffect(() => {
+    setNav1(slider1Ref.current);
+    setNav2(slider2Ref.current);
+  }, []);
     const { id } = useParams();
     let navigate = useNavigate();
     const [prod, setProd] = useState();
@@ -197,26 +240,48 @@ const ProductDetails=()=>{
             
               <div className="ps-product__thumbnail">
                 <div className="ps-product__preview">
-                <div className="arrow_prev"><span style={{display: 'flex',justifyContent: 'center',cursor:'pointer'}} ><RiArrowUpSLine size={40}/></span></div>
+                {/* <div className="arrow_prev"><span style={{display: 'flex',justifyContent: 'center',cursor:'pointer'}} ></span></div> */}
                   <div className="ps-product__variants">
                     
                   {/* {imgg?.map((item) => (                   
                   <div className="item"><img src={item? item:"images/shoe-detail/2.jpg"} alt=""/></div>))} */}
-                  
-                    <div className="item"><img  src={allImage[indexNo][0] } alt=""/></div>
+                  <Slider
+                  asNavFor={nav1}
+                  ref={slider2Ref}
+                  slidesToShow={3}
+                  swipeToSlide={true}
+                  focusOnSelect={true}
+                  vertical={true}
+                  nextArrow={<NextArrow />}
+                  prevArrow={<PrevArrow />}
+                >
+                  <div className="item"><img  src={allImage[indexNo][0] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][2] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][3] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][4] } alt=""/></div>
+                </Slider>
+                    {/* <div className="item"><img  src={allImage[indexNo][0] } alt=""/></div>
                      <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
                     <div className="item"><img  src={allImage[indexNo][2] } alt=""/></div>
                     <div className="item"><img  src={allImage[indexNo][3] } alt=""/></div>
-                    <div className="item"><img  src={allImage[indexNo][4] } alt=""/></div>
+                    <div className="item"><img  src={allImage[indexNo][4] } alt=""/></div> */}
                   </div>
-                  <div className="arrow_next"><span style={{display: 'flex',justifyContent: 'center',cursor:'pointer'}}><RiArrowDownSLine size={40}/></span></div>
                 </div>
                 <div className="ps-product__image">
-                  <div className="item"><img className="zoom" src={allImage[indexNo][0] } alt="" data-zoom-image={allImage[indexNo][0]}/></div>
+                <Slider arrows={false} asNavFor={nav2} ref={slider1Ref}>
+                <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][2] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][3] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][4] } alt=""/></div>
+                </Slider>
+                  {/* <div className="item"><img className="zoom" src={allImage[indexNo][0] } alt="" data-zoom-image={allImage[indexNo][0]}/></div>
                   <div className="item"><img className="zoom" src={allImage[indexNo][1]} alt="" data-zoom-image={allImage[indexNo][1]}/></div>
                   <div className="item"><img className="zoom" src={allImage[indexNo][2]} alt="" data-zoom-image={allImage[indexNo][2]}/></div>
                   <div className="item"><img className="zoom" src={allImage[indexNo][3]} alt="" data-zoom-image={allImage[indexNo][3]}/></div>
                   <div className="item"><img className="zoom" src={allImage[indexNo][4]} alt="" data-zoom-image={allImage[indexNo][5]}/></div>
+                 */}
                 </div>
               </div>
               
@@ -265,7 +330,8 @@ const ProductDetails=()=>{
                   <select name="size" style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px',appearance: 'none',paddingRight:'20px',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 1.9rem center',
-                  backgroundSize: '1em'}}>
+                  backgroundSize: '1em',
+                  marginRight:'1rem'}}>
                     <option value="" >SELECT SIZE</option>
                     {sizes?.[cartProduct.index].map((item,index)=>{
                       return(
