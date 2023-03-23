@@ -71,13 +71,13 @@ const Header = (props) => {
   
 
 
-  let num = useState({});
+  // let num = useState({});
 
     useEffect(() => {
         if (products.length === 0) {
           dispatch(getData());
         }
-      }, [dispatch, products.length,num]);
+      }, [dispatch, products?.length]);
   useEffect(() => {
     // console.log('inside useState',quantity,items)
     // dispatch(getData());
@@ -445,6 +445,7 @@ const Header = (props) => {
                       // console.log(cartData,'cartdata');
                       const val=cartData[index];
                       // let quant = (quantity)
+
                       // const color=val.split('/')[1];
                       // console.log(val);
                       let a;

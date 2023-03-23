@@ -25,7 +25,10 @@ const Homepage = () => {
   const dispatch = useDispatch();
   const products1 = useSelector((store) => store.dataReducer.products);
 
-  const products = useSelector((store) => store.dataReducer.products);
+  const products = products1.filter(function (el) {
+    return el.Quantity !== undefined; 
+  });
+  // const products = useSelector((store) => store.dataReducer.products);
   const aboutSection = useRef(null);
   const socialSection = useRef(null);
 
@@ -81,7 +84,7 @@ const Homepage = () => {
       setProd(response.data)
     }
     const l = axiosTest()
-  }, [products,location])
+  }, [products.length,location])
 
 
   useEffect(() => {
@@ -90,7 +93,7 @@ const Homepage = () => {
       setLink(response.data)
     }
     const l = axiosTest()
-  }, [products])
+  }, [products.length])
 
   const link1=links?.users[0]?.link1;
   const link2=links?.users[0]?.link2;
