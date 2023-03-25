@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../redux/DataReducer/action";
 import { useLocation } from "react-router-dom";
 import { useRef } from 'react';
+import Search from './Search';
+import { createSearchParams } from "react-router-dom";
+import { setSearchQuery } from "../redux/QueryReducer/action";
 
 // import CartData from "./CartData";
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
@@ -254,6 +257,17 @@ const Header = (props) => {
     // window.location.reload();
     // window.scrollTo(0,0); 
   };
+  
+  const handleAllProducts=()=>{
+    navigate({
+      pathname: "/allproducts",
+      search: `?${createSearchParams({
+          GET: 'ALL'
+      })}`
+  });
+  dispatch(setSearchQuery({}));
+
+  }
 
   // console.log(items,quantity,cartData);
   if(products){
@@ -300,7 +314,7 @@ const Header = (props) => {
                         <div className="mega-column">
                           <h4 className="mega-heading">Shoes</h4>
                           <ul className="mega-item">
-                            <li><a href='allproducts'>All Shoes</a></li>
+                            <li><a onClick={handleAllProducts}>All Shoes</a></li>
                             <li><a href="product-listing.html">Running</a></li>
                             <li><a href="product-listing.html">Training &amp; Gym</a></li>
                             <li><a href="product-listing.html">Basketball</a></li>
@@ -364,7 +378,7 @@ const Header = (props) => {
                         <div className="mega-column">
                           <h4 className="mega-heading">Shoes</h4>
                           <ul className="mega-item">
-                            <li><a href='allproducts'>All Shoes</a></li>
+                            <li><a onClick={handleAllProducts}>All Shoes</a></li>
                             <li><a href="product-listing.html">Running</a></li>
                             <li><a href="product-listing.html">Training &amp; Gym</a></li>
                             <li><a href="product-listing.html">Basketball</a></li>
@@ -433,10 +447,7 @@ const Header = (props) => {
               </div>
               <div className="navigation__column right" style={{maxWidth:'350px'}}>
               
-                <form className="ps-search--header" action="do_action" method="post">
-                  <input className="form-control" type="text" placeholder="Search Product…" />
-                  <button><i className="ps-icon-search" /></button>
-                </form>
+                <Search/>
                 
                 <div className="ps-cart" ><a className="ps-cart__toggle" href="#"><span><i>{(total===0)?0:items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
                   <div className="ps-cart__listing" style={{width:'350px'}}>

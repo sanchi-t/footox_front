@@ -5,18 +5,22 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import React,{useState} from "react";
+import { setSearchQuery } from "../redux/QueryReducer/action";
 
 
 
 
 const ProductListing=()=>{
   const navigate = useNavigate();
-  
+  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  const products = useSelector((store) => store.dataReducer.products);
+  const products1 = useSelector((store) => store.dataReducer.products);
+  
+  
   const location = useLocation();
   const [searchParams] = useSearchParams();
+  const searchQuery = useSelector((store) => store.queryReducer.search);
 
   const handleDes = (id) => {
     console.log('click');
@@ -27,23 +31,38 @@ const ProductListing=()=>{
   };
 
   useEffect(() => {
-    if (location.search || products?.length === 0) {
+    setProducts(products1.filter(function (el) {
+      return el.Quantity !== undefined; 
+    }))
+    if (location.search || products.length === 0) {
       const sortBy = searchParams.get("sortBy");
 
       const queryParams = {
         params: {
           category: searchParams.getAll("category"),
-          gender: searchParams.getAll("productGender"),
-          // colortype: searchParams.getAll("colortype"),
-          sizes: searchParams.getAll("Sizes"),
+          productGender: searchParams.getAll("productGender"),
+          Quantity: searchParams.getAll("Quantity"),
+          color: searchParams.getAll("color"),
+          Sizes: searchParams.getAll("Sizes"),
           _sort: sortBy && "rating",
           _order: sortBy,
         },
       };
       dispatch(getData(queryParams));
     }
-  }, [dispatch, location.search, products?.length, searchParams]);
-  console.log(products);
+
+    if(searchQuery.query && searchQuery.query!==''){
+      setProducts(searchQuery.filteredProducts.map(function(item) { return item["item"]; }))
+    }
+    else{
+      
+      setProducts(products1.filter(function (el) {
+          return el.Quantity !== undefined; 
+        }))
+    }
+  }, [dispatch, location.search, products1?.length, searchParams,searchQuery.query]);
+  console.log(products,searchParams.get('GET'));
+  console.log(searchQuery,'yooooooooooooooooooooo');
 
     return(
         <>
@@ -73,7 +92,7 @@ const ProductListing=()=>{
                 </div>
               </div>
               <div className="ps-product__columns">
-              {products.map((item) => (
+              {products && products.map((item) => (
                 <div className="ps-product__column" key={item._id}>
                   <div className="ps-shoe mb-30">
                     <div className="ps-shoe__thumbnail">
@@ -92,10 +111,12 @@ const ProductListing=()=>{
                           <option value={2}>5</option>
                         </select> */}
                       </div>
-                      <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.name}</a>
-                        <p className="ps-shoe__categories" style={{width: '120px'}}><a href="#">{item.productName}</a></p><span className="ps-shoe__price">
-                          <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
-                      </div>
+                      <div className="ps-shoe__detail" key={item.id} style={{textAlign:'left'}}>
+                                <div key={item.id} style={{inlineSize: "15rem",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
+                                <p key={item.id} className="ps-shoe__categories"><a key={item.id} href="#">
+                                  {item.gender} shoes</a>,<a key={item.id} href="#"> Nike</a>,<a key={item.id} href="#"> Jordan</a></p><span key={item.id} className="ps-shoe__price">
+                                  <del key={item.id}>₹{item.original_price}</del> ₹{item.selling_price}</span>
+                              </div>
                     </div>
                   </div>
                 </div>

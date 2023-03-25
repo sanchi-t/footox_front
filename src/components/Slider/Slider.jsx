@@ -19,7 +19,7 @@ const Slider = () => {
     const l = axiosTest()
   }, [slide.length])
 
-  console.log(slide);
+  // console.log(slide);
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideLength = slide.length;
 
