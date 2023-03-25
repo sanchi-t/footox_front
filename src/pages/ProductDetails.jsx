@@ -270,7 +270,7 @@ const ProductDetails=()=>{
                 </div>
                 <div className="ps-product__image">
                 <Slider arrows={false} asNavFor={nav2} ref={slider1Ref}>
-                <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
+                <div className="item"><img  src={allImage[indexNo][0] } alt=""/></div>
                 <div className="item"><img  src={allImage[indexNo][1] } alt=""/></div>
                 <div className="item"><img  src={allImage[indexNo][2] } alt=""/></div>
                 <div className="item"><img  src={allImage[indexNo][3] } alt=""/></div>

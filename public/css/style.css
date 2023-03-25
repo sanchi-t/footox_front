@@ -3978,6 +3978,7 @@ textarea.form-control {
     .mega-menu .mega-column:last-child {
       border-right: 0; }
   .mega-menu .mega-item a {
+    cursor: pointer;
     display: block;
     padding: 5px 0;
     position: relative;
