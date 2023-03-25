@@ -92,6 +92,9 @@ const ProductListing=()=>{
                 </div>
               </div>
               <div className="ps-product__columns">
+                {!products? 
+                <img src='https://img.freepik.com/free-vector/hand-drawn-404-error_23-2147737389.jpg?w=740&t=st=1679744345~exp=1679744945~hmac=5cbc63e4ccef5f0b2b3708bbfa87ac93b9715b59dd8c8bc93e27bca5a288bc7d'></img>
+                :null}
               {products && products.map((item) => (
                 <div className="ps-product__column" key={item._id}>
                   <div className="ps-shoe mb-30">
