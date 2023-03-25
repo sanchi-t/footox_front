@@ -139,44 +139,7 @@ const ProductListing=()=>{
                   </ul>
                 </div>
               </aside>
-              {/* <aside className="ps-widget--sidebar ps-widget--filter">
-                <div className="ps-widget__header">
-                  <h3>Price</h3>
-                </div>
-                <div className="ps-widget__content">
-                  <div className="ac-slider" data-default-min={300} data-default-max={2000} data-max={3450} data-step={50} data-unit="$" />
-                  <p className="ac-slider__meta">Price:<span className="ac-slider__value ac-slider__min" />-<span className="ac-slider__value ac-slider__max" /></p><a className="ac-slider__filter ps-btn" href="#">Filter</a>
-                </div>
-              </aside> */}
-              {/* <aside className="ps-widget--sidebar ps-widget--category">
-                <div className="ps-widget__header">
-                  <h3>Shoe Brand</h3>
-                </div>
-                <div className="ps-widget__content">
-                  <ul className="ps-list--checked">
-                    <li className="current"><a href="product-listing.html">Nike(521)</a></li>
-                    <li><a href="product-listing.html">Adidas(76)</a></li>
-                    <li><a href="product-listing.html">Baseball(69)</a></li>
-                    <li><a href="product-listing.html">Gucci(36)</a></li>
-                    <li><a href="product-listing.html">Dior(108)</a></li>
-                    <li><a href="product-listing.html">B&amp;G(108)</a></li>
-                    <li><a href="product-listing.html">Louis Vuiton(47)</a></li>
-                  </ul>
-                </div>
-              </aside> */}
-              {/* <aside className="ps-widget--sidebar ps-widget--category">
-                <div className="ps-widget__header">
-                  <h3>Width</h3>
-                </div>
-                <div className="ps-widget__content">
-                  <ul className="ps-list--checked">
-                    <li className="current"><a href="product-listing.html">Narrow</a></li>
-                    <li><a href="product-listing.html">Regular</a></li>
-                    <li><a href="product-listing.html">Wide</a></li>
-                    <li><a href="product-listing.html">Extra Wide</a></li>
-                  </ul>
-                </div>
-              </aside> */}
+              
               <div className="ps-sticky desktop">
                 <aside className="ps-widget--sidebar">
                   <div className="ps-widget__header">
