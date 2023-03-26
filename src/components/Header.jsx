@@ -66,6 +66,7 @@ const Header = (props) => {
   const products = useSelector((store) => store.dataReducer.products);
   const dispatch = useDispatch();
   const location = useLocation();
+  const [getOffer, setGetOffer] = useState(null);
   const userData=JSON.parse(localStorage.getItem('all'));
 
   const navigate = useNavigate();
@@ -81,6 +82,12 @@ const Header = (props) => {
           dispatch(getData());
         }
       }, [dispatch, products?.length]);
+
+      useEffect(() => {
+        axios.get(`${process.env.REACT_APP_BACKEND_SERVER}getOffer/`)
+          .then(res => setGetOffer(res.data.offer))
+          .catch(err => console.log(err));
+      }, []);
   useEffect(() => {
     // console.log('inside useState',quantity,items)
     // dispatch(getData());
@@ -519,9 +526,9 @@ const Header = (props) => {
           <div className="ps-services owl-slider">
             <OwlCarousel items={1} margin={0} autoplay={true} loop={true} dots={false} nav={false}>
 
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: Get free standard delivery on every order with Shoe Store</p>
+              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
+              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
+              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
             </OwlCarousel>
           </div>
         </div> 

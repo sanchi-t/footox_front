@@ -53,15 +53,11 @@ const Search=()=>{
     
     dispatch(setSearchQuery({query,filteredProducts}));
   }
-  const handleBlur = () => {
-    setTimeout(() => {
-      setShowDropdown(false);
-    }, 200);
-  };
+
     return(
     <>
     <form className="ps-search--header" onSubmit={handleSumbit}>
-        <input id="myInput" className="form-control" type="text" placeholder="Search Product…" onBlur={handleBlur} onChange={handleSearch} />
+        <input id="myInput" className="form-control" type="text" placeholder="Search Product…" onChange={handleSearch} />
         <button><i className="ps-icon-search" /></button>
         {showDropdown &&  (
         <ul id="myUL">
