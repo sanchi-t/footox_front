@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams,createSearchParams } from "react-router-dom";
 import { getData } from "../redux/DataReducer/action";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,20 +7,78 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import React,{useState} from "react";
 import { setSearchQuery } from "../redux/QueryReducer/action";
+import Fuse from "fuse.js";
 
+
+
+
+
+
+const Checkbox = ({ label, checked, onChange }) => { 
+
+  return (
+    <div className="checkbox-wrapper">
+      <label>
+        <input
+          value={label}
+          type="checkbox"
+          checked={checked}
+          onChange={onChange}
+          className={checked ? "checked" : ""}
+        />
+        <span>{label}</span>
+      </label>
+    </div>
+  );
+};
+
+// products.filter(
+//   (product) =>
+//     queryParams.category.includes(product.category) &&
+//     queryParams.color.includes(product.color)
+// );
 
 
 
 const ProductListing=()=>{
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [queryParams, setQueryParams] = useState({});
+
   const dispatch = useDispatch();
   const products1 = useSelector((store) => store.dataReducer.products);
+  const category = ['Slides','Sneakers','Sports','FlipFlop'  ];
+  const colors = ['Red','Black','Grey','Green','White'  ];
+
+  const [checkedState2, setCheckedState2] = useState(
+    new Array(colors.length).fill(false)
+);
+
+  const [checkedState, setCheckedState] = useState(
+    new Array(category.length).fill(false)
+);
+
+
+const options = {
+  keys: ["productName"],
+  threshold: 0.4, // Adjust this value to control how "fuzzy" the search is
+};
+const fuse = new Fuse(products, options);
+
   
   
   const location = useLocation();
-  const [searchParams] = useSearchParams();
+  const [searchParams,setSearchParams] = useSearchParams({});
+  const [searchParams1, setSearchParams1] = useState({
+    category: [],
+    colors: [],
+    size: [],
+  });
   const searchQuery = useSelector((store) => store.queryReducer.search);
+
+
 
   const handleDes = (id) => {
     console.log('click');
@@ -30,39 +88,149 @@ const ProductListing=()=>{
     window.scrollTo(0,0); 
   };
 
+
+
   useEffect(() => {
-    setProducts(products1.filter(function (el) {
-      return el.Quantity !== undefined; 
-    }))
-    if (location.search || products.length === 0) {
-      const sortBy = searchParams.get("sortBy");
 
-      const queryParams = {
-        params: {
-          category: searchParams.getAll("category"),
-          productGender: searchParams.getAll("productGender"),
-          Quantity: searchParams.getAll("Quantity"),
-          color: searchParams.getAll("color"),
-          Sizes: searchParams.getAll("Sizes"),
-          _sort: sortBy && "rating",
-          _order: sortBy,
-        },
-      };
-      dispatch(getData(queryParams));
-    }
+    setSearchParams(searchParams1);
+  }, [searchParams1]);
 
-    if(searchQuery.query && searchQuery.query!==''){
-      setProducts(searchQuery.filteredProducts.map(function(item) { return item["item"]; }))
+
+  
+  // useEffect(() => {
+  //   if(searchQuery.query && searchQuery.query!==''){
+  //     console.log('hi');
+  //     setProducts(searchQuery.filteredProducts.map(function(item) { return item["item"]; }))
+  //   }
+    
+  // }, [searchQuery]);
+
+  
+
+
+
+
+  const handleCategory = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+    const checkedCategories = category.filter(
+      (value, index) => updatedCheckedState[index]
+    );
+    console.log(searchQuery,'searchquery');
+    setSearchParams1((prevState) => ({
+      ...prevState,
+      ['category']: checkedCategories,
+      ['sizes']: selectedSizes,
+    }));
+
+
+
+    
+    
+    // console.log(checkedCategories);
+
+
+    // const totalPrice = updatedCheckedState.reduce(
+    //   (sum, currentState, index) => {
+    //     if (currentState === true) {
+    //       return sum + toppings[index].price;
+    //     }
+    //     return sum;
+    //   },
+    //   0
+    // );
+
+    // setTotal(totalPrice);
+  };
+
+
+  const handleColor = (position) => {
+    const updatedCheckedState = checkedState2.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState2(updatedCheckedState);
+    const checkedColor = colors.filter(
+      (value, index) => updatedCheckedState[index]
+    );
+    setSearchParams1((prevState) => ({
+      ...prevState,
+      ['colors']: checkedColor,
+    }));
+  }
+
+
+
+
+  
+
+  useEffect(() => {
+    if (location.search) {
+      setSearchParams1((prevState) => ({
+        ...prevState,
+        ...(searchQuery.query ? { ['productName']: searchQuery.query } : {['productName']:''}),
+      }));
+      const query = {
+        productName: searchParams.get('productName'),
+        category: searchParams.getAll("category"),
+        productGender: searchParams.getAll("productGender"),
+        Quantity: searchParams.getAll("Quantity"),
+        colors: searchParams.getAll("colors"),
+        sizes: searchParams.getAll("sizes").map(Number),
+    };
+    console.log(!query.productName,'prodyctan')
+    setQueryParams(query);
+    console.log(query,'queryParams',searchQuery?.filteredProducts?.includes(products[0]),products[0],searchQuery.filteredProducts);
+    setFilteredProducts(products.filter(product => {
+      const { productName,sizes, colors, category } = query;
+      if (
+        (!productName || searchQuery.filteredProducts.some(p => JSON.stringify(p) === JSON.stringify(product))) &&
+        (sizes.length === 0 || product.Sizes.some(size => size.some(s => sizes.includes(s)))) &&
+        (colors.length === 0 || product.color.some(color => colors.includes(String(color)))) &&
+        (category.length === 0 || category.includes(product.category))
+      ) {
+        console.log(product,'product')
+        return true;
+      }
+      return false;
+    }));;
     }
     else{
-      
       setProducts(products1.filter(function (el) {
-          return el.Quantity !== undefined; 
-        }))
+        return el.Quantity !== undefined; 
+      }))
+      setFilteredProducts(products1.filter(function (el) {
+        return el.Quantity !== undefined; 
+      }));
     }
-  }, [dispatch, location.search, products1?.length, searchParams,searchQuery.query]);
-  console.log(products,searchParams.get('GET'));
-  console.log(searchQuery,'yooooooooooooooooooooo');
+
+    
+  }, [dispatch, location.search, products1?.length,searchParams,searchQuery]);
+
+
+  function handleSizeClick(size) {
+    const newSelectedSizes = selectedSizes.includes(size)
+    ? selectedSizes.filter(s => s !== size)
+    : [...selectedSizes, size];
+
+  setSelectedSizes(newSelectedSizes);
+
+  setSearchParams1((prevState) => ({
+    ...prevState,
+    ['sizes']: newSelectedSizes,
+  }));
+
+  }
+
+  function getClassNames(size) {
+    return selectedSizes.includes(size) ? 'active' : 'inactive';
+  }
+
+  console.log(filteredProducts,searchQuery.filteredProducts);
+
 
     return(
         <>
@@ -80,22 +248,20 @@ const ProductListing=()=>{
                     <option value={3}>Price (High to Low)</option>
                   </select>
                 </div> */}
-                <div className="ps-pagination">
+                {/* <div className="ps-pagination">
                   <ul className="pagination">
-                    {/* <li><a href="#"><i className="fa fa-angle-left" /></a></li> */}
                     <li className="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">...</a></li>
-                    {/* <li><a href="#"><i className="fa fa-angle-right" /></a></li> */}
                   </ul>
-                </div>
+                </div> */}
               </div>
               <div className="ps-product__columns">
-                {!products? 
-                <img src='https://img.freepik.com/free-vector/hand-drawn-404-error_23-2147737389.jpg?w=740&t=st=1679744345~exp=1679744945~hmac=5cbc63e4ccef5f0b2b3708bbfa87ac93b9715b59dd8c8bc93e27bca5a288bc7d'></img>
+                {filteredProducts.length==0? 
+                <img style={{position:'relative',top:'-17rem',marginLeft:'16%'}} src='https://img.freepik.com/free-vector/hand-drawn-404-error_23-2147737389.jpg?w=740&t=st=1679744345~exp=1679744945~hmac=5cbc63e4ccef5f0b2b3708bbfa87ac93b9715b59dd8c8bc93e27bca5a288bc7d'></img>
                 :null}
-              {products && products.map((item) => (
+              {filteredProducts && filteredProducts.map((item) => (
                 <div className="ps-product__column" key={item._id}>
                   <div className="ps-shoe mb-30">
                     <div className="ps-shoe__thumbnail">
@@ -153,10 +319,39 @@ const ProductListing=()=>{
                 </div>
                 <div className="ps-widget__content">
                   <ul className="ps-list--checked">
-                    <li className="current"><a href="product-listing.html">Slides</a></li>
-                    <li><a href="product-listing.html">Sneakers</a></li>
-                    <li><a href="product-listing.html">Sports</a></li>
-                    <li><a href="product-listing.html">Flip-Flop</a></li>
+                    {category.map((item,index)=>{
+                      return(
+                         <>
+                         <li> <Checkbox label={item} name={item} checked={checkedState[index]} onChange={() => handleCategory(index)} /></li>
+                    
+                    </> 
+                      )
+                      
+                    })}
+                  {/* <li> <Checkbox label="Slides" name="Slides" checked={searchParams1.category.includes('Slides')} onChange={(e) => handleFilterChange("category", [
+                ...searchParams1.category,
+                e.target.value,
+                e.target.checked,
+              ])
+            } /></li>
+                    <li> <Checkbox label="Sneakers" name="Sneakers" checked={searchParams1.category.includes('Sneakers')} onChange={(e) => handleFilterChange("category", [
+                ...searchParams1.category,
+                e.target.value,
+                e.target.checked,
+              ])
+            } /></li>
+                    <li> <Checkbox label="Sports" name="Sports" checked={searchParams1.category.includes('Sports')} onChange={(e) => handleFilterChange("category", [
+                ...searchParams1.category,
+                e.target.value,
+                e.target.checked,
+              ])
+            } /></li>
+                    <li> <Checkbox label="FlipFlop" name="FlipFlop" checked={searchParams1.category.includes('FlipFlop')} onChange={(e) => handleFilterChange("category", [
+                ...searchParams1.category,
+                e.target.value,
+                e.target,
+              ])
+            } /></li> */}
                     {/* <li><a href="product-listing.html">Soccer(108)</a></li>
                     <li><a href="product-listing.html">Trainning &amp; game(47)</a></li>
                     <li><a href="product-listing.html">More</a></li> */}
@@ -211,23 +406,23 @@ const ProductListing=()=>{
                       <tbody>
                         <tr>
                           {/* <td className="active"></td> */}
-                          <td>1</td>
-                          <td>2</td>
-                          <td>3</td>
-                          <td>4</td>
+                          <td className={getClassNames(1)} onClick={() => handleSizeClick(1)}>1</td>
+                          <td className={getClassNames(2)} onClick={() => handleSizeClick(2)}>2</td>
+                          <td className={getClassNames(3)} onClick={() => handleSizeClick(3)}>3</td>
+                          <td className={getClassNames(4)} onClick={() => handleSizeClick(4)}>4</td>
                         </tr>
                         <tr>
-                          <td>5</td>
-                          <td>6</td>
-                          <td>7</td>
-                          <td>8</td>
+                          <td className={getClassNames(5)} onClick={() => handleSizeClick(5)}>5</td>
+                          <td className={getClassNames(6)} onClick={() => handleSizeClick(6)}>6</td>
+                          <td className={getClassNames(7)} onClick={() => handleSizeClick(7)}>7</td>
+                          <td className={getClassNames(8)} onClick={() => handleSizeClick(8)}>8</td>
                          
                         </tr>
                         <tr>
-                          <td><a>9</a></td>
-                          <td>10</td>
-                          <td>11</td>
-                          <td>12</td>
+                          <td className={getClassNames(9)} onClick={() => handleSizeClick(9)}><a>9</a></td>
+                          <td className={getClassNames(10)} onClick={() => handleSizeClick(10)}>10</td>
+                          <td className={getClassNames(11)} onClick={() => handleSizeClick(11)}>11</td>
+                          <td className={getClassNames(12)} onClick={() => handleSizeClick(12)}>12</td>
                           {/* <td>14</td> */}
                         </tr>
                         {/* <tr>
@@ -254,19 +449,15 @@ const ProductListing=()=>{
                   </div>
                   <div className="ps-widget__content">
                     <ul className="ps-list--color">
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
-                      <li><a href="#" /></li>
+                    {colors.map((item,index)=>{
+                      return(
+                         <>
+                         <li style={{width:'10rem'}}> <Checkbox label={item} name={item} checked={checkedState2[index]} onChange={() => handleColor(index)} /></li>
+                    
+                    </> 
+                      )
+                      
+                    })}
                     </ul>
                   </div>
                 </aside>

@@ -19,7 +19,7 @@ const Search=()=>{
   // const searchresults = useSelector((store) => )
   
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [fProducts, setFilteredProducts] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const options = {
@@ -34,7 +34,7 @@ const Search=()=>{
     setQuery(query);
     setFilteredProducts(filtered);
     setShowDropdown(true);
-    // console.log(filteredProducts,products);
+    // console.log(fProducts,products);
   };
   const handleClick=(id)=>{
     navigate(`/${id}`);
@@ -43,29 +43,40 @@ const Search=()=>{
   }
   const handleSumbit=(e)=>{
     e.preventDefault();
+    const params = new URLSearchParams(window.location.search);
+  const category = params.getAll("category");
+  const size = params.getAll("size");
+  const color = params.getAll("color");
+  let searchQuery = query;
+  if (category) {
+    searchQuery += " " + '&category='+category;
+  }
+  if (size) {
+    searchQuery += " " + size;
+  }
+  if (color) {
+    searchQuery += " " + color;
+  }
     navigate({
       pathname: "/allproducts",
       search: `?${createSearchParams({
-          GET:'SEARCH',
-          productName: query
+          productName: query,
+          category: category,
+          color:color,
       })}`
   });
-    
+  const filteredProducts=fProducts.map(function(item) { return item["item"]; })
+    console.log(filteredProducts,'filteredProducts');
     dispatch(setSearchQuery({query,filteredProducts}));
   }
-  const handleBlur = () => {
-    setTimeout(() => {
-      setShowDropdown(false);
-    }, 200);
-  };
     return(
     <>
     <form className="ps-search--header" onSubmit={handleSumbit}>
-        <input id="myInput" className="form-control" type="text" placeholder="Search Product…" onBlur={handleBlur} onChange={handleSearch} />
+        <input id="myInput" className="form-control" type="text" placeholder="Search Product…"  onChange={handleSearch} />
         <button><i className="ps-icon-search" /></button>
         {showDropdown &&  (
         <ul id="myUL">
-          {filteredProducts.map((product) => {
+          {fProducts.map((product) => {
             return(<li onClick={()=>handleClick(product.item.productId)}><a><img id="myImg" src={product.item.image[0][0]}/><p>{product.item.productName}</p></a></li>)
             })}
         </ul>
