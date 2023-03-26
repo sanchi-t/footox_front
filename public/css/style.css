@@ -6552,10 +6552,10 @@ html .bg--parallax {
 
 
 
-  /* .ps-product__variants img{
+  .ps-product__variants img{
     height: 6.12rem;
-    weight: 6.12rem;
-  } */
+    width: 6.12rem;
+  }
 
   
 .checkbox-wrapper input[type="checkbox"] {
@@ -6626,7 +6626,7 @@ input:checked::before {
   display: flex;
   align-items: center;
 }
-  .slick-next.slick-arrow{
+  /* .slick-next.slick-arrow{ */
 
     /* font-size: 0;
     line-height: 0;
@@ -6645,6 +6645,6 @@ input:checked::before {
     position: absolute;
     display: block;
     padding: 0; */
-  }
+  /* } */
  
 /*# sourceMappingURL=style.css.map */
