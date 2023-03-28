@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import Search from './Search';
 import { createSearchParams } from "react-router-dom";
 import { setSearchQuery } from "../redux/QueryReducer/action";
+import parse from 'html-react-parser';
 
 // import CartData from "./CartData";
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
