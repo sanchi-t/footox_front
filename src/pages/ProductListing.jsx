@@ -7,7 +7,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import React,{useState} from "react";
 import { setSearchQuery } from "../redux/QueryReducer/action";
+import { setProductData } from "../redux/DataReducer/action";
+import ReactPaginate from "react-js-pagination";
 import Fuse from "fuse.js";
+import axios from "axios";
 
 
 
@@ -45,12 +48,31 @@ const ProductListing=()=>{
   const [products, setProducts] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [item, setItem] = useState([]);
+  // const [category, setCategpry] = useState([]);
   const [queryParams, setQueryParams] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(2);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  // const currentProducts = filteredProducts.slice(
+  //   indexOfFirstProduct,
+  //   indexOfLastProduct
+  // );
+  const currentProducts = useSelector((store) => store.productReducer.products);
+  const category = useSelector((store) => store.productReducer.category);
+
+  const totalPages = Math.ceil(item / productsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const dispatch = useDispatch();
   const products1 = useSelector((store) => store.dataReducer.products);
-  const category = ['Slides','Sneakers','Sports','FlipFlop'  ];
+  // const category = ['Slides','Sneakers','Sports','FlipFlop'  ];
   const colors = ['Red','Black','Grey','Green','White'  ];
+  console.log(products1,currentProducts)
 
   const [checkedState2, setCheckedState2] = useState(
     new Array(colors.length).fill(false)
@@ -111,6 +133,7 @@ const fuse = new Fuse(products, options);
 
 
   const handleCategory = (position) => {
+    console.log(checkedState,'checoedstaet')
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
@@ -162,13 +185,22 @@ const fuse = new Fuse(products, options);
     }));
   }
 
-
+  useEffect(() => {
+    axios.get(`http://localhost:4000/products?page=${currentPage}&limit=${productsPerPage}&query=${JSON.stringify(queryParams)}`)
+      .then((response) => {
+        console.log(response)
+        setItem(response.data.totalProducts)
+        dispatch(setProductData(response.data));
+        setLoading(false);
+      });
+  }, [currentPage,queryParams]);
 
 
   
 
   useEffect(() => {
     if (location.search) {
+      paginate(1);
       setSearchParams1((prevState) => ({
         ...prevState,
         ...(searchQuery.query ? { ['productName']: searchQuery.query } : {['productName']:''}),
@@ -181,31 +213,31 @@ const fuse = new Fuse(products, options);
         colors: searchParams.getAll("colors"),
         sizes: searchParams.getAll("sizes").map(Number),
     };
-    console.log(!query.productName,'prodyctan')
+    // console.log(!query.productName,'prodyctan')
     setQueryParams(query);
-    console.log(query,'queryParams',searchQuery?.filteredProducts?.includes(products[0]),products[0],searchQuery.filteredProducts);
-    setFilteredProducts(products.filter(product => {
-      const { productName,sizes, colors, category } = query;
-      if (
-        (!productName || searchQuery.filteredProducts.some(p => JSON.stringify(p) === JSON.stringify(product))) &&
-        (sizes.length === 0 || product.Sizes.some(size => size.some(s => sizes.includes(s)))) &&
-        (colors.length === 0 || product.color.some(color => colors.includes(String(color)))) &&
-        (category.length === 0 || category.includes(product.category))
-      ) {
-        console.log(product,'product')
-        return true;
-      }
-      return false;
-    }));;
+    // console.log(query,'queryParams',searchQuery?.filteredProducts?.includes(products[0]),products[0],searchQuery.filteredProducts);
+    // setFilteredProducts(products.filter(product => {
+    //   const { productName,sizes, colors, category } = query;
+    //   if (
+    //     (!productName || searchQuery.filteredProducts.some(p => JSON.stringify(p) === JSON.stringify(product))) &&
+    //     (sizes.length === 0 || product.Sizes.some(size => size.some(s => sizes.includes(s)))) &&
+    //     (colors.length === 0 || product.color.some(color => colors.includes(String(color)))) &&
+    //     (category.length === 0 || category.includes(product.category))
+    //   ) {
+    //     console.log(product,'product')
+    //     return true;
+    //   }
+    //   return false;
+    // }));;
     }
-    else{
-      setProducts(products1.filter(function (el) {
-        return el.Quantity !== undefined; 
-      }))
-      setFilteredProducts(products1.filter(function (el) {
-        return el.Quantity !== undefined; 
-      }));
-    }
+    // else{
+    //   setProducts(products1.filter(function (el) {
+    //     return el.Quantity !== undefined; 
+    //   }))
+    //   setFilteredProducts(products1.filter(function (el) {
+    //     return el.Quantity !== undefined; 
+    //   }));
+    // }
 
     
   }, [dispatch, location.search, products1?.length,searchParams,searchQuery]);
@@ -229,7 +261,7 @@ const fuse = new Fuse(products, options);
     return selectedSizes.includes(size) ? 'active' : 'inactive';
   }
 
-  console.log(filteredProducts,searchQuery.filteredProducts);
+  // console.log(filteredProducts,searchQuery.filteredProducts);
 
 
     return(
@@ -248,26 +280,28 @@ const fuse = new Fuse(products, options);
                     <option value={3}>Price (High to Low)</option>
                   </select>
                 </div> */}
-                {/* <div className="ps-pagination">
+                <div className="ps-pagination">
                   <ul className="pagination">
-                    <li className="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">...</a></li>
+                  <Pagination totalPages={totalPages} currentPage={currentPage} paginate={paginate} />
+
+                    {/* <li className="active"><a >1</a></li>
+                    <li><a >2</a></li>
+                    <li><a >3</a></li>
+                    <li><a >...</a></li> */}
                   </ul>
-                </div> */}
+                </div>
               </div>
               <div className="ps-product__columns">
-                {filteredProducts.length==0? 
-                <img style={{position:'relative',top:'-17rem',marginLeft:'16%'}} src='https://img.freepik.com/free-vector/hand-drawn-404-error_23-2147737389.jpg?w=740&t=st=1679744345~exp=1679744945~hmac=5cbc63e4ccef5f0b2b3708bbfa87ac93b9715b59dd8c8bc93e27bca5a288bc7d'></img>
+                {(currentProducts.length<=0 && !loading)? 
+                <img style={{position:'relative',top:'-14rem',height:'60rem',marginLeft:'20%'}} src='https://img.freepik.com/free-vector/hand-drawn-404-error_23-2147737389.jpg?w=740&t=st=1679744345~exp=1679744945~hmac=5cbc63e4ccef5f0b2b3708bbfa87ac93b9715b59dd8c8bc93e27bca5a288bc7d'></img>
                 :null}
-              {filteredProducts && filteredProducts.map((item) => (
+              {currentProducts && currentProducts.map((item) => (
                 <div className="ps-product__column" key={item._id}>
                   <div className="ps-shoe mb-30">
                     <div className="ps-shoe__thumbnail">
                       {/* <div className="ps-badge"><span>New</span></div> */}
                       {/* <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div> */}
-                      <a className="ps-shoe__favorite" href="#"><i className="ps-icon-heart" /></a><img style ={{height : '350px', width : '300px'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
+                      <a className="ps-shoe__favorite" ><i className="ps-icon-heart" /></a><img style ={{height : '350px', width : '300px'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
                     </div>
                     <div className="ps-shoe__content">
                       <div className="ps-shoe__variants">
@@ -282,8 +316,8 @@ const fuse = new Fuse(products, options);
                       </div>
                       <div className="ps-shoe__detail" key={item.id} style={{textAlign:'left'}}>
                                 <div key={item.id} style={{inlineSize: "15rem",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
-                                <p key={item.id} className="ps-shoe__categories"><a key={item.id} href="#">
-                                  {item.gender} shoes</a>,<a key={item.id} href="#"> Nike</a>,<a key={item.id} href="#"> Jordan</a></p><span key={item.id} className="ps-shoe__price">
+                                <p key={item.id} className="ps-shoe__categories"><a key={item.id} >
+                                  {item.gender} shoes</a>,<a key={item.id} > Nike</a>,<a key={item.id} > Jordan</a></p><span key={item.id} className="ps-shoe__price">
                                   <del key={item.id}>₹{item.original_price}</del> ₹{item.selling_price}</span>
                               </div>
                     </div>
@@ -300,16 +334,16 @@ const fuse = new Fuse(products, options);
                     <option value={3}>Price (High to Low)</option>
                   </select>
                 </div> */}
-                {/* <div className="ps-pagination">
+                <div className="ps-pagination">
                   <ul className="pagination">
-                    <li><a href="#"><i className="fa fa-angle-left" /></a></li>
-                    <li className="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">...</a></li>
-                    <li><a href="#"><i className="fa fa-angle-right" /></a></li>
+                  <Pagination totalPages={totalPages} currentPage={currentPage} paginate={paginate} />
+
+                    {/* <li className="active"><a >1</a></li>
+                    <li><a >2</a></li>
+                    <li><a >3</a></li>
+                    <li><a >...</a></li> */}
                   </ul>
-                </div> */}
+                </div>
               {/* </div> */}
             </div>
             <div className="ps-sidebar" data-mh="product-listing">
@@ -358,7 +392,44 @@ const fuse = new Fuse(products, options);
                   </ul>
                 </div>
               </aside>
-              
+              {/* <aside className="ps-widget--sidebar ps-widget--filter">
+                <div className="ps-widget__header">
+                  <h3>Price</h3>
+                </div>
+                <div className="ps-widget__content">
+                  <div className="ac-slider" data-default-min={300} data-default-max={2000} data-max={3450} data-step={50} data-unit="$" />
+                  <p className="ac-slider__meta">Price:<span className="ac-slider__value ac-slider__min" />-<span className="ac-slider__value ac-slider__max" /></p><a className="ac-slider__filter ps-btn" >Filter</a>
+                </div>
+              </aside> */}
+              {/* <aside className="ps-widget--sidebar ps-widget--category">
+                <div className="ps-widget__header">
+                  <h3>Shoe Brand</h3>
+                </div>
+                <div className="ps-widget__content">
+                  <ul className="ps-list--checked">
+                    <li className="current"><a href="product-listing.html">Nike(521)</a></li>
+                    <li><a href="product-listing.html">Adidas(76)</a></li>
+                    <li><a href="product-listing.html">Baseball(69)</a></li>
+                    <li><a href="product-listing.html">Gucci(36)</a></li>
+                    <li><a href="product-listing.html">Dior(108)</a></li>
+                    <li><a href="product-listing.html">B&amp;G(108)</a></li>
+                    <li><a href="product-listing.html">Louis Vuiton(47)</a></li>
+                  </ul>
+                </div>
+              </aside> */}
+              {/* <aside className="ps-widget--sidebar ps-widget--category">
+                <div className="ps-widget__header">
+                  <h3>Width</h3>
+                </div>
+                <div className="ps-widget__content">
+                  <ul className="ps-list--checked">
+                    <li className="current"><a href="product-listing.html">Narrow</a></li>
+                    <li><a href="product-listing.html">Regular</a></li>
+                    <li><a href="product-listing.html">Wide</a></li>
+                    <li><a href="product-listing.html">Extra Wide</a></li>
+                  </ul>
+                </div>
+              </aside> */}
               <div className="ps-sticky desktop">
                 <aside className="ps-widget--sidebar">
                   <div className="ps-widget__header">
@@ -454,6 +525,34 @@ const fuse = new Fuse(products, options);
         </>
     )
 }
+
+
+
+
+
+const Pagination = ({ totalPages,currentPage, paginate }) => {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  return (
+    <>
+
+        {pageNumbers.map((number) => (
+          <li key={number} style={{cursor:'pointer'}} className={`${currentPage === number ? 'active' : ''}`}>
+            <a onClick={() => paginate(number)}>
+              {number}
+            </a>
+          </li>
+        ))}
+
+      </>
+  );
+};
+
+
 
 
 

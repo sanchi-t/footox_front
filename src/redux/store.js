@@ -5,7 +5,7 @@ import {
   applyMiddleware,
 } from "redux";
 import thunk from "redux-thunk";
-import { dataReducer } from "./DataReducer/reducer";
+import { dataReducer,productReducer } from "./DataReducer/reducer";
 import { reducer as AuthReducer } from "./AuthReducer/reducer";
 import { cartReducer } from "./CartReducer/reducer";
 import { pagesReducer } from "./PagesReducer/reducer";
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   pagesReducer,
   wishReducer,
   queryReducer,
+  productReducer,
 
 });
 

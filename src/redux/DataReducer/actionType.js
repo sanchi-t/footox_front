@@ -13,3 +13,5 @@ export const DELETE_DATA_F = "UPDATE_DATA_F";
 export const Add_DATA_R = "INSERT_DATA_R"
 export const Add_DATA_S = "INSERT_DATA_S"
 export const Add_DATA_F = "INSERT_DATA_F"
+
+export const GET_PRODUCTS="GET_PRODUCTS";

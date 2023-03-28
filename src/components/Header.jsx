@@ -272,7 +272,9 @@ const Header = (props) => {
       search: `?${createSearchParams({
           GET: 'ALL'
       })}`
+      
   });
+  
   dispatch(setSearchQuery({}));
 
   }
