@@ -6552,10 +6552,10 @@ html .bg--parallax {
 
 
 
-  /* .ps-product__variants img{
+  .ps-product__variants img{
     height: 6.12rem;
-    weight: 6.12rem;
-  } */
+    width: 6.12rem;
+  }
 
   
 .checkbox-wrapper input[type="checkbox"] {
