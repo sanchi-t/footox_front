@@ -526,9 +526,9 @@ const Header = (props) => {
           <div className="ps-services owl-slider">
             <OwlCarousel items={1} margin={0} autoplay={true} loop={true} dots={false} nav={false}>
 
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
+              <p className="ps-service">{parse(`${getOffer}`)}</p>
+              <p className="ps-service">{parse(`${getOffer}`)}</p>
+              <p className="ps-service">{parse(`${getOffer}`)}</p>
             </OwlCarousel>
           </div>
         </div> 
