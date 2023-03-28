@@ -19,6 +19,7 @@ const getData = (params) => (dispatch) => {
 };
 
 
+
 const updateData = (id, payload) => (dispatch) => {
   dispatch({ type: types.UPDATE_DATA_R });
   return axios.post
@@ -164,5 +165,15 @@ const getBannerData = () => async (dispatch) => {
 };
 
 
+const setProductData=(products)=>{
+  // dispatch({ type: types.SET_SEARCH_QUERY, });
+  return{
+    type: types.GET_PRODUCTS,
+    products: products.products,
+    pages: products.totalProducts,
+    category: products.category
+  
+}};
 
-export { getData, updateData, deleteData,addData,getCoupon,updateCoupon,deleteCoupon,addCoupon,getOneCoupon,getBannerData };
+
+export { getData, updateData, deleteData,addData,getCoupon,updateCoupon,deleteCoupon,addCoupon,getOneCoupon,getBannerData,setProductData };
