@@ -15,6 +15,7 @@ import {
   import axios from "axios";
   import { useEffect, useState } from "react";
   import { useLocation } from "react-router-dom";
+  import { createSearchParams } from "react-router-dom";
   import { useDispatch, useSelector } from "react-redux";
   import Container from "react-bootstrap/Container";
   import Header from "../components/Header";
@@ -38,6 +39,7 @@ import {
       products: [],
     });
     let num = 0;
+    const navigate=useNavigate();
     var filteredProducts1 = [];
   
       // const [products, setProducts] = useState(null);
@@ -107,6 +109,7 @@ import {
   
                     filteredProducts1[num - 1] = {
                       user : item.name_reciever,
+                      orderId: item._id,
                       id : orders.id,
                       productName: products.productName,
                       image : products.image,
@@ -127,6 +130,19 @@ import {
           //     order: 'You never ordered anything',
           //   }
           // };
+
+
+    const handleClick=(product)=>{
+      console.log('clicked',product);
+      navigate({
+        pathname: "/orderdetail",
+        search: `?${createSearchParams({
+            orderId: product.orderId,
+            productId:product.id
+        })}`
+        
+    });
+    }
   
     
   
@@ -159,6 +175,8 @@ import {
           filteredProducts1.map((item, index) => (
               <>
               <Box
+
+          onClick={()=>handleClick(item)}
           m="auto"
           w={"95%"}
           bg={'#50CF96'}

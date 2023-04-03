@@ -11,6 +11,19 @@ import { setProductData } from "../redux/DataReducer/action";
 import ReactPaginate from "react-js-pagination";
 import Fuse from "fuse.js";
 import axios from "axios";
+import Image from "./productnotfound.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import PlaceholderImage from "./productnotfound1.jpg";
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
+
+
+
+
+
+const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+
 
 
 
@@ -74,13 +87,20 @@ const ProductListing=()=>{
   const colors = ['Red','Black','Grey','Green','White'  ];
   console.log(products1,currentProducts)
 
+  // useEffect(() => {
+  //   if(!category){
+  //     setCheckedState( new Array(category.length).fill(false))
+  //   }
+    
+  // }, [category.length]);
+
+
+
   const [checkedState2, setCheckedState2] = useState(
     new Array(colors.length).fill(false)
 );
 
-  const [checkedState, setCheckedState] = useState(
-    new Array(category.length).fill(false)
-);
+  const [checkedState, setCheckedState] = useState( new Array(50).fill(false));
 
 
 const options = {
@@ -186,7 +206,7 @@ const fuse = new Fuse(products, options);
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/products?page=${currentPage}&limit=${productsPerPage}&query=${JSON.stringify(queryParams)}`)
+    axios.get(`${BackendServer}products?page=${currentPage}&limit=${productsPerPage}&query=${JSON.stringify(queryParams)}`)
       .then((response) => {
         console.log(response)
         setItem(response.data.totalProducts)
@@ -293,7 +313,10 @@ const fuse = new Fuse(products, options);
               </div>
               <div className="ps-product__columns">
                 {(currentProducts.length<=0 && !loading)? 
-                <img style={{position:'relative',top:'-14rem',height:'60rem',marginLeft:'20%'}} src='https://img.freepik.com/free-vector/hand-drawn-404-error_23-2147737389.jpg?w=740&t=st=1679744345~exp=1679744945~hmac=5cbc63e4ccef5f0b2b3708bbfa87ac93b9715b59dd8c8bc93e27bca5a288bc7d'></img>
+                <LazyLoadImage src={Image}
+                PlaceholderSrc={PlaceholderImage}
+                effect="blur"
+            />
                 :null}
               {currentProducts && currentProducts.map((item) => (
                 <div className="ps-product__column" key={item._id}>

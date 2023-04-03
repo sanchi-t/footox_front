@@ -8,6 +8,7 @@ import HomePage from "../pages/HomePage";
 // import AdminNavbar from "../Admin/AdminNavbar";
 // import AddCoupon from "../Admin/AddCoupon";
 // import Banner from "../Admin/Banner";
+import OrderDetail from "../pages/OrderDetail";
 import Checkout from "../pages/Checkout";
 import ViewCart from "../pages/ViewCart";
 import Authentication from "../Authentication/Auth";
@@ -64,6 +65,7 @@ const AllRoutes = () => {
         {/* <Route path="/showPreviousOrder" element={<OrderPage/>}/> */}
         <Route path="/showProducts" element={<ProductPage/>}/>  
         <Route path="/showCoupon" element={<Coupon/>}/>
+        <Route path="/orderdetail/*" element={<OrderDetail/>}/>
 
  
   

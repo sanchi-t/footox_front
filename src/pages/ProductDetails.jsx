@@ -9,7 +9,8 @@ import Footer from "../components/Footer";
 import OwlCarousel from 'react-owl-carousel';
 import parse from 'html-react-parser';
 import {useRef } from "react";
-import Slider from "react-slick";import axios from "axios";
+import Slider from "react-slick";
+import axios from "axios";
 // import CartData from "../components/CartData";
 // import ReactImageMagnify from 'react-image-magnify';
 
