@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import Search from './Search';
 import { createSearchParams } from "react-router-dom";
 import { setSearchQuery } from "../redux/QueryReducer/action";
+import parse from 'html-react-parser';
 
 // import CartData from "./CartData";
 const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
@@ -528,9 +529,9 @@ const Header = (props) => {
           <div className="ps-services owl-slider">
             <OwlCarousel items={1} margin={0} autoplay={true} loop={true} dots={false} nav={false}>
 
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
-              <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Free delivery</strong>: {getOffer}</p>
+              <p className="ps-service">{parse(`${getOffer}`)}</p>
+              <p className="ps-service">{parse(`${getOffer}`)}</p>
+              <p className="ps-service">{parse(`${getOffer}`)}</p>
             </OwlCarousel>
           </div>
         </div> 
