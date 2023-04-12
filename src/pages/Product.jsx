@@ -90,9 +90,12 @@ import {
       //  }
       //  console.log('ids', id);
   
-       {prod1.map((item, num1) => (
-            <>
-              {item.items.map((orders, index) => {
+       {prod1.map((item, num1) => {
+            // <>
+            //   {item.map((orders, index) => {
+              
+              const orders=item.items;
+              console.log(item,orders)
                   num = num + 1;
                 
                   //  const id = [];
@@ -111,9 +114,9 @@ import {
                       user : item.name_reciever,
                       orderId: item._id,
                       id : orders.id,
-                      productName: products.productName,
-                      image : products.image,
-                      color : products.color,
+                      productName: orders.productName,
+                      image : orders.image,
+                      color : orders.id.split('/')[1],
                       Quantity: orders.quantity,
                       price :orders.price ? orders.price: 0,
                       Status : item.status,
@@ -122,9 +125,9 @@ import {
                     console.log(filteredProducts1,'asdcfv');
                     
   
-              })}
-            </>
-          ))}
+            //   })}
+            // </>
+                  })}
           // if(filteredProducts1.length ===0){
           //   filteredProducts1[0] ={
           //     order: 'You never ordered anything',

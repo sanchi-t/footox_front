@@ -74,6 +74,7 @@ const ViewCart=()=>{
             let sum=0;
             console.log(response);
             const all=response.data.cart.cart;
+            
             localStorage.setItem('cart',JSON.stringify(all));
             
             all.forEach((number, index) => {

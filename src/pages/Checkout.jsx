@@ -51,7 +51,7 @@ const Checkout=()=>{
     const [currentProducts, setCurrentProducts] = useState([]);
     const [items, setItems] = useState(getSessionStorageOrDefault('items', [[]]));
     const [address, setAddress] = useState([]);
-    // console.log(items);
+    console.log(items, 'asdfghj');
 
     useEffect(() => {
       console.log('inside use effect');
@@ -72,6 +72,14 @@ const Checkout=()=>{
     }, [items.length,typeof items[0]]);
 
     let num = useState({});
+    var orderItemDetails = JSON.parse(localStorage.getItem('cart'));
+    console.log(orderItemDetails,"asdfghjbxcnvmbv");
+    for(let i = 0; i< items.length; i++){
+      orderItemDetails[i].productName = items[i].productName;
+      orderItemDetails[i].image = items[i]?.image?.[items[i]?.color.indexOf((orderItemDetails[i].id).split('/')[1])]?.[0]
+    }
+
+    console.log(orderItemDetails, 'updated');
     
     useEffect(() => {
         if (products.length === 0) {
@@ -125,7 +133,7 @@ const Checkout=()=>{
         form.address={place:event.target.address.value,save:checked};
         // form.address.save=checked;
         
-        form.items=JSON.parse(localStorage.getItem('cart'));
+        form.items=orderItemDetails;
         // form.items.forEach((val,index)=>{
         //   val.price=Number(JSON.parse(sessionStorage.getItem('items'))[index].selling_price);
         // })
