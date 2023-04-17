@@ -31,7 +31,7 @@ import {
     updateData,
   } from "../redux/DataReducer/action";
   import { DeleteIcon, Icon, EditIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-  const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+  const BackendServer = process.env.REACT_APP_API_BASE_URL;
   const ProductPage = () => {
    const [prod, setProd] = useState([]);
        const [nishu, setNishu] = useState({

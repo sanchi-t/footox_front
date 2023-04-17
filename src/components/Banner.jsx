@@ -9,7 +9,7 @@ import RevSlider, { Slide, Caption } from 'react-rev-slider';
 import './Banner.css';
 import Slider from './Slider/Slider';
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 
 const Banner = () => {

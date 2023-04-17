@@ -8,7 +8,7 @@ import styles from './OrderConfirmed.module.css';
 import { useState } from "react";
 
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 const OrderCorfirmed =()=>{
 

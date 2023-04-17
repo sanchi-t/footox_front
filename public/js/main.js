@@ -102,7 +102,7 @@
             $('.ps-sticky').removeClass('desktop');
         }
         /*logo*/
-        if (windowWidth < 480) {
+        if (windowWidth < 280) {
             $('.ps-search--header').prependTo('.header--sidebar');
         }
         else {
@@ -257,7 +257,7 @@
             await imageLoader(masonryTrigger);
             console.log('loded')
             var filters = masonryTrigger.closest('.masonry-root').find('.ps-masonry__filter > li > a');
-            // console.log(filters,'asnch');
+            console.log(filters,'asnch');
             // $(`[data-filter=".allp"]`).trigger('click');
             // window.on('load',function(){
                 

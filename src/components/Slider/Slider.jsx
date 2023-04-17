@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "./Slider.scss";
 import axios from "axios";
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 
 const Slider = () => {

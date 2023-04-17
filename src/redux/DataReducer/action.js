@@ -3,7 +3,7 @@ import axios from "axios";
 
 const {REACT_APP_GET_DATAI, REACT_APP_BACKEND_PORT} = process.env
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 const getData = (params) => (dispatch) => {
   dispatch({ type: types.GET_DATA_R });

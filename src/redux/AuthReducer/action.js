@@ -3,7 +3,7 @@ import { setToast } from "../../components/Other/CheckProperty";
 import { saveLocalData } from "../../utils/localStorage";
 import * as types from "./actionType";
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 const register = (payload, toast) => (dispatch) => {
   dispatch({ type: types.REGISTER_R });
   return axios

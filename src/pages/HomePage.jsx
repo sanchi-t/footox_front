@@ -16,7 +16,7 @@ const Header=lazy(() =>  import('../components/Header'));
 const Footer=lazy(() =>  import('../components/Footer'));
 // const Banner=lazy(() =>  import('./Banner'));
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -107,6 +107,10 @@ const Homepage = () => {
   products.sort(function(a,b){
     return new Date(b.modifiedDate) - new Date(a.modifiedDate);
   });
+
+  const handleWomen=()=>{
+    console.log('women clock');
+  }
   // console.log(products,'sort');
 
   return (
@@ -123,7 +127,7 @@ const Homepage = () => {
                 <ul className="ps-masonry__filter" style={{paddingTop:'05%'}}>
                   <li className="current"><a  id='allp123'  href="#" data-filter="*">All <sup>{products.length}</sup></a></li>
                   <li><a style={{cursor: 'pointer'}} data-filter=".men">Men <sup>{(products.filter(x => x.productGender === 'Men')).length}</sup></a></li>
-                  <li><a href='#' data-filter=".women">Women <sup>{(products.filter(x => x.productGender === 'Women')).length}</sup></a></li>
+                  <li><a style={{cursor: 'pointer'}} data-filter=".women" onClick={handleWomen}>Women <sup>{(products.filter(x => x.productGender === 'Women')).length}</sup></a></li>
                   {/* <li><a href='#' data-filter=".shoes">Shoes <sup>4</sup></a></li> */}
                 </ul>
               </div>

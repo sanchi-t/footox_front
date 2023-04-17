@@ -12,7 +12,7 @@ import { getLocalData } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 
 const Checkout=()=>{

@@ -57,7 +57,7 @@ const Avatar=()=> {
                 }
                 {(!profile) &&
 
-                  <img style={{height:'50px',borderRadius: '50%'}} src={`https://api.dicebear.com/5.x/initials/svg?seed=${username}`} alt="avatar" />
+                  <img style={{height:'5rem',borderRadius: '50%'}} src={`https://api.dicebear.com/5.x/initials/svg?seed=${username}`} alt="avatar" />
                 }
             </MenuButton>
             <MenuList>

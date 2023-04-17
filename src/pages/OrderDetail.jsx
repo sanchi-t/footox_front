@@ -29,7 +29,7 @@ import EdiText from 'react-editext';
 
 
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 
 

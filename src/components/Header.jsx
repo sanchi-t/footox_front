@@ -14,7 +14,7 @@ import { setSearchQuery } from "../redux/QueryReducer/action";
 import parse from 'html-react-parser';
 
 // import CartData from "./CartData";
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 const Header = (props) => {
   const {change}=props;
@@ -85,7 +85,7 @@ const Header = (props) => {
       }, [dispatch, products?.length]);
 
       useEffect(() => {
-        axios.get(`${process.env.REACT_APP_BACKEND_SERVER}getOffer/`)
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}getOffer/`)
           .then(res => setGetOffer(res.data.offer))
           .catch(err => console.log(err));
       }, []);
@@ -455,7 +455,7 @@ const Header = (props) => {
                   </li>
                 </ul>
               </div>
-              <div className="navigation__column right" style={{maxWidth:'350px'}}>
+              <div className="navigation__column right" style={{maxWidth:'350px',display:'contents'}}>
               
                 <Search/>
                 
@@ -507,7 +507,8 @@ const Header = (props) => {
                   </div>
                 </div>
                
-                
+                <ModalWindow toggled={isToggle} toggle={toggleButton} />
+
                 
                 
               </div>
@@ -515,7 +516,7 @@ const Header = (props) => {
                 
                 
                   
-                  <ModalWindow toggled={isToggle} toggle={toggleButton} />
+                  {/* <ModalWindow toggled={isToggle} toggle={toggleButton} /> */}
 
                 
                   {/* <img onClick={() => setIsOpen(true)} src='images/user.png' style={{height:'40px'}}></img> */}

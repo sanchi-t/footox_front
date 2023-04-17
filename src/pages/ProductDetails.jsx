@@ -16,7 +16,7 @@ import axios from "axios";
 
 import {RiArrowUpSLine,RiArrowDownSLine} from 'react-icons/ri';
 
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 
 
@@ -58,6 +58,7 @@ const ProductDetails=()=>{
   const [nav2, setNav2] = useState(null);
   const slider1Ref = useRef(null);
   const slider2Ref = useRef(null);
+
 
   useEffect(() => {
     setNav1(slider1Ref.current);
@@ -195,17 +196,35 @@ const ProductDetails=()=>{
           // const cartProduct1={color:'',index:0};
           const cur = products.find((item) => item.productId === id);
 
+          const skuId = cur?.color.map((color) => {
+            return `${id}/${color}`;
+          });
+          console.log(skuId);
+          if (skuId) {
+            const promises = skuId.map((sku) => {
+              return axios.get(`${BackendServer}getAvailableSizes?skuId=${sku}`);
+            });
+            
+            Promise.all(promises).then((responses) => {
+              const sizes = responses.map((response) => {
+                return response.data.sizes;
+              });
+              console.log(sizes);
+              setSize(sizes)
+            });
+          }
+
           cur && setCurrentProducts(cur);
-          cur && setColor(cur.color)
+          cur && setColor(cur.color);
           // cartProduct1.color=cur?.color[0];
           // cartProduct1.index=0;
           // cur &&setCartProduct(cartProduct1)
           cur && setImg(cur.image[0]);
           cur && setAllImage(cur.image);
-          cur && setSize(cur.Sizes);
+          // cur && setSize(cur.Sizes);
           setProd(products)
         }
-      }, [id, products,dispatch,num]);
+      }, [id, products]);
 
       // const imgg=currentProducts.image;
       // const color=currentProducts.color;

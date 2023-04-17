@@ -1,6 +1,6 @@
 import * as types from "./actionType";
 import axios from "axios";
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 
 const getMensData = (params) => (dispatch) => {
   dispatch({ type: types.GET_MENS_DATA_R });

@@ -7,7 +7,7 @@ import React, { useState,useEffect } from "react";
 
 
 const clientId= process.env.REACT_APP_GOOGLE_CLIENT_ID;
-const BackendServer = process.env.REACT_APP_BACKEND_SERVER;
+const BackendServer = process.env.REACT_APP_API_BASE_URL;
 console.log(clientId);
 
 const GLogin=({ setGLogin })=>{
