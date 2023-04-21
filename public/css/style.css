@@ -5141,25 +5141,25 @@ textarea.form-control {
   overflow: hidden; }
 
 .menu--active {
-  -webkit-transform: translateX(-240px);
-  -moz-transform: translateX(-240px);
-  -ms-transform: translateX(-240px);
-  -o-transform: translateX(-240px);
-  transform: translateX(-240px); }
+  -webkit-transform: translateX(-24rem);
+  -moz-transform: translateX(-24rem);
+  -ms-transform: translateX(-24rem);
+  -o-transform: translateX(-24rem);
+  transform: translateX(-24rem); }
   .menu--active .header--sidebar {
     overflow-y: auto; }
   .menu--active.navigation--pin {
-    -webkit-transform: translate(-240px, 0);
-    -moz-transform: translate(-240px, 0);
-    -ms-transform: translate(-240px, 0);
-    -o-transform: translate(-240px, 0);
-    transform: translate(-240px, 0); }
+    -webkit-transform: translate(-24rem, 0);
+    -moz-transform: translate(-24rem, 0);
+    -ms-transform: translate(-24rem, 0);
+    -o-transform: translate(-24rem, 0);
+    transform: translate(-24rem, 0); }
   .menu--active.navigation--unpin {
-    -webkit-transform: translate(-240px, -100%);
-    -moz-transform: translate(-240px, -100%);
-    -ms-transform: translate(-240px, -100%);
-    -o-transform: translate(-240px, -100%);
-    transform: translate(-240px, -100%); }
+    -webkit-transform: translate(-24rem, -100%);
+    -moz-transform: translate(-24rem, -100%);
+    -ms-transform: translate(-24rem, -100%);
+    -o-transform: translate(-24rem, -100%);
+    transform: translate(-24rem, -100%); }
 
 .navigation--sticky {
   position: fixed;
@@ -6700,6 +6700,15 @@ input:checked::before {
 }
 
 @media (max-width: 450px){
+  .owl-carousel.owl-drag .owl-item {
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    top: -4rem;
+    user-select: none;
+}
   hr {
     margin-top: 5rem;
     margin-bottom: 2rem;
