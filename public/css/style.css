@@ -2582,9 +2582,9 @@ textarea.form-control {
       max-width: 48.0rem;
       margin: 0 auto; } }
 
-  @media (max-width: 450px) {
+  /* @media (max-width: 450px) {
     .main-menu.main {
-      display: none; } }
+      display: none; } } */
 
 .ps-shoe--sidebar {
   display: -webkit-box;

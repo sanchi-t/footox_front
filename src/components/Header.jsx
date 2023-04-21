@@ -158,6 +158,15 @@ const Header = (props) => {
 
   // console.log('here at header',change);
 
+  useEffect(() => {
+    const headerActive = document.querySelector('.header--sidebar.active');
+    const mainMenu = document.querySelector('.main-menu.menu');
+    console.log(headerActive)
+    if (isActive && mainMenu && mainMenu) {
+      headerActive.appendChild(mainMenu);
+    }
+  }, [isActive]);
+
 
   
 
