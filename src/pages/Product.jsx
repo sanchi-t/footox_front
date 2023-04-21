@@ -71,7 +71,7 @@ import {
     
       }, []);
       const myStyle = {
-          borderRadius:'2px',
+          borderRadius:'0.2rem',
           borderColor:'black'
       }
   
@@ -155,7 +155,7 @@ import {
         <br />
         <Header/>
         
-        <Heading style={{paddingLeft:'3%',fontSize:'40px'}}>My Orders</Heading>
+        <Heading style={{paddingLeft:'3%',fontSize:'4rem'}}>My Orders</Heading>
         <br></br>
   
         {/* <Box
@@ -173,7 +173,7 @@ import {
             // bg={'#50CF96'}
             // boxShadow={"rgba(80, 270, 150, 0.24) 0px 3px 8px"}
             p={"1.8rem"}
-          ><Text fontSize={'50px'}>You haven't ordered yet</Text></Box> :
+          ><Text fontSize={'5rem'}>You haven't ordered yet</Text></Box> :
          
           filteredProducts1.map((item, index) => (
               <>
@@ -183,14 +183,14 @@ import {
           m="auto"
           w={"95%"}
           bg={'#50CF96'}
-          boxShadow={"rgba(80, 270, 150, 0.24) 0px 3px 8px"}
+          boxShadow={"rgba(80, 270, 150, 0.24) 0rem 0.3rem 0.8rem"}
           p={"1.1rem"}
         >
              <Box
           m="auto"
           w={"95%"}
           bg={'#F5F5F4'}
-          boxShadow={"rgba(12, 0, 0, 0.24) 0px 3px 8px"}
+          boxShadow={"rgba(12, 0, 0, 0.24) 0rem 0.3rem 0.8rem"}
           p={"1.1rem"}
         >
             
@@ -199,7 +199,7 @@ import {
               textAlign={"center"}
               justifyContent={"space-between"}
               my={"5"}
-              fontSize={["7px", "10px", "12px", "15px"]}
+              fontSize={["0.7rem", "1rem", "1.2rem", "1.5rem"]}
             >
               <Box w="15%">{item.order}</Box>
               <Box width={"15%"} mx={"2"}>

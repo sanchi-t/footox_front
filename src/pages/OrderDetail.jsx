@@ -333,22 +333,22 @@ const OrderDetail=()=> {
     
   }
 
-    console.log(returnRequested,exchangeRequested,order);
+    console.log(product,product?.original_price-product?.selling_price);
 
 
   return (
     <>
 
-<Modal show={showModal}  style={{opacity:1}} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
+<Modal className="cancelModal" show={showModal}  style={{opacity:1}} onHide={() => setShowModal(false)}>
+        <Modal.Header className="cancelHeader" closeButton>
+          <Modal.Title style={{fontSize:"1.8rem"}}>Are you sure?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Do you want to cancel this order?</Modal.Body>
+        <Modal.Body className="cancelBody">Do you want to cancel this order?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button style={{fontSize:'1.4rem',marginLeft: '0.5rem',padding:'0.6rem 1.2rem'}} variant="secondary" onClick={() => setShowModal(false)}>
             No
           </Button>
-          <Button variant="primary" onClick={handleConfirm}>
+          <Button style={{fontSize:'1.4rem',marginLeft: '0.5rem',padding:'0.6rem 1.2rem'}} variant="primary" onClick={handleConfirm}>
             Yes
           </Button>
         </Modal.Footer>
@@ -363,7 +363,7 @@ const OrderDetail=()=> {
       <Modal
         show={show1}
         // size={'lg'}
-        dialogClassName="modal-width"
+        dialogClassName="modal-width exchangeModal"
         style={{opacity:1}}
         scrollable={true}
 
@@ -425,12 +425,15 @@ const OrderDetail=()=> {
                     {pickupAddress || order.address}
                   </span>
                 )}
+                <div style={{cursor:'pointer'}}  onClick={handleEditClick}>
                 <h3
+                  
                   className="d-1 h3tag"
-                  onClick={handleEditClick}
+                 
                 >
                   {'CHANGE PICKUP ADDRESS'}
                 </h3>
+                </div>
               </div>
             </div>
 
@@ -440,11 +443,11 @@ const OrderDetail=()=> {
         </Modal.Body>
 
         <Modal.Footer style={{position: 'absolute',bottom: '0',width: '100%'}}>
-          <Button variant="secondary" onClick={handleClose1}>
+          <Button style={{fontSize:'1.4rem',marginLeft: '0.5rem',padding:'0.6rem 1.2rem'}} variant="secondary" onClick={handleClose1}>
             Cancel
           </Button>
 
-          <Button type="submit" variant="primary">
+          <Button style={{fontSize:'1.4rem',marginLeft: '0.5rem',padding:'0.6rem 1.2rem'}} type="submit" variant="primary">
             Submit
           </Button>
           
@@ -483,7 +486,7 @@ const OrderDetail=()=> {
             
             <div className="row" style={{display: 'flex'}}>
             <div className="col" style={{flex: '50%',padding: '0.5em'}}>
-              <label>Reason for Return:</label>
+              <label style={{fontSize:'1.8rem'}}>Reason for Return:</label>
             <div>
               <input type="radio" id="wrongItem" name="reason" value="Wrong Item" checked={selectedOption === "Wrong Item"} onChange={handleOptionChange} />
               <label htmlFor="wrongItem">Wrong Item</label>
@@ -515,11 +518,11 @@ const OrderDetail=()=> {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button style={{fontSize:'1.4rem',marginLeft: '0.5rem',padding:'0.6rem 1.2rem'}} variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
 
-          <Button type="submit" variant="primary">
+          <Button style={{fontSize:'1.4rem',marginLeft: '0.5rem',padding:'0.6rem 1.2rem'}} type="submit" variant="primary">
             Submit
           </Button>
           
@@ -540,7 +543,7 @@ const OrderDetail=()=> {
             <MDBCol md="10" lg="8" xl="6">
               <MDBCard
                 className="card-stepper"
-                style={{ borderRadius: "16px" }}
+                style={{ borderRadius: "1.6rem" }}
               >
                 <MDBCardHeader className="p-4">
                   <div className="divtag d-flex justify-content-between align-items-center">
@@ -588,7 +591,7 @@ const OrderDetail=()=> {
                       <ul id="progressbar-1" className="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
                       {order.status==="Order Canceled" ? (
                       <>
-                        <div class="ItemDetails-cancelledCard"><div class="CancelledCard-test"><div class="CancelledCard-Container"><div class="CancelledCard-IconContainer"><div class="CancelledCard-CloseIcon"><span class="svgImages-svg svgImages-crossBox " style={{height: "24px",width: "24px"}}></span></div></div><div class="CancelledCard-TextContainer"><div class="CancelledCard-Text">Cancelled On {new Date(order.updatedAt).toDateString()}</div><div class="CancelledCard-TextSecondary"> as per your request</div></div></div></div></div>
+                        <div class="ItemDetails-cancelledCard"><div class="CancelledCard-test"><div class="CancelledCard-Container"><div class="CancelledCard-IconContainer"><div class="CancelledCard-CloseIcon"><span class="svgImages-svg svgImages-crossBox " style={{height: "2.4rem",width: "2.4rem"}}></span></div></div><div class="CancelledCard-TextContainer"><div class="CancelledCard-Text">Cancelled On {new Date(order.updatedAt).toDateString()}</div><div class="CancelledCard-TextSecondary"> as per your request</div></div></div></div></div>
                       </>
                     ):(
                       <>
@@ -648,7 +651,7 @@ const OrderDetail=()=> {
 
                       {order.status === "Order Delivered" ? (
                         <>
-                        <MDBTypography tag="h5"  style={{padding: '10px',border: '2px solid #d2d2d2',display: 'inline-block',width:'100%'
+                        <MDBTypography tag="h5"  style={{padding: '1rem',border: '0.2rem solid #d2d2d2',display: 'inline-block',width:'100%'
                       
                     }}>
                      • Exchange/Return window {daysDiff<7?`open for ${7-daysDiff} days`:'closed'} 
@@ -656,8 +659,8 @@ const OrderDetail=()=> {
                       <MDBTypography
                         tag="h5"
                         style={{
-                          padding: "10px",
-                          border: "2px solid #d2d2d2",
+                          padding: "1rem",
+                          border: "0.2rem solid #d2d2d2",
                           display: "inline-block",
                           width: "100%",
                         }}
@@ -670,7 +673,7 @@ const OrderDetail=()=> {
                       
                   </div>
                   
-                  <div style={{borderTop:'1px solid',borderBottom:'1px solid',paddingBottom:'3rem',marginTop:'3rem'}}>
+                  <div style={{borderTop:'0.1rem solid',borderBottom:'0.1rem solid',paddingBottom:'3rem',marginTop:'3rem'}}>
                     <MDBTypography tag="h3" style={{marginTop:'3rem'}}>
                      { exchangeRequested?"Pickup Address":"Delivery Address" }
                     </MDBTypography>
@@ -685,7 +688,7 @@ const OrderDetail=()=> {
 
 
                     </div>
-                    <span class="Text-Text" style={{paddingTop: "6px",lineHeight:'1.5',color: "rgb(105, 110, 121)"}}>{order?.exchange_details?.exchange_pickup_address || order.address}</span>
+                    <span class="Text-Text" style={{fontSize:'1.4rem',paddingTop: "0.6rem",lineHeight:'1.5',color: "rgb(105, 110, 121)"}}>{order?.exchange_details?.exchange_pickup_address || order.address}</span>
 
                   </div>
 
@@ -706,7 +709,11 @@ const OrderDetail=()=> {
                         </MDBTypography>
                       </p>
                       </div>
-                      <div class="PriceDetails-discount"><span>You saved </span><span class="Text-Text" style={{fontFamily: "Assistant", fontWeight: "600", color: "rgb(3, 166, 133)"}}>₹{product?.original_price-product?.selling_price-order?.coupon?.value}</span><span> on this order</span></div>
+                      {product?
+                      <div class="PriceDetails-discount" style={{fontSize:'1.4rem'}}><span>You saved </span><span class="Text-Text" style={{fontSize: "1.4rem", fontFamily: "Assistant", fontWeight: "600", color: "rgb(3, 166, 133)"}}>₹{product?.original_price-product?.selling_price}</span><span> on this order</span></div>
+
+                      
+                      :<></>}
                       <div class="Styles-buttonHolder" style={{display: 'flex',
                       marginTop:'3.5rem',
                       justifyContent:'center'

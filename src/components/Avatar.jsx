@@ -53,7 +53,7 @@ const Avatar=()=> {
               style={{backgroundColor: '#FFFFFF',border: 'none',margin:'0px',paddingRight:'0px',paddingLeft:'5px'}}
               rightIcon={<AiFillCaretDown  style={{width:'70%', color: 'black',float:'left'}} />}>
                 {(localStorage.getItem('user')) &&
-                  <img style={{height:'50px',borderRadius: '50%'}} src={`${JSON.parse(localStorage.getItem('user')).picture}`} alt="avatar" />
+                  <img style={{height:'5rem',borderRadius: '50%'}} src={`${JSON.parse(localStorage.getItem('user')).picture}`} alt="avatar" />
                 }
                 {(!profile) &&
 
@@ -61,19 +61,19 @@ const Avatar=()=> {
                 }
             </MenuButton>
             <MenuList>
-              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={logoutHandler}>
+              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '1.7rem',padding:'1rem 2rem',borderRadius: '0.5rem'}}  onClick={logoutHandler}>
                 Logout
               </MenuItem>
-               <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={handleWishlist} >
+               <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '1.7rem',padding:'1rem 2rem',borderRadius: '0.5rem'}}  onClick={handleWishlist} >
                 Whislist
               </MenuItem>
-              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={handlePreviousOrder} >
+              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '1.7rem',padding:'1rem 2rem',borderRadius: '0.5rem'}}  onClick={handlePreviousOrder} >
                 Orders
               </MenuItem>
-              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={handleProfile} >
+              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '1.7rem',padding:'1rem 2rem',borderRadius: '0.5rem'}}  onClick={handleProfile} >
                 My Profile
               </MenuItem>
-              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '17px',padding:'10px 20px',borderRadius: '5px'}}  onClick={handleCoupons} >
+              <MenuItem as={"Button"} style={{color:'White',backgroundColor:'#2fb675',fontSize: '1.7rem',padding:'1rem 2rem',borderRadius: '0.5rem'}}  onClick={handleCoupons} >
                 Coupons
               </MenuItem>
             </MenuList>

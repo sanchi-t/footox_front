@@ -87,6 +87,9 @@
       font-size: 0.9rem; } }
 
   @media screen and (max-width: 500px) {
+    .slider{
+      max-height:60rem;
+    }
     .ps-banner .ps-banner__header p {
       font-size: 12px; }
       /* .ps-banner .ps-banner__header p br {

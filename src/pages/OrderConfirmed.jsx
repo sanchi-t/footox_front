@@ -88,17 +88,17 @@ const OrderCorfirmed =()=>{
             <p>Your Order has been placed check myorder under profile section to know more about it.</p><a className="ps-btn" onClick={handleDes}>Back to home<i className="ps-icon-next"></i></a>
           </div>
         </div> */}
-        <main className="ps-main" style={{paddingTop:'50px',paddingBottom:'50px'}}>
+        <main className="ps-main" style={{paddingTop:'5rem',paddingBottom:'5rem'}}>
         <div className={styles.card}>
-          <div className="ps-4041 bg--cover" data-background="images/confirm.jpg" style={{height:'340px'}}>
-          <div className="ps-404__content"  style={{color:'black',maxWidth: '700px',position: 'absolute',top: '18%',left: '50%',textAlign: 'center',WebkitTransform:' translate(-50%, -50%)',MozTransform: 'translate(-50%, -50%)',MsTransform: 'translate(-50%, -50%)',OTransform: 'translate(-50%, -50%)',
+          <div className="ps-4041 bg--cover" data-background="images/confirm.jpg" style={{height:'34rem'}}>
+          <div className="ps-404__content"  style={{color:'black',maxWidth: '70rem',position: 'absolute',top: '18%',left: '50%',textAlign: 'center',WebkitTransform:' translate(-50%, -50%)',MozTransform: 'translate(-50%, -50%)',MsTransform: 'translate(-50%, -50%)',OTransform: 'translate(-50%, -50%)',
     transform: 'translate(-50%, -50%)'}}>
-            <h3 style={{color:'black',marginBottom: '25px',fontFamily: "Montserrat, sans-serif",fontSize: '36px',fontWeight: '600',letterSpacing: '2px',textTransform: 'uppercase'}}>Order Confirmed</h3>
+            <h3 style={{color:'black',marginBottom: '2.5rem',fontFamily: "Montserrat, sans-serif",fontSize: '3.6rem',fontWeight: '600',letterSpacing: '0.2rem',textTransform: 'uppercase'}}>Order Confirmed</h3>
             <p>Your Order has been placed check myorder under profile section to know more about it.</p>
           </div>
 
         </div>
-        <hr style={{backgroundColor:'rgb(252, 103, 49)',height:'2px'}}></hr>
+        <hr className={styles.hrtag} style={{backgroundColor:'rgb(252, 103, 49)',height:'0.2rem'}}></hr>
             <div className={styles.title}>Purchase Reciept</div>
             <div className={styles.info}>
                 <div className={`${styles.row}`}>
@@ -118,19 +118,19 @@ const OrderCorfirmed =()=>{
                       return(<>
                       <div className={`${styles.pricing}`}>
                       <div className={`${styles.row}`}>                        <div className={`${styles.col-9}`}>
-                        <span id={`${styles.name}`}>{item?.productName}</span>  
+                        <span className={`${styles.nameP}`}>{item?.productName}</span>  
                     </div>
                     <div className={`${styles.col-3}`}>
-                        <span id={`${styles.price}`}>₹{item?.selling_price}</span>
+                        <span className={`${styles.nameP}`}>₹{item?.selling_price}</span>
                     </div>                </div>
                     <div className={`${styles.row}`}>
                     <div className={`${styles.col-9}`}>
-                        <span id={`${styles.name}`}>Shipping</span>
+                        <span className={`${styles.nameP}`}>Shipping</span>
                     </div>
                     <div className={`${styles.col-3}`}>
-                        <span id={`${styles.price}`}>₹33.00</span>
+                        <span className={`${styles.nameP}`}>₹33.00</span>
                     </div></div></div>
-                      <div style={{height:'15px',backgroundColor:'white'}}></div></>
+                      <div style={{height:'1.5rem',backgroundColor:'white'}}></div></>
                       )
                     })}
                 

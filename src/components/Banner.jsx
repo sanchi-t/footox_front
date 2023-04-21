@@ -61,11 +61,11 @@ const Banner = () => {
     }
     const l = axiosTest()
   }, [products])
-  console.log('sancit', prod,slide);
+  // console.log('sancit', prod,slide);
   useEffect(() => {
     dispatch(getData(queryParams));
   }, [])
-  console.log('helloo', products, products1)
+  // console.log('helloo', products, products1)
   if(true){
 
   

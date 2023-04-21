@@ -36,7 +36,7 @@ const Checkbox = ({ label, checked, onChange }) => {
     <div className="checkbox-wrapper">
       <label>
         <input
-          value={label}
+          value={label.toLowerCase()}
           type="checkbox"
           checked={checked}
           onChange={onChange}
@@ -159,9 +159,12 @@ const fuse = new Fuse(products, options);
     );
 
     setCheckedState(updatedCheckedState);
-    const checkedCategories = category.filter(
+    let checkedCategories = category.filter(
       (value, index) => updatedCheckedState[index]
     );
+
+    checkedCategories = checkedCategories.map(item => item.toLowerCase());
+    console.log(checkedCategories,'esdrtyui');
     console.log(searchQuery,'searchquery');
     setSearchParams1((prevState) => ({
       ...prevState,
@@ -324,11 +327,11 @@ const fuse = new Fuse(products, options);
                     <div className="ps-shoe__thumbnail">
                       {/* <div className="ps-badge"><span>New</span></div> */}
                       {/* <div className="ps-badge ps-badge--sale ps-badge--2nd"><span>-35%</span></div> */}
-                      <a className="ps-shoe__favorite" ><i className="ps-icon-heart" /></a><img style ={{height : '350px', width : '300px'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
+                      <a className="ps-shoe__favorite" ><i className="ps-icon-heart" /></a><img style ={{height : '35rem', width : '30rem'}} src={item.image?.[0][0]} alt="" /><a className="ps-shoe__overlay" onClick={() => handleDes(item.productId)} />
                     </div>
                     <div className="ps-shoe__content">
                       <div className="ps-shoe__variants">
-                        <div className="ps-shoe__variant normal"><img  style = {{height : '50px',width :"50px" }} src={item.image?.[0][1]} alt="" /><img style ={{height : '50px',width :"50px" }} src={item.image?.[0][2]}alt="" /><img style ={{height : '50px',width :"50px" }} src={item.image?.[0][3]} alt="" /><img style ={{height : '50px',width : "50px" }} src={item.image?.[0][4]} alt="" /></div>
+                        <div className="ps-shoe__variant normal"><img  style = {{height : '5rem',width :"5rem" }} src={item.image?.[0][1]} alt="" /><img style ={{height : '50px',width :"50px" }} src={item.image?.[0][2]}alt="" /><img style ={{height : '50px',width :"50px" }} src={item.image?.[0][3]} alt="" /><img style ={{height : '50px',width : "50px" }} src={item.image?.[0][4]} alt="" /></div>
                         {/* <select className="ps-rating ps-shoe__rating">
                           <option value={1}>1</option>
                           <option value={1}>2</option>
@@ -337,7 +340,7 @@ const fuse = new Fuse(products, options);
                           <option value={2}>5</option>
                         </select> */}
                       </div>
-                      <div className="ps-shoe__detail" key={item.id} style={{textAlign:'left'}}>
+                      <div className="ps-shoe__detail" key={item.id} style={{maxWidth:'30rem',textAlign:'left'}}>
                                 <div key={item.id} style={{inlineSize: "15rem",  overflowWrap: "break-word"}}><a className="ps-shoe__name" onClick={() => handleDes(item.productId)}>{item.productName}</a></div>
                                 <p key={item.id} className="ps-shoe__categories"><a key={item.id} >
                                   {item.gender} shoes</a>,<a key={item.id} > Nike</a>,<a key={item.id} > Jordan</a></p><span key={item.id} className="ps-shoe__price">
@@ -509,7 +512,7 @@ const fuse = new Fuse(products, options);
                     {colors.map((item,index)=>{
                       return(
                          <>
-                         <li style={{width:'10rem'}}> <Checkbox label={item} name={item} checked={checkedState2[index]} onChange={() => handleColor(index)} /></li>
+                         <li> <Checkbox label={item} name={item} checked={checkedState2[index]} onChange={() => handleColor(index)} /></li>
                     
                     </> 
                       )

@@ -18,7 +18,7 @@
   
   #progressbar-1 .litag {
     list-style-type: none;
-    font-size: 13px;
+    font-size: 1.3rem;
     width: 33.33%;
     float: left;
     position: relative;
@@ -27,7 +27,7 @@
   #progressbar-1 #step1:before {
     content: "1";
     color: #fff;
-    width: 29px;
+    width: 2.9rem;
     margin-left: 7rem;
     padding-left: 1.3rem;
   }
@@ -35,13 +35,13 @@
   #progressbar-1 #step2:before {
     content: "2";
     color: #fff;
-    width: 29px;
+    width: 2.9rem;
   }
   
   #progressbar-1 #step3:before {
     content: "3";
     color: #fff;
-    width: 29px;
+    width: 2.9rem;
     margin-right: 7rem;
     text-align: center;
   }
@@ -49,7 +49,7 @@
   #progressbar-1 .litag:before {
     line-height: 3rem;
     display: block;
-    font-size: 12px;
+    font-size: 1.2rem;
     background: #455A64;
     border-radius: 50%;
     margin: auto;
@@ -63,9 +63,13 @@
     position: absolute;
     left: 0%;
     right: 0%;
-    top: 15px;
+    top: 1.5rem;
     z-index: -1;
   }
+  .modal-dialog {
+    position: relative;
+    margin: 1rem auto;
+}
   
   #progressbar-1 .litag:nth-child(2):after {
     left: 5%
@@ -90,7 +94,7 @@
     z-index: 0
   }
 
-  @media (min-width: 768px)
+  @media (min-width: 76.8rem)
   {.col-md-10 {
       flex: 0 0 auto;
       width: 83.33333333%;
@@ -133,11 +137,11 @@
     display: block;
 }
 .card-header:first-child {
-    border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
+    border-radius: calc(0.5rem - .1rem) calc(0.5rem - .1rem) 0 0;
 }
 .card-header {
     background-color: hsla(0,0%,100%,0);
-    border-bottom: 2px solid #f5f5f5;
+    border-bottom: 0.2rem solid #f5f5f5;
 }
 .p-4 {
     padding: 1.5rem!important;
@@ -146,7 +150,7 @@
     padding: 0.75rem 1.5rem;
     margin-bottom: 0;
     background-color: rgba(0,0,0,.03);
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 0.1rem solid rgba(0,0,0,.125);
 }
 .p-4 {
     padding: 1.5rem!important;
@@ -156,11 +160,11 @@
     padding: 1.5rem;
 }
 .card-footer:last-child {
-    border-radius: 0 0 calc(0.5rem - 1px) calc(0.5rem - 1px);
+    border-radius: 0 0 calc(0.5rem - .1rem) calc(0.5rem - .1rem);
 }
 .card-footer {
     background-color: hsla(0,0%,100%,0);
-    border-top: 2px solid #f5f5f5;
+    border-top: 0.2rem solid #f5f5f5;
 }
 .p-4 {
     padding: 1.5rem!important;
@@ -168,7 +172,7 @@
 .card-footer {
     padding: 0.75rem 1.5rem;
     background-color: rgba(0,0,0,.03);
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 0.1rem solid rgba(0,0,0,.125);
 }
 
 
@@ -184,7 +188,7 @@
 }
 .card {
     border: 0;
-    box-shadow: 0 2px 15px -3px rgba(0,0,0,.07), 0 10px 20px -2px rgba(0,0,0,.04);
+    box-shadow: 0 .2rem 1.5rem -.3rem rgba(0,0,0,.07), 0 1.0rem 2.0rem -.2rem rgba(0,0,0,.04);
 }
 .card {
     position: relative;
@@ -194,7 +198,7 @@
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 0.1rem solid rgba(0,0,0,.125);
     border-radius: 0.5rem;
 }
 
@@ -225,7 +229,7 @@
 }
 #progressbar-1 li {
     list-style-type: none;
-    font-size: 13px;
+    font-size: 1.3rem;
     width: 33.33%;
     float: left;
     position: relative;
@@ -247,7 +251,7 @@
     height: 100%!important;
 }
 .border-start {
-    border-left: 1px solid #e0e0e0!important;
+    border-left: 0.1rem solid #e0e0e0!important;
 }
 .justify-content-between {
     justify-content: space-between!important;
@@ -263,7 +267,7 @@
 
 .span0{
     margin-left: 5.5rem;
-    margin-top: 12px
+    margin-top: 1.2rem
 }
 
 .span2{
@@ -281,9 +285,9 @@
 }
 
 .Address-verticalDivider {
-    width: 1px;
-    height: 13px;
-    border-left: 1px solid #151313;
+    width: 0.1rem;
+    height: 1.3rem;
+    border-left: 0.1rem solid #151313;
 }
 
 .PriceDetails-itemPrice{
@@ -291,20 +295,20 @@
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #282c3f;
 }
 .Styles-buttonHolder{
     width: 100%;
-    padding: 0 4.44% 16px;
+    padding: 0 4.44% 1.6rem;
     background-color: #fff;
     user-select: auto;
 }
 
 .visionbutton-l {
-    height: 40px;
-    font-size: 14px;
+    height: 4.0rem;
+    font-size: 1.4rem;
 }
 
 .visionbutton-secondary {
@@ -319,11 +323,11 @@
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
     outline: none;
-    border: 1px solid #ff527a;
-    border-radius: 2px;
+    border: 0.1rem solid #ff527a;
+    border-radius: 0.2rem;
     font-family: Assistant;
     font-weight: 700;
     text-align: center;
@@ -334,16 +338,16 @@
 
 .ItemDetails-itemDetailsView .ItemDetails-cancelledCard {
     width: 100%;
-    padding: 0 16px;
+    padding: 0 1.6rem;
 }
 .CancelledCard-test {
     width: 100%;
 }
 .CancelledCard-Container {
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 0 .1rem .4rem 0 rgba(0,0,0,.1);
     background-color: #fff;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
     -webkit-box-align: start;
     align-items: flex-start;
     display: flex;
@@ -354,11 +358,11 @@
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 20px 15px;
+    padding: 2.0rem 1.5rem;
 }
 .CancelledCard-CloseIcon {
-    width: 32px;
-    height: 32px;
+    width: 3.2rem;
+    height: 3.2rem;
     border-radius: 50%;
     background-color: #eaeaec;
     display: flex;
@@ -375,26 +379,26 @@
 .CancelledCard-TextContainer {
     -webkit-box-flex: 1;
     flex: 1;
-    padding: 20px 0;
+    padding: 2.0rem 0;
 }
 .CancelledCard-Text {
-    height: 24px;
+    height: 2.4rem;
     font-family: Assistant;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.5;
     color: #282c3f;
 }
 .CancelledCard-TextSecondary {
     font-family: Assistant;
-    font-size: 14px;
+    font-size: 1.4rem;
     line-height: 1.5;
     color: #696e79;
 }
 
 .exchanngemodalwindow{
     background-color: #f5f5f5;
-    max-height: calc(100vh - 150px);
+    max-height: calc(100vh - 15.0rem);
     overflow-y: auto;
 
 }
@@ -429,17 +433,17 @@
     height:0.9rem;
     border: 0 none;
     color: #a8a6a6;
-    height: 1px;
+    height: 0.1rem;
     background-color: #d5d2d2;
 }
 
 .numberCircle {
-    width: 35px;
-    line-height: 32px;
+    width: 3.5rem;
+    line-height: 3.2rem;
     border-radius: 50%;
     text-align: center;
-    font-size: 16px;
-    border: 2px solid #666;
+    font-size: 1.6rem;
+    border: 0.2rem solid #666;
     display: block;
     float: left;
     margin-right: 2rem;
@@ -464,7 +468,7 @@
 }
 .modal__header,
 .modal__footer {
-    height: 100px;
+    height: 10.0rem;
 }
 .modal-footer{
     border-top: 0 none;
@@ -475,8 +479,8 @@
     width: 100%;
 }
 .modal__content {
-    bottom: 100px;
-    top: 100px;
+    bottom: 10.0rem;
+    top: 10.0rem;
     overflow-y: auto;
 }
 .modal__footer {
@@ -502,9 +506,9 @@ h5 {
 
 .d-1 {
     --c: #27b574; /* the color */
-    --b: .085em;    /* border length*/
+    --b: 0.085em;    /* border length*/
     --d: 1.2rem;    /* the cube depth */
-    --h: 1em;   /* the height */
+    --h: 1.5em;   /* the height */
     
     --_s: calc(var(--d) + var(--b));
   
@@ -552,8 +556,8 @@ h5 {
   
   .d-2 {
     --c: #CC333F; /* the color */
-    --b: .1em;    /* border length*/
-    --d: 20px;    /* the cube depth */
+    --b: 0.1em;    /* border length*/
+    --d: 2.0rem;    /* the cube depth */
     --h: 1.2em;   /* the height */
     
     --_s: calc(var(--d) + var(--b));
@@ -565,7 +569,7 @@ h5 {
     overflow: hidden;
     border-width: var(--b) var(--_s) var(--_s) var(--b);
     background:
-      linear-gradient(var(--c) 0 0) -1px 100%
+      linear-gradient(var(--c) 0 0) -.1rem 100%
        /101% var(--_p,0%) no-repeat,
       conic-gradient(from -90deg at right var(--d)  bottom var(--d),
         #0000 90deg, rgb(255 255 255 /0.3) 0 225deg,rgb(255 255 255 /0.6) 0) border-box,
@@ -612,4 +616,39 @@ h5 {
     align-items: center;
     margin-bottom: 3rem ;
     margin-top: 1rem;
+  }
+
+
+  @media screen and (max-width:450px) {
+    .exchanngemodalwindow{
+        background-color: #f5f5f5;
+        max-height: 100rem;
+        overflow-y: auto;
+    
+    }
+
+    .exchangeModal{
+        width:65%;
+    }
+
+    .cancelModal{
+        max-width: 60rem;
+        margin:0 auto;
+    }
+    .cancelBody{
+        padding: 1.5rem;   
+    }
+    .cancelHeader{
+        padding: 1.5rem;
+    }
+
+    input[type=radio]{
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        width: 1.8rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        line-height: normal;
+    }
+    
   }

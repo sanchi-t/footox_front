@@ -10,6 +10,7 @@ import parse from 'html-react-parser';
 import { useRef } from 'react';
 // import { InstagramEmbed } from 'react-social-media-embed';
 import Banner from '../components/Banner';
+import { animationControls } from 'framer-motion';
 // import Contact from './contact';
 
 const Header=lazy(() =>  import('../components/Header'));
@@ -73,6 +74,7 @@ const Homepage = () => {
     },
   };
   const [prod, setProd] = useState();
+  const [genderFilter, setGenderFilter] = useState('all');
   const [links, setLink] = useState();
   // const parentToChild = () => {
   //   setProd(prod);
@@ -108,8 +110,10 @@ const Homepage = () => {
     return new Date(b.modifiedDate) - new Date(a.modifiedDate);
   });
 
-  const handleWomen=()=>{
-    console.log('women clock');
+  const handleFilter=(item)=>{
+    setGenderFilter(item);
+    console.log(item);
+    
   }
   // console.log(products,'sort');
 
@@ -119,23 +123,25 @@ const Homepage = () => {
         <Header scrollDown = {scrollDown}/>
         <main className="ps-main">
           <Banner/>
-          <div className='container' style={{position:'relative',left:'-16.5rem'}}>
-          <div className="ps-section--features-product ps-section masonry-root pt-40 pb-80"  style={{paddingTop:'20%'}}>
+          <div className='container' >
+          
+          </div>
+          <div className="ps-section--features-product ps-section masonry-root1 pt-40 pb-80"  style={{paddingTop:'2rem',display:'flex'}}>
             <div className="ps-container" >
               <div className="ps-section__header mb-50">
                 <h3 className="ps-section__title" data-mask="features">- New Product</h3>
                 <ul className="ps-masonry__filter" style={{paddingTop:'05%'}}>
-                  <li className="current"><a  id='allp123'  href="#" data-filter="*">All <sup>{products.length}</sup></a></li>
-                  <li><a style={{cursor: 'pointer'}} data-filter=".men">Men <sup>{(products.filter(x => x.productGender === 'Men')).length}</sup></a></li>
-                  <li><a style={{cursor: 'pointer'}} data-filter=".women" onClick={handleWomen}>Women <sup>{(products.filter(x => x.productGender === 'Women')).length}</sup></a></li>
+                  <li className={`${genderFilter==='all'?'current':''}`}><a style={{cursor: 'pointer'}}  id='allp123'  onClick={()=>handleFilter('all')}>All <sup>{products.length}</sup></a></li>
+                  <li className={`${genderFilter==='men'?'current':''}`}><a style={{cursor: 'pointer'}} onClick={()=>handleFilter('men')}>Men <sup>{(products.filter(x => x.productGender === 'Men')).length}</sup></a></li>
+                  <li className={`${genderFilter==='women'?'current':''}`}><a style={{cursor: 'pointer'}} onClick={()=>handleFilter('women')}>Women <sup>{(products.filter(x => x.productGender === 'Women')).length}</sup></a></li>
                   {/* <li><a href='#' data-filter=".shoes">Shoes <sup>4</sup></a></li> */}
                 </ul>
               </div>
               <div className="ps-section__content pb-50">
                 <div className="masonry-wrapper" data-col-md="4" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
                   <div className="ps-masonry">
-                  {products.map((item) => {
-                      if(item.productGender==="Men")
+                  { products.map((item) => {
+                      if(item.productGender==="Men" && (genderFilter==='men' || genderFilter==='all'))
                       return(
                         <div className="grid-item men" key={item.id} style={{float: 'left',display:'block',marginBottom:'8rem' }}>
                         <div className="grid-item__content-wrapper" key={item.id} style={{minHeight: "30.0rem",position: 'relative'}}>
@@ -176,7 +182,7 @@ const Homepage = () => {
 
                     
                     {products.map((item) => {
-                      if(item.productGender==="Women")
+                      if(item.productGender==="Women" && (genderFilter==='women' || genderFilter==='all'))
                       return(
                         <div className="grid-item women" key={item.id} style={{float: 'left',display:'block',marginBottom:'8rem' }}>
                         <div className="grid-item__content-wrapper" key={item.id} style={{minHeight: "30rem",position: 'relative'}}>
@@ -215,7 +221,7 @@ const Homepage = () => {
                       </div>
                       )})}      
                     {products.map((item) => {
-                      if(item.category==="shoes")
+                      if(item.category==="shoes" && (genderFilter==='shoes' || genderFilter==='all'))
                       return(
                       <div className="grid-item shoes"key = {item.productId}>
                         <div className="grid-item__content-wrapper"key = {item.productId}>
@@ -246,7 +252,6 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-          </div>
           </div>
           <br></br> <br></br> <br></br>
 
@@ -285,7 +290,7 @@ const Homepage = () => {
                     </select>
                     <p>Logan May - CEO & Founder Invision</p>
                   </header>
-                  <footer>
+                  <footer id="ohk"> 
                     <p>“Dessert pudding dessert jelly beans cupcake sweet caramels gingerbread. Fruitcake biscuit cheesecake. Cookie topping sweet muffin pudding tart bear claw sugar plum croissant. “</p>
                   </footer>
                 </div>
@@ -311,8 +316,8 @@ const Homepage = () => {
           </div>
           <div className="ps-features pt-80 pb-80">
             <div className="ps-container">
-              <div className="row">
-                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+              <div className="row" style={{display:'flex',justifyContent:'center'}}>
+                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 " style={{display:'flex',justifyContent:'center'}}>
                   <div className="ps-iconbox">
                     <div className="ps-iconbox__header"><i className="ps-icon-delivery"></i>
                       <h3>Free shipping</h3>
@@ -323,7 +328,7 @@ const Homepage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 " style={{display:'flex',justifyContent:'center'}}>
                   <div className="ps-iconbox">
                     <div className="ps-iconbox__header"><i className="ps-icon-money"></i>
                       <h3>100% MONEY BACK.</h3>
@@ -334,7 +339,7 @@ const Homepage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 " style={{display:'flex',justifyContent:'center'}}>
                   <div className="ps-iconbox">
                     <div className="ps-iconbox__header"><i className="ps-icon-customer-service"></i>
                       <h3>SUPPORT 24/7.</h3>
@@ -383,9 +388,22 @@ const Homepage = () => {
           </div>
           <div className="ps-home-partner">
             <div className="ps-container">
-              <div className="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="40" data-owl-nav="false" data-owl-dots="false" data-owl-item="6" data-owl-item-xs="2" data-owl-item-sm="4" data-owl-item-md="5" data-owl-item-lg="6" data-owl-duration="1000" data-owl-mousedrag="on">
+              <div className="owl-slider" id="slider1" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="40" data-owl-nav="false" data-owl-dots="false" data-owl-item="6" data-owl-item-xs="2" data-owl-item-sm="4" data-owl-item-md="5" data-owl-item-lg="6" data-owl-duration="1000" data-owl-mousedrag="on">
 
-                <OwlCarousel items={6} autoplay={true} dots={false} margin={40} nav={false}>
+                <OwlCarousel items={6} autoplay={true} dots={false} margin={40} nav={false}  responsive={{
+            '0': {
+                items: 3,
+            },
+            '450': {
+                items: 4,
+            },
+            '600': {
+                items: 5,
+            },
+            '1000': {
+                items: 7,
+            },
+        }}>
 
                   <a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/1.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/2.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/3.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/4.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/5.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/6.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/7.png" alt="" /></a><a href="#"><img src="http://nouthemes.net/html/trueshoes/images/partner/8.png" alt="" /></a>
                 </OwlCarousel>

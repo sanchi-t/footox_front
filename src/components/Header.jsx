@@ -67,6 +67,7 @@ const Header = (props) => {
   const products = useSelector((store) => store.dataReducer.products);
   const dispatch = useDispatch();
   const location = useLocation();
+  const [isActive, setActive] = useState(false);
   const [getOffer, setGetOffer] = useState(null);
   const userData=JSON.parse(localStorage.getItem('all'));
 
@@ -274,10 +275,18 @@ const Header = (props) => {
       })}`
       
   });
-  
+
+
   dispatch(setSearchQuery({}));
 
+
+
   }
+  const handleMenuToggle=() => {
+    console.log('in da menu toggle');
+    setActive(!isActive);
+  };
+  
 
   // console.log(items,quantity,cartData);
   if(products){
@@ -288,8 +297,8 @@ const Header = (props) => {
 
     {(!token) && 
         <GOneTapLogin chooseonetap={chooseonetap}/>}
-      <div className="header--sidebar" />
-        <header className="header" style={{position:'relative',zIndex:1000}}>
+      <div className={`header--sidebar ${isActive?'active':''}`} />
+        <header className={`header ${isActive?'menu--active':''}`} style={{position:'relative',zIndex:1000}}>
           <div className="header__top">
             <div className="container-fluid">
               <div className="row">
@@ -455,12 +464,12 @@ const Header = (props) => {
                   </li>
                 </ul>
               </div>
-              <div className="navigation__column right" style={{maxWidth:'350px',display:'contents'}}>
+              <div className="navigation__column right" style={{maxWidth:'35rem',display:'contents'}}>
               
                 <Search/>
                 
-                <div className="ps-cart" ><a className="ps-cart__toggle" href="#"><span><i>{(total===0)?0:items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
-                  <div className="ps-cart__listing" style={{width:'350px'}}>
+                <div className="ps-cart" ><a className="ps-cart__toggle"><span><i>{(total===0)?0:items.length}</i></span><i className="ps-icon-shopping-cart" /></a>
+                  <div className="ps-cart__listing" style={{width:'35rem'}}>
                     <div className="ps-cart__content" >
                     {items && items.map((item,index)=>{
                       // console.log(cartData,'cartdata');
@@ -506,7 +515,8 @@ const Header = (props) => {
                     <div className="ps-cart__footer"><a className="ps-btn" onClick={handleViewCart} style={{cursor:'pointer'}}>Check out<i className="ps-icon-arrow-left" /></a></div>
                   </div>
                 </div>
-               
+                <div className={`menu-toggle ${isActive?'active':''}`} onClick={handleMenuToggle}><span></span></div>
+
                 <ModalWindow toggled={isToggle} toggle={toggleButton} />
 
                 

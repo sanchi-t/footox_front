@@ -197,7 +197,7 @@ const Login= ({ chooseMessage })=> {
 			<input  className={styles.inputLogin} type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
       <div className="email error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors?.email}</div>
 			<input  className={styles.inputLogin} type={eye ? "text" : "password"} placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-      <Button variant={"ghost"} onClick={handleEye} style={{left: '50px',top: '-39px',backgroundColor:'rgb(250, 239, 218)',outline:'none', border : '0'}}>
+      <Button variant={"ghost"} onClick={handleEye} style={{left: '5rem',top: '-3.9rem',backgroundColor:'rgb(250, 239, 218)',outline:'none', border : '0'}}>
             <ViewIcon />
       </Button>
       <div className="password error" style={{color:'#d93c34',fontSize:'1.2rem'}}>{errors?.password}</div>

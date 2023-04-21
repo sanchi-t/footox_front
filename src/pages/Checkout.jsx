@@ -228,7 +228,7 @@ const Checkout=()=>{
         <div className="ps-container">
           <form className="ps-checkout__form" onSubmit={handleSubmit} >
             <div className="row">
-                  <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+                  <div id="col-xs-12-id" className="col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
                     <div className="ps-checkout__billing">
                       <h3>Billing Detail</h3>
                             <div className="form-group form-group--inline">
@@ -252,13 +252,13 @@ const Checkout=()=>{
                               <input className="form-control" type="text" name="address" onChange={handleAddress} value={JSON.parse(sessionStorage.getItem('order'))?.address.place || currentAddress}/>
                             </div>
                       <div className="form-group" >
-                        <div className="ps-checkbox" style={{width:"200px",display:'inline'}}>
+                        <div className="ps-checkbox" style={{width:"20rem",display:'inline'}}>
                           <input className="form-control" onChange={handleChange} type="checkbox" id="cb01" />
                           <label for="cb01" name="saveAddress" >Save this address?</label>
                           
                         </div>
                           
-                          <label style={{paddingLeft:'50px',cursor:'pointer',color:'#737373'}} onClick={handleShow} ><a>Use other address?</a></label>
+                          <label style={{paddingLeft:'5rem',cursor:'pointer',color:'#737373',fontSize:'1.4rem'}} onClick={handleShow} ><a>Use other address?</a></label>
 
                       </div>
                       <h3 className="mt-40"> Addition information</h3>
@@ -268,7 +268,7 @@ const Checkout=()=>{
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                  <div id="col-xs-12-id2" className="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
                     <div className="ps-checkout__order">
                       <header>
                         <h3>Your Order</h3>
@@ -345,13 +345,13 @@ const Checkout=()=>{
         </div>
       </div>
       <Footer/>
-      <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'28px'}}>
+      <div style={{verticalAlign:'middle',float:'right',display:'flex',justifyContent:'flex-end',paddingTop:'2.8rem'}}>
       
         <Modal
           show={show}
           // size={'lg'}
           dialogClassName="modal-width"
-          style={{opacity:1,top:'30px',width:'785px',left:'25%'}}
+          style={{opacity:1,top:'3rem',width:'78.5rem',left:'25%'}}
           onHide={handleClose}
           keyboard={true}
         >
@@ -360,7 +360,7 @@ const Checkout=()=>{
             {address.map((item,index)=>{
               return(
                 <div className="radio" style={{backgroundColor:'#E4E4E4'}} onChange={handleModal}>
-                <label>
+                <label className="labeladdress">
                   <input
                     name="radioButton"
                     type="radio"
@@ -378,10 +378,10 @@ const Checkout=()=>{
 
           </Modal.Body>
           <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button style={{padding: '0.6rem 1.2rem',marginBottom: '0',fontSize: '1.8rem',fontWeight:'400'}} variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" type="submit" onClick={handleSaveChanges}>
+          <Button style={{padding: '0.6rem 1.2rem',marginBottom: '0',fontSize: '1.8rem',fontWeight:'400'}} variant="primary" type="submit" onClick={handleSaveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>
