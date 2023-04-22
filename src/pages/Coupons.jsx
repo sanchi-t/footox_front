@@ -72,8 +72,8 @@ setCoupon(verfied)
                       <p className={`${styles.description}`} >{item.title}</p>
                       </div>
                       <div className={`${styles.container}`}>
-                        <p classname={`${styles.avail1}`} style={{fontSize:'20px',color:'black'}}>Use Promo Code:<span className={`${styles.promo}`}>{item.code}</span></p>
-                        <p classname={`${styles.avail1}`} style={{fontSize:'20px',color:'red'}}>End Date: {item.endDate}</p>
+                        <p classname={`${styles.avail1}`} style={{fontSize:'2rem',color:'black'}}>Use Promo Code:<span className={`${styles.promo}`}>{item.code}</span></p>
+                        <p classname={`${styles.avail1}`} style={{fontSize:'2rem',color:'red'}}>End Date: {item.endDate}</p>
                         
                       
               {/* //        <Flex justifyContent={"space-around"} alignItem={"center"}>
