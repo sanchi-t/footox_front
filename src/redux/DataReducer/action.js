@@ -8,7 +8,7 @@ const BackendServer = process.env.REACT_APP_API_BASE_URL;
 const getData = (params) => (dispatch) => {
   dispatch({ type: types.GET_DATA_R });
   return axios
-    .get(`${BackendServer}admin1`, params)
+    .get(`${BackendServer}getImage`, params)
     // .get(`${REACT_APP_GET_DATAI}`, params)
     .then((res) => {
       dispatch({ type: types.GET_DATA_S, payload: res.data });
