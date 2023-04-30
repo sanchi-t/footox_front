@@ -25,6 +25,7 @@ const Homepage = () => {
 
   const dispatch = useDispatch();
   const products1 = useSelector((store) => store.dataReducer.products);
+  console.log(products1,'products1');
 
   const products = products1.filter(function (el) {
     return el.Quantity !== undefined; 
@@ -115,7 +116,7 @@ const Homepage = () => {
     console.log(item);
     
   }
-  // console.log(products,'sort');
+  console.log(products,'sort');
 
   return (
     <React.Fragment>
@@ -220,7 +221,7 @@ const Homepage = () => {
                         </div>
                       </div>
                       )})}      
-                    {products.map((item) => {
+                    {/* {products.map((item) => {
                       if(item.category==="shoes" && (genderFilter==='shoes' || genderFilter==='all'))
                       return(
                       <div className="grid-item shoes"key = {item.productId}>
@@ -238,16 +239,15 @@ const Homepage = () => {
                               </div>
                               <div key = {item.productId} className="ps-shoe__detail" style={{textAlign:'left'}}>
                                 <div key= {item.productId} style={{inlineSize: "15.0rem",  overflowWrap: "break-word"}}><a key = {item.productId} className="ps-shoe__name" href="#" >{item.name}</a></div>
-                                {/* <p = {item.productId} className="ps-shoe__categories"><a = {item.productId} href="#">
-                                  {item.gender} shoes</a>,<a = {item.productId} href="#"> Nike</a>,<a = {item.productId} href="#"> Jordan</a></p> */}
+                                
                                   <span key= {item.productId} className="ps-shoe__price">
                                   <del key = {item.productId}>₹{item.original_price}</del> ₹{item.final_price}</span>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      )})}
+                      </div> */}
+                      {/* )})} */}
                   </div>
                 </div>
               </div>

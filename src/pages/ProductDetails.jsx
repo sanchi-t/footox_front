@@ -309,8 +309,8 @@ const ProductDetails=()=>{
 
               <div className="ps-product__thumbnail--mobile">
                 <div className="ps-product__main-img"><img src={allImage[indexNo][0]} alt=""/></div>
-                <div className="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on">
-                <OwlCarousel items={3} margin={20} autoplay={true} loop={true} dots={false} nav={false}>
+                <div className="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on" >
+                <OwlCarousel items={3} margin={20} autoplay={true} loop={true} dots={false} nav={false} >
                   <img src={allImage[indexNo][0]} alt=""/><img src={allImage[indexNo][1]} alt=""/><img src={allImage[indexNo][2]} alt=""/>
                   </OwlCarousel>
                   </div>
@@ -347,7 +347,7 @@ const ProductDetails=()=>{
                 </div>
                 <div className="ps-product__block ps-product__size">
                   <h4 style={{textAlign:'left'}}>CHOOSE SIZE<a href="#">Size chart</a></h4>
-                  <select name="size" style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '16px',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 20px',height: '50px',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '220px',appearance: 'none',paddingRight:'20px',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                  <select name="size" style={{display:'inline-block', overflow: 'hidden',width: '100%', textAlign: 'left',fontFamily: "sans-serif",fontWeight: '400',fontsize: '1.6rem',lineHeight: '1.4em',color: '#5b5b5b',boxSizing: 'border-box',padding: '0 2rem',height: '5rem',lineHeight: '1.4em',width: '100%',backgroundColor:'#E4E4E4',border: 'none',position:'relative',display: 'inline-block',float:'left',width: '22rem',appearance: 'none',paddingRight:'2rem',backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right 1.9rem center',
                   backgroundSize: '1em',
@@ -505,7 +505,7 @@ const ProductDetails=()=>{
                       </select> */}
                     </div>
                     <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                        <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.productName}</a></div>
+                        <div style={{inlineSize: "15rem",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{item.productName}</a></div>
                         <p className="ps-shoe__categories"><a href="#">
                           {item.productGender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
                           <del>₹{item.original_price}</del> ₹{item.selling_price}</span>
@@ -534,7 +534,7 @@ const ProductDetails=()=>{
                       </select> */}
                     </div>
                     <div className="ps-shoe__detail" style={{textAlign:'left'}}>
-                      <div style={{inlineSize: "150px",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{currentProducts.productName}</a></div>
+                      <div style={{inlineSize: "15rem",  overflowWrap: "break-word"}}><a className="ps-shoe__name" href="#" >{currentProducts.productName}</a></div>
                       <p className="ps-shoe__categories"><a href="#">
                         {currentProducts.gender} shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
                         <del>₹{currentProducts.original_price}</del> ₹{currentProducts.selling_price}</span>

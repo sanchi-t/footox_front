@@ -56,6 +56,7 @@ import {
       // prod.push(response1.data);
       // const orders = response.data;
       // const products = response1.data;
+      console.log(response);
       setProd(response.data);
   
       setNishu({
@@ -67,6 +68,7 @@ import {
      
     
       useEffect(()=>{
+
         axiosTest();
     
       }, []);

@@ -47,13 +47,11 @@ const GLogin=({ setGLogin })=>{
       }
     return(
         <GoogleOAuthProvider clientId={clientId}>
-          <div className='divwrapper'>
             <GoogleLogin
             width={'160px'}
                 onSuccess={GoogleLoginSucc}
                 onFailure={(error) => console.log(error)}
                 />
-            </div>
         </GoogleOAuthProvider>
     );
 }
